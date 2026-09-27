@@ -601,16 +601,23 @@
 
 }
 
-
 /* ========================================
    syousai
 ======================================== */
 
 .area-card ul {
 
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px 18px;
+
     margin: 0;
 
-    padding-left: 25px;
+    padding-left: 0;
+
+    list-style: none;
 
 }
 
@@ -621,13 +628,26 @@
 
 .area-card li {
 
-    margin-bottom: 8px;
+    margin: 0;
 
     color: #444444;
 
     font-size: 15px;
 
     line-height: 1.7;
+
+    white-space: nowrap;
+
+}
+
+
+/* ========================================
+   箇条書き
+======================================== */
+
+.area-card li::before {
+
+    content: "・";
 
 }
 

@@ -18,6 +18,11 @@ const areaName =
         "area-name"
     );
 
+const calendarAreaName =
+    document.getElementById(
+        "calendar-area-name"
+    );
+
 const monthTitle =
     document.getElementById(
         "month-title"
@@ -170,7 +175,7 @@ async function loadMunicipality() {
 
     const municipality =
         municipalities.find(
-            function(item) {
+            function (item) {
 
                 return item.id ===
                     municipalityId;
@@ -197,13 +202,17 @@ async function loadMunicipality() {
 /* ========================================
    地区名
 ======================================== */
-
 async function loadAreaName() {
 
     if (!areaId) {
 
         areaName.textContent =
             "";
+
+        calendarAreaName.textContent =
+            "（" +
+            cityName.textContent +
+            "）";
 
         return;
 
@@ -231,7 +240,7 @@ async function loadAreaName() {
 
     const municipalityData =
         areasData[
-            municipalityId
+        municipalityId
         ];
 
 
@@ -249,7 +258,7 @@ async function loadAreaName() {
 
     const area =
         municipalityData.areas.find(
-            function(item) {
+            function (item) {
 
                 return item.id ===
                     areaId;
@@ -262,6 +271,13 @@ async function loadAreaName() {
 
         areaName.textContent =
             area.name;
+
+        calendarAreaName.textContent =
+            "（" +
+            cityName.textContent +
+            " " +
+            area.name +
+            "）";
 
     }
 
@@ -530,13 +546,13 @@ function displayCalendar() {
 
         if (
             date.getFullYear() ===
-                today.getFullYear() &&
+            today.getFullYear() &&
 
             date.getMonth() ===
-                today.getMonth() &&
+            today.getMonth() &&
 
             date.getDate() ===
-                today.getDate()
+            today.getDate()
         ) {
 
             dayElement.classList.add(
@@ -574,7 +590,7 @@ function displayCalendar() {
 
         if (
             date.getMonth() ===
-                month
+            month
         ) {
 
             const garbageList =
@@ -584,7 +600,7 @@ function displayCalendar() {
 
 
             garbageList.forEach(
-                function(garbage) {
+                function (garbage) {
 
                     createGarbageEvent(
                         dayElement,
@@ -625,7 +641,7 @@ function findGarbageForDate(
 
     const day =
         weekDays[
-            date.getDay()
+        date.getDay()
         ];
 
 
@@ -652,7 +668,7 @@ function findGarbageForDate(
 
 
     calendarData.garbage.forEach(
-        function(garbage) {
+        function (garbage) {
 
             if (
                 !Array.isArray(
@@ -666,7 +682,7 @@ function findGarbageForDate(
 
 
             garbage.schedule.forEach(
-                function(schedule) {
+                function (schedule) {
 
                     if (
                         schedule.day !==
@@ -691,7 +707,7 @@ function findGarbageForDate(
 
                     if (
                         schedule.restriction[
-                            index
+                        index
                         ] === 1
                     ) {
 
@@ -758,7 +774,7 @@ function createGarbageEvent(
 
     image.addEventListener(
         "click",
-        function() {
+        function () {
 
             const index =
                 calendarData.garbage.indexOf(
@@ -848,14 +864,14 @@ function getCalendarLocations() {
         ) {
 
             return locations.filter(
-                function(location) {
+                function (location) {
 
                     return (
                         location.municipalityId ===
-                            municipalityId &&
+                        municipalityId &&
 
                         location.areaId ===
-                            (areaId || "")
+                        (areaId || "")
                     );
 
                 }
@@ -891,7 +907,7 @@ function isLocationCollectionDay(
     if (
         location.day !==
         weekDays[
-            date.getDay()
+        date.getDay()
         ]
     ) {
 
@@ -923,7 +939,7 @@ function isLocationCollectionDay(
 
     return (
         location.restriction[
-            index
+        index
         ] === 1
     );
 
@@ -944,7 +960,7 @@ function createLocationEvents(
 
 
     locations.forEach(
-        function(location) {
+        function (location) {
 
             if (
                 isLocationCollectionDay(
@@ -958,14 +974,58 @@ function createLocationEvents(
                         "div"
                     );
 
-
                 event.className =
                     "calendar-location-event";
 
+                const image =
+                    document.createElement(
+                        "img"
+                    );
 
-                event.textContent =
-                    "📍 " +
+                image.className =
+                    "garbage-image";
+
+                image.src =
+                    "img/sitei.webp";
+
+                image.alt =
                     location.name;
+
+                image.addEventListener(
+                    "click",
+                    function () {
+
+                        const target =
+                            findLocationInformation(
+                                location
+                            );
+
+                        if (target) {
+                            scrollToElement(
+                                target
+                            );
+                        }
+                    }
+                );
+
+                event.appendChild(
+                    image
+                );
+
+                const name =
+                    document.createElement(
+                        "div"
+                    );
+
+                name.className =
+                    "calendar-garbage-name";
+
+                name.textContent =
+                    location.name;
+
+                event.appendChild(
+                    name
+                );
 
 
                 /*
@@ -974,7 +1034,7 @@ function createLocationEvents(
 
                 event.addEventListener(
                     "click",
-                    function() {
+                    function () {
 
                         const target =
                             findLocationInformation(
@@ -1024,7 +1084,7 @@ function findLocationInformation(
 
 
     items.forEach(
-        function(item) {
+        function (item) {
 
             if (target) {
 
@@ -1043,10 +1103,10 @@ function findLocationInformation(
 
             if (
                 name ===
-                    location.name &&
+                location.name &&
 
                 jichikai ===
-                    location.jichikai
+                location.jichikai
             ) {
 
                 target =
@@ -1112,7 +1172,7 @@ function displayGarbageInformation() {
 
 
     calendarData.garbage.forEach(
-        function(garbage, index) {
+        function (garbage, index) {
 
             const item =
                 document.createElement(
@@ -1145,7 +1205,7 @@ function displayGarbageInformation() {
             ) {
 
                 garbage.schedule.forEach(
-                    function(schedule) {
+                    function (schedule) {
 
                         if (
                             scheduleText !== ""
@@ -1255,7 +1315,7 @@ function displayCalendarLocations() {
      */
 
     locations.forEach(
-        function(location) {
+        function (location) {
 
             const item =
                 document.createElement(
@@ -1368,7 +1428,7 @@ function displayCalendarLocations() {
 
 previousMonthButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         currentDate.setMonth(
             currentDate.getMonth() - 1
@@ -1387,7 +1447,7 @@ previousMonthButton.addEventListener(
 
 nextMonthButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         currentDate.setMonth(
             currentDate.getMonth() + 1
