@@ -2,6 +2,7 @@
     "garbage": [
         {
             "name": "燃やせるごみ",
+            "img": "img/moeru.webp",
 
             "schedule": [
                 {
@@ -20,7 +21,58 @@
         },
 
         {
-            "name": "資源ごみ",
+            "name": "容器包装プラスチック",
+            "img": "img/pura.webp",
+
+
+            "schedule": [
+                {
+                    "day": "火曜日",
+                    "restriction": [1, 1, 1, 1, 1]
+                }
+            ],
+
+            "separation": "種類ごとに分けてください。",
+
+            "collectionPlace": "ごみステーション"
+        },
+
+        {
+            "name": "ペットボトル",
+            "img": "img/pet.webp",
+
+
+            "schedule": [
+                {
+                    "day": "金曜日",
+                    "restriction": [1, 0, 1, 0, 0]
+                }
+            ],
+
+            "separation": "種類ごとに分けてください。",
+
+            "collectionPlace": "ごみステーション"
+        },
+
+         {
+            "name": "燃やせないゴミ",
+            "img": "img/moenai.webp",
+
+            "schedule": [
+                {
+                    "day": "金曜日",
+                    "restriction": [0, 1, 0, 1, 0]
+                }
+            ],
+
+            "separation": "指定袋に入れてください。",
+
+            "collectionPlace": "ごみステーション"
+        },
+        
+        {
+            "name": "紙類",
+            "img": "img/kami.webp",
 
             "schedule": [
                 {
@@ -29,9 +81,9 @@
                 }
             ],
 
-            "separation": "種類ごとに分けてください。",
+            "separation": "指定袋に入れてください。",
 
-            "collectionPlace": "資源ごみ集積所"
+            "collectionPlace": "ごみステーション"
         }
     ]
 }
