@@ -1,0 +1,205 @@
+/* ===========================
+   概要
+=========================== */
+
+.about-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 45px 0 80px;
+}
+
+
+/* ===========================
+   ページタイトル
+=========================== */
+
+.about-container > h1 {
+    margin-bottom: 30px;
+
+    color: #205b4a;
+
+    font-size: 32px;
+}
+
+
+/* ===========================
+   各セクション
+=========================== */
+
+.about-section {
+    margin-bottom: 25px;
+
+    padding: 25px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+/* ===========================
+   セクションタイトル
+=========================== */
+
+.about-section h2 {
+    margin: 0 0 18px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        2px solid #31856d;
+
+    color: #205b4a;
+
+    font-size: 22px;
+}
+
+
+/* ===========================
+   本文
+=========================== */
+
+.about-section p {
+    margin: 0 0 12px;
+
+    color: #444444;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+.about-section p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ===========================
+   注意事項
+=========================== */
+
+.notice-list {
+    margin: 0;
+
+    padding-left: 22px;
+
+    color: #444444;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+.notice-list li {
+    margin-bottom: 10px;
+}
+
+.notice-list li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ===========================
+   クレジット
+=========================== */
+
+.credit-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.credit-item {
+    padding: 16px 18px;
+
+    background-color: #f8fbfa;
+
+    border-left:
+        4px solid #31856d;
+
+    border-radius: 8px;
+}
+
+
+.credit-item h3 {
+    margin: 0 0 6px;
+
+    color: #205b4a;
+
+    font-size: 16px;
+}
+
+
+.credit-item p {
+    margin: 0;
+
+    color: #555555;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   スマートフォン
+=========================== */
+
+@media (max-width: 700px) {
+
+    .about-container {
+        width: 94%;
+
+        padding-top: 30px;
+    }
+
+
+    .about-container > h1 {
+        margin-bottom: 25px;
+
+        font-size: 26px;
+    }
+
+
+    .about-section {
+        margin-bottom: 18px;
+
+        padding: 20px;
+    }
+
+
+    .about-section h2 {
+        font-size: 20px;
+    }
+
+
+    .about-section p {
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+
+    .notice-list {
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+
+    .credit-item {
+        padding: 14px 15px;
+    }
+
+}

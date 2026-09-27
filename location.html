@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>回収場所 - ながさきごみナビ</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/location.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- ===========================
+         ヘッダー
+    ============================ -->
+
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="header-logo"
+        >
+            🗑️ ながさきごみナビ
+        </a>
+
+        <div class="selected-city">
+
+            <span id="city-name">
+                読み込み中...
+            </span>
+
+            <span
+                id="area-name"
+                class="selected-area"
+            ></span>
+
+            <a href="index.html">
+                変更
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===========================
+         ナビゲーション
+    ============================ -->
+
+    <nav class="navigation">
+
+        <a
+            href="search.html"
+            class="nav-item"
+        >
+            <span>🔍</span>
+            <span>検索</span>
+        </a>
+
+        <a
+            href="calendar.html"
+            class="nav-item"
+        >
+            <span>📅</span>
+            <span>カレンダー</span>
+        </a>
+
+        <a
+            href="location.html"
+            class="nav-item"
+        >
+            <span>📍</span>
+            <span>回収場所</span>
+        </a>
+
+        <a
+            href="about.html"
+            class="nav-item"
+        >
+            <span>ℹ️</span>
+            <span>概要</span>
+        </a>
+
+    </nav>
+
+
+    <!-- ===========================
+         メイン
+    ============================ -->
+
+    <main class="location-container">
+
+        <h1>
+            拠点回収場所
+        </h1>
+
+        <p class="location-description">
+            ごみの回収場所と回収日時を確認できます。
+        </p>
+
+
+        <!-- 市町村名 -->
+
+        <section class="municipality-section">
+
+            <h2 id="municipality-name">
+                読み込み中...
+            </h2>
+
+
+            <!-- 自治会一覧 -->
+
+            <div
+                id="jichikai-list"
+                class="jichikai-list"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/location.js"></script>
+
+</body>
+
+</html>

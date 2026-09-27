@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        カレンダー - ながさきごみナビ
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/calendar.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ===========================
+         ヘッダー
+    ============================ -->
+
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="header-logo"
+        >
+            🗑️ ながさきごみナビ
+        </a>
+
+
+        <div class="selected-city">
+
+            <span id="city-name">
+                読み込み中...
+            </span>
+
+            <span
+                id="area-name"
+                class="selected-area"
+            ></span>
+
+            <a href="index.html">
+                変更
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===========================
+         ナビゲーション
+    ============================ -->
+
+    <nav class="navigation">
+
+        <a
+            href="search.html"
+            class="nav-item"
+        >
+            <span>🔍</span>
+            <span>検索</span>
+        </a>
+
+
+        <a
+            href="calendar.html"
+            class="nav-item"
+        >
+            <span>📅</span>
+            <span>カレンダー</span>
+        </a>
+
+
+        <a
+            href="location.html"
+            class="nav-item"
+        >
+            <span>📍</span>
+            <span>指定場所</span>
+        </a>
+
+
+        <a
+            href="about.html"
+            class="nav-item"
+        >
+            <span>ℹ️</span>
+            <span>概要</span>
+        </a>
+
+    </nav>
+
+
+    <!-- ===========================
+         メイン
+    ============================ -->
+
+    <main class="calendar-container">
+
+
+        <h1>
+            ごみ収集カレンダー
+        </h1>
+
+
+        <!-- ===========================
+             月移動
+        ============================ -->
+
+        <div class="month-navigation">
+
+            <button
+                type="button"
+                id="previous-month"
+            >
+                ← 前の月
+            </button>
+
+
+            <h2 id="month-title">
+                読み込み中...
+            </h2>
+
+
+            <button
+                type="button"
+                id="next-month"
+            >
+                次の月 →
+            </button>
+
+        </div>
+
+
+        <!-- ===========================
+             カレンダー
+        ============================ -->
+
+        <div class="calendar-card">
+
+
+            <!-- 曜日 -->
+
+            <div class="calendar-week">
+
+                <div>
+                    日
+                </div>
+
+                <div>
+                    月
+                </div>
+
+                <div>
+                    火
+                </div>
+
+                <div>
+                    水
+                </div>
+
+                <div>
+                    木
+                </div>
+
+                <div>
+                    金
+                </div>
+
+                <div>
+                    土
+                </div>
+
+            </div>
+
+
+            <!-- 日付 -->
+
+            <div
+                id="calendar-days"
+                class="calendar-days"
+            >
+            </div>
+
+
+        </div>
+
+        <!-- ===========================
+             カレンダーに追加した
+             指定場所
+        ============================ -->
+
+        <section class="location-information">
+
+            <h2>
+                カレンダーに追加した指定場所
+            </h2>
+
+
+            <div
+                id="calendar-location-list"
+                class="calendar-location-list"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- ===========================
+             ごみ情報
+        ============================ -->
+
+        <section class="garbage-information">
+
+            <h2>
+                ごみ情報
+            </h2>
+
+
+            <div
+                id="garbage-list"
+                class="garbage-list"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script
+        src="js/calendar.js"
+    ></script>
+
+
+</body>
+
+</html>

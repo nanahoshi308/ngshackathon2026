@@ -1,0 +1,379 @@
+/* ===========================
+   全体
+=========================== */
+
+.location-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 45px 0 80px;
+}
+
+.location-container > h1 {
+    margin-bottom: 10px;
+    color: #205b4a;
+    font-size: 32px;
+}
+
+.location-description {
+    margin-bottom: 30px;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   市町村
+=========================== */
+
+.municipality-section {
+    margin-top: 20px;
+}
+
+.municipality-section > h2 {
+    margin: 0 0 20px;
+    padding: 18px 20px;
+    background-color: #31856d;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+
+/* ===========================
+   自治会一覧
+=========================== */
+
+.jichikai-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* ===========================
+   自治会
+=========================== */
+
+.jichikai-item {
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #d8e5e1;
+    border-radius: 12px;
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+
+/* ===========================
+   自治会ボタン
+=========================== */
+
+.jichikai-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 19px 22px;
+
+    background-color: #ffffff;
+    border: none;
+
+    color: #205b4a;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.jichikai-button:hover {
+    background-color: #edf6f2;
+}
+
+
+/* 矢印 */
+
+.jichikai-arrow {
+    display: inline-block;
+
+    color: #31856d;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+/* 開いているとき */
+
+.jichikai-item.open
+.jichikai-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ===========================
+   自治会の中身
+=========================== */
+
+.jichikai-content {
+    max-height: 0;
+
+    overflow: hidden;
+
+    padding: 0 22px;
+
+    transition:
+        max-height 0.4s ease,
+        padding 0.4s ease;
+}
+
+
+/* 開いているとき */
+
+.jichikai-item.open
+.jichikai-content {
+    max-height: 1000px;
+
+    padding:
+        0 22px 22px;
+}
+
+
+/* ===========================
+   回収場所
+=========================== */
+
+.collection-place {
+    margin-bottom: 15px;
+    padding: 16px;
+
+    background-color: #f8fbfa;
+
+    border-radius: 9px;
+
+    border-left:
+        4px solid #31856d;
+}
+
+.collection-place:last-child {
+    margin-bottom: 0;
+}
+
+
+/* 回収場所名 */
+
+.collection-place-name {
+    margin: 0 0 10px;
+
+    color: #205b4a;
+
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+/* ===========================
+   回収日時
+=========================== */
+
+.collection-date {
+    margin: 0;
+}
+
+.collection-date-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #31856d;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.collection-date-value {
+    margin: 0;
+
+    color: #444444;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   データなし
+=========================== */
+
+.no-location {
+    padding: 25px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    color: #777777;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* ===========================
+   エラー
+=========================== */
+
+.location-error {
+    padding: 20px;
+
+    background-color: #fff5f5;
+
+    border-radius: 8px;
+
+    color: #a94442;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* ===========================
+   スマートフォン
+=========================== */
+
+@media (max-width: 700px) {
+
+    .location-container {
+        width: 94%;
+
+        padding-top: 30px;
+    }
+
+    .location-container > h1 {
+        font-size: 26px;
+    }
+
+    .location-description {
+        font-size: 14px;
+    }
+
+    .municipality-section > h2 {
+        padding: 15px 17px;
+
+        font-size: 20px;
+    }
+
+    .jichikai-button {
+        padding: 17px 18px;
+
+        font-size: 16px;
+    }
+
+    .jichikai-content {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .jichikai-item.open
+    .jichikai-content {
+        padding:
+            0 18px 18px;
+    }
+
+    .collection-place {
+        padding: 14px;
+    }
+
+    .collection-place-name {
+        font-size: 16px;
+    }
+
+}
+/* ========================================
+   回収場所ヘッダー
+======================================== */
+
+.collection-place-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* ========================================
+   カレンダー追加ボタン
+======================================== */
+
+.calendar-add-button {
+    flex-shrink: 0;
+
+    padding: 7px 11px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #31856d;
+
+    border-radius: 7px;
+
+    color: #31856d;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+
+.calendar-add-button:hover {
+    background-color: #edf6f2;
+}
+
+
+/* 登録済み */
+
+.calendar-add-button.added {
+    background-color: #31856d;
+
+    color: #ffffff;
+}
+
+
+.calendar-add-button.added:hover {
+    background-color: #205b4a;
+}
+
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 700px) {
+
+    .collection-place-header {
+        align-items: flex-start;
+    }
+
+    .calendar-add-button {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+
+}

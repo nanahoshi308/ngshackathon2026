@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        検索 - ながさきごみナビ
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/search.css"
+    >
+</head>
+
+<body>
+
+    <!-- ===========================
+         ヘッダー
+    ============================ -->
+
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="header-logo"
+        >
+            🗑️ ながさきごみナビ
+        </a>
+
+        <div class="selected-city">
+
+            <span id="city-name">
+                読み込み中...
+            </span>
+
+            <span
+                id="area-name"
+                class="selected-area"
+            ></span>
+
+            <a href="index.html">
+                変更
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===========================
+         ナビゲーション
+    ============================ -->
+
+    <nav class="navigation">
+
+        <a
+            href="search.html"
+            class="nav-item"
+        >
+            <span>🔍</span>
+            <span>検索</span>
+        </a>
+
+        <a
+            href="calendar.html"
+            class="nav-item"
+        >
+            <span>📅</span>
+            <span>カレンダー</span>
+        </a>
+
+        <a
+            href="separation.html"
+            class="nav-item"
+        >
+            <span>♻️</span>
+            <span>分別一覧</span>
+        </a>
+
+        <a
+            href="location.html"
+            class="nav-item"
+        >
+            <span>📍</span>
+            <span>指定場所</span>
+        </a>
+
+        <a
+            href="about.html"
+            class="nav-item"
+        >
+            <span>ℹ️</span>
+            <span>概要</span>
+        </a>
+
+    </nav>
+
+
+    <!-- ===========================
+         メイン
+    ============================ -->
+
+    <main class="search-container">
+
+        <h1>
+            ごみを検索
+        </h1>
+
+        <p class="search-description">
+            捨てたいごみの名前を入力するか、
+            画像をアップロードしてください。
+        </p>
+
+
+        <!-- ===========================
+             文字検索
+        ============================ -->
+
+        <section class="search-section">
+
+            <h2>
+                文字から検索
+            </h2>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="例：ペットボトル"
+                >
+
+                <button
+                    type="button"
+                    id="search-button"
+                >
+                    🔍 検索
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===========================
+             画像検索
+        ============================ -->
+
+        <section class="image-search-section">
+
+            <h2>
+                画像から検索
+            </h2>
+
+            <p class="image-search-description">
+                文字で検索しても見つからないごみや、
+                名前が分からないごみは画像から判定できます。
+            </p>
+
+
+            <!-- ファイル選択 -->
+
+            <div class="image-upload-area">
+
+                <label
+                    for="image-input"
+                    class="image-upload-button"
+                >
+                    📷 画像を選択
+                </label>
+
+                <input
+                    type="file"
+                    id="image-input"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <!-- 画像プレビュー -->
+
+            <div
+                id="image-preview-area"
+                class="image-preview-area"
+            >
+
+                <p class="image-preview-message">
+                    画像を選択するとここに表示されます。
+                </p>
+
+            </div>
+
+
+            <!-- AI判定ボタン -->
+
+            <button
+                type="button"
+                id="image-ai-button"
+                class="image-ai-button"
+                disabled
+            >
+                🤖 AIで判定
+            </button>
+
+        </section>
+
+
+        <!-- ===========================
+             検索結果
+        ============================ -->
+
+        <section
+            id="search-result"
+            class="search-result"
+        ></section>
+
+
+        <!-- ===========================
+             AI判定結果
+        ============================ -->
+
+        <section
+            id="ai-result"
+            class="ai-result"
+        ></section>
+
+    </main>
+
+
+    <script src="js/search.js"></script>
+
+</body>
+
+</html>

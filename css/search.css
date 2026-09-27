@@ -1,0 +1,547 @@
+/* ===========================
+   検索全体
+=========================== */
+
+.search-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 45px 0 80px;
+}
+
+.search-container > h1 {
+    margin-bottom: 10px;
+    color: #205b4a;
+    font-size: 32px;
+}
+
+.search-description {
+    margin-bottom: 30px;
+    color: #666666;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   検索セクション
+=========================== */
+
+.search-section,
+.image-search-section {
+    margin-bottom: 25px;
+    padding: 25px;
+    background-color: #ffffff;
+    border: 1px solid #d8e5e1;
+    border-radius: 12px;
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+.search-section h2,
+.image-search-section h2 {
+    margin: 0 0 18px;
+    color: #205b4a;
+    font-size: 22px;
+}
+
+
+/* ===========================
+   文字検索
+=========================== */
+
+.search-box {
+    display: flex;
+    gap: 10px;
+}
+
+#search-input {
+    flex: 1;
+    min-width: 0;
+
+    padding: 13px 15px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #cfded9;
+
+    border-radius: 8px;
+
+    color: #333333;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+#search-input:focus {
+    border-color: #31856d;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(49, 133, 109, 0.1);
+}
+
+
+#search-button {
+    padding: 0 22px;
+
+    background-color: #31856d;
+
+    border: none;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+#search-button:hover {
+    background-color: #205b4a;
+}
+
+
+/* ===========================
+   画像検索
+=========================== */
+
+.image-search-description {
+    margin: 0 0 20px;
+
+    color: #666666;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   画像選択
+=========================== */
+
+.image-upload-area {
+    margin-bottom: 20px;
+}
+
+#image-input {
+    display: none;
+}
+
+.image-upload-button {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    background-color: #31856d;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.image-upload-button:hover {
+    background-color: #205b4a;
+}
+
+
+/* ===========================
+   画像プレビュー
+=========================== */
+
+.image-preview-area {
+    min-height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 18px;
+
+    padding: 15px;
+
+    background-color: #f8fbfa;
+
+    border:
+        1px dashed #c5d8d2;
+
+    border-radius: 10px;
+}
+
+.image-preview-message {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+.image-preview {
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 300px;
+
+    border-radius: 8px;
+
+    object-fit: contain;
+}
+
+
+/* ===========================
+   AI判定ボタン
+=========================== */
+
+.image-ai-button {
+    width: 100%;
+
+    padding: 13px;
+
+    background-color: #31856d;
+
+    border: none;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+.image-ai-button:hover:not(:disabled) {
+    background-color: #205b4a;
+}
+
+.image-ai-button:disabled {
+    background-color: #b9c8c4;
+
+    cursor: not-allowed;
+}
+
+
+/* ===========================
+   検索結果
+=========================== */
+
+.search-result {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.search-result-title {
+    margin: 0 0 5px;
+
+    color: #205b4a;
+
+    font-size: 22px;
+}
+
+
+/* ===========================
+   検索結果カード
+=========================== */
+
+.search-item {
+    display: flex;
+
+    gap: 18px;
+
+    padding: 18px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+.search-item-image {
+    width: 90px;
+    height: 90px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+.search-item-content {
+    flex: 1;
+}
+
+.search-item-content h2 {
+    margin: 0 0 10px;
+
+    color: #205b4a;
+
+    font-size: 19px;
+}
+
+.search-item-content p {
+    margin: 5px 0;
+
+    color: #555555;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.search-label {
+    color: #31856d;
+
+    font-weight: bold;
+}
+
+
+/* ===========================
+   検索結果なし
+=========================== */
+
+.no-result {
+    padding: 30px 20px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    color: #666666;
+
+    text-align: center;
+
+    font-size: 15px;
+}
+
+
+/* ===========================
+   AIへ渡すメッセージ
+=========================== */
+
+.ai-message {
+    padding: 20px;
+
+    background-color: #edf6f2;
+
+    border:
+        1px solid #c9dfd7;
+
+    border-radius: 10px;
+
+    color: #205b4a;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* ===========================
+   AI結果
+=========================== */
+
+.ai-result {
+    margin-top: 25px;
+}
+
+.ai-result-card {
+    padding: 22px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+}
+
+.ai-result-card h2 {
+    margin: 0 0 15px;
+
+    color: #205b4a;
+
+    font-size: 21px;
+}
+
+.ai-result-card p {
+    margin: 7px 0;
+
+    color: #555555;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+.ai-label {
+    color: #31856d;
+
+    font-weight: bold;
+}
+
+
+/* ===========================
+   AI読み込み中
+=========================== */
+
+.ai-loading {
+    padding: 20px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    color: #31856d;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* ===========================
+   エラー
+=========================== */
+
+.search-error {
+    padding: 20px;
+
+    background-color: #fff5f5;
+
+    border-radius: 8px;
+
+    color: #a94442;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+/* ===========================
+   スマートフォン
+=========================== */
+
+@media (max-width: 700px) {
+
+    .search-container {
+        width: 94%;
+
+        padding-top: 30px;
+    }
+
+
+    .search-container > h1 {
+        font-size: 26px;
+    }
+
+
+    .search-description {
+        font-size: 14px;
+    }
+
+
+    .search-section,
+    .image-search-section {
+        padding: 20px;
+    }
+
+
+    .search-section h2,
+    .image-search-section h2 {
+        font-size: 20px;
+    }
+
+
+    .search-box {
+        gap: 7px;
+    }
+
+
+    #search-input {
+        padding: 12px;
+
+        font-size: 14px;
+    }
+
+
+    #search-button {
+        padding: 0 15px;
+
+        font-size: 14px;
+    }
+
+
+    .search-item {
+        gap: 12px;
+
+        padding: 14px;
+    }
+
+
+    .search-item-image {
+        width: 70px;
+        height: 70px;
+    }
+
+
+    .search-item-content h2 {
+        font-size: 17px;
+    }
+
+
+    .search-item-content p {
+        font-size: 13px;
+    }
+
+
+    .image-preview-area {
+        min-height: 150px;
+    }
+
+
+    .image-preview {
+        max-height: 220px;
+    }
+
+}

@@ -1,0 +1,765 @@
+/* ========================================
+   ながさきごみナビ
+   main.html 専用CSS
+======================================== */
+
+
+/* ========================================
+   市町村・地区表示
+======================================== */
+
+.selected-city {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.selected-city a {
+
+    color: #31856d;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+.selected-city a:hover {
+
+    text-decoration: underline;
+
+}
+
+.selected-area {
+
+    padding-left: 10px;
+
+    border-left:
+        1px solid #cccccc;
+
+    color: #666666;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   メインコンテナ
+======================================== */
+
+.main-container {
+
+    width: 90%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    padding: 50px 0 80px;
+
+}
+
+
+/* ========================================
+   ようこそ
+======================================== */
+
+.welcome {
+
+    margin-bottom: 35px;
+
+}
+
+.welcome .small-text {
+
+    margin-bottom: 8px;
+
+    color: #31856d;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+}
+
+.welcome h1 {
+
+    margin: 0 0 15px;
+
+    color: #205b4a;
+
+    font-size: 38px;
+
+    line-height: 1.4;
+
+}
+
+.welcome > p:last-child {
+
+    color: #666666;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ========================================
+   今日のごみカード
+======================================== */
+
+.today-card {
+
+    margin-bottom: 25px;
+
+    padding: 28px;
+
+    background-color: #ffffff;
+
+    border:
+        2px solid #31856d;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.07);
+
+}
+
+
+/* ========================================
+   今日のごみ ヘッダー
+======================================== */
+
+.today-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #d8e5e1;
+
+    color: #205b4a;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+.today-date {
+
+    color: #666666;
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+}
+
+
+/* ========================================
+   今日のごみ内容
+======================================== */
+
+.today-content {
+
+    min-height: 130px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding: 25px 5px;
+
+}
+
+
+/* ========================================
+   ごみアイコン
+======================================== */
+
+.garbage-icon {
+
+    width: 80px;
+
+    height: 80px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    background-color: #edf6f2;
+
+    border-radius: 50%;
+
+    font-size: 40px;
+
+}
+
+
+/* ========================================
+   ラベル
+======================================== */
+
+.garbage-label {
+
+    margin: 0 0 5px;
+
+    color: #31856d;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+
+/* ========================================
+   ごみの名前
+======================================== */
+
+.today-content h2 {
+
+    margin: 0;
+
+    color: #263331;
+
+    font-size: 26px;
+
+}
+
+
+/* ========================================
+   複数のごみ
+======================================== */
+
+.today-garbage-list {
+
+    width: 100%;
+
+}
+
+.today-garbage-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+
+    color: #263331;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+.today-garbage-item:last-child {
+
+    margin-bottom: 0;
+
+}
+
+.today-garbage-item .garbage-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    font-size: 28px;
+
+}
+
+
+/* ========================================
+   収集なし
+======================================== */
+
+.no-garbage {
+
+    width: 100%;
+
+    text-align: center;
+
+    color: #666666;
+
+}
+
+.no-garbage-icon {
+
+    margin-bottom: 10px;
+
+    font-size: 40px;
+
+}
+
+.no-garbage p {
+
+    margin: 0;
+
+    font-size: 16px;
+
+}
+
+
+/* ========================================
+   エラー
+======================================== */
+
+.garbage-error {
+
+    width: 100%;
+
+    padding: 15px;
+
+    background-color: #fff5f5;
+
+    border-radius: 8px;
+
+    color: #a94442;
+
+    text-align: center;
+
+}
+
+
+/* ========================================
+   カレンダーを見るボタン
+======================================== */
+
+.card-button {
+
+    display: block;
+
+    padding: 14px;
+
+    background-color: #31856d;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+
+}
+
+.card-button:hover {
+
+    background-color: #205b4a;
+
+    transform: translateY(-2px);
+
+}
+
+
+
+/* ========================================
+   次のごみ ヘッダー
+======================================== */
+
+.next-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 15px;
+
+    border-bottom:
+        1px solid #d8e5e1;
+
+    color: #205b4a;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+.next-date {
+
+    color: #666666;
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+}
+
+
+/* ========================================
+   次のごみ内容
+======================================== */
+
+.next-content {
+
+    min-height: 100px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px 5px;
+
+}
+
+
+/* ========================================
+   次のごみが複数の場合
+======================================== */
+
+.next-garbage-list {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+.next-garbage-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    color: #263331;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+}
+
+.next-garbage-item .garbage-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    font-size: 28px;
+
+}
+
+
+/* ========================================
+   次のごみがない場合
+======================================== */
+
+.no-next-garbage {
+
+    width: 100%;
+
+    padding: 15px 0;
+
+    color: #666666;
+
+    text-align: center;
+
+    font-size: 15px;
+
+}
+
+
+/* ========================================
+   クイックメニュー
+======================================== */
+
+.quick-menu {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+/* ========================================
+   クイックカード
+======================================== */
+
+.quick-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-height: 130px;
+
+    padding: 25px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 14px;
+
+    color: #263331;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0, 0, 0, 0.05);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+}
+
+.quick-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(0, 0, 0, 0.10);
+
+}
+
+
+/* ========================================
+   クイックアイコン
+======================================== */
+
+.quick-icon {
+
+    width: 60px;
+
+    height: 60px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    background-color: #edf6f2;
+
+    border-radius: 50%;
+
+    font-size: 28px;
+
+}
+
+
+/* ========================================
+   クイックタイトル
+======================================== */
+
+.quick-card h2 {
+
+    margin: 0 0 7px;
+
+    color: #205b4a;
+
+    font-size: 20px;
+
+}
+
+
+/* ========================================
+   クイック説明
+======================================== */
+
+.quick-card p {
+
+    margin: 0;
+
+    color: #666666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 700px) {
+
+
+    .main-container {
+
+        width: 92%;
+
+        padding-top: 35px;
+
+    }
+
+
+    .selected-city {
+
+        gap: 6px;
+
+    }
+
+
+    .selected-area {
+
+        padding-left: 6px;
+
+        font-size: 12px;
+
+    }
+
+
+    .welcome h1 {
+
+        font-size: 30px;
+
+    }
+
+
+    .today-card {
+
+        padding: 20px;
+
+    }
+
+
+    .today-header {
+
+        font-size: 16px;
+
+    }
+
+
+    .today-content {
+
+        gap: 15px;
+
+        padding: 20px 0;
+
+    }
+
+
+    .garbage-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 30px;
+
+    }
+
+
+    .today-content h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .today-garbage-item {
+
+        font-size: 17px;
+
+    }
+
+
+    .next-header {
+
+        font-size: 16px;
+
+    }
+
+
+    .next-content {
+
+        padding: 18px 0;
+
+    }
+
+
+    .next-garbage-item {
+
+        font-size: 17px;
+
+    }
+
+
+    .next-garbage-item .garbage-icon {
+
+        width: 50px;
+
+        height: 50px;
+
+        font-size: 25px;
+
+    }
+
+
+    .quick-menu {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .quick-card {
+
+        min-height: 100px;
+
+        padding: 20px;
+
+    }
+
+}

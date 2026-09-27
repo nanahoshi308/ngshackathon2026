@@ -1,0 +1,38 @@
+{
+    "garbage": [
+        {
+            "name": "燃やせるごみ",
+            "img": "img/moeru.webp",
+
+            "schedule": [
+                {
+                    "day": "月曜日",
+                    "restriction": [1, 1, 1, 1, 1]
+                },
+                {
+                    "day": "木曜日",
+                    "restriction": [1, 1, 1, 1, 1]
+                }
+            ],
+
+            "separation": "指定袋に入れてください。",
+
+            "collectionPlace": "ごみステーション"
+        },
+
+        {
+            "name": "資源ごみ",
+
+            "schedule": [
+                {
+                    "day": "水曜日",
+                    "restriction": [0, 1, 0, 1, 0]
+                }
+            ],
+
+            "separation": "種類ごとに分けてください。",
+
+            "collectionPlace": "資源ごみ集積所"
+        }
+    ]
+}

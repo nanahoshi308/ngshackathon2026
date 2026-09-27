@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ながさきごみナビ</title>
+
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         ヘッダー
+    ======================================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <h1>
+                🗑️ ながさきごみナビ
+            </h1>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         メイン
+    ======================================== -->
+
+    <main class="select-main">
+
+        <section class="select-box">
+
+
+            <!-- ========================================
+                 タイトル
+            ======================================== -->
+
+            <h2>
+                お住まいの地域を選択
+            </h2>
+
+
+            <p class="select-description">
+
+                まず、市町村を選択してください。
+
+            </p>
+
+
+            <!-- ========================================
+                 市町村
+            ======================================== -->
+
+            <div class="select-group">
+
+                <label for="municipality">
+                    市町村
+                </label>
+
+
+                <select id="municipality">
+
+                    <option value="">
+                        市町村を選択してください
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ========================================
+                 地区
+            ======================================== -->
+
+            <div
+                id="area-group"
+                class="area-group hidden"
+            >
+
+
+                <h3 class="area-title">
+                    地区
+                </h3>
+
+
+                <p class="area-description">
+
+                    以下の一覧から、お住まいの地域が
+                    含まれている地区を確認してください。
+
+                </p>
+
+
+                <!-- ========================================
+                     地区一覧
+                ======================================== -->
+
+                <div
+                    id="area-list"
+                    class="area-list"
+                >
+                </div>
+
+
+                <!-- ========================================
+                     地区選択
+                ======================================== -->
+
+                <div class="select-group area-select-group">
+
+                    <label for="area">
+                        地区を選択
+                    </label>
+
+
+                    <select id="area">
+
+                        <option value="">
+                            地区を選択してください
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ========================================
+                 ごみ情報を見る
+            ======================================== -->
+
+            <button
+                id="start-button"
+                class="start-button"
+                disabled
+            >
+
+                ごみ情報を見る
+
+            </button>
+
+
+            <p class="select-note">
+
+                ※ 市町村によっては地区の選択が
+                必要な場合があります。
+
+            </p>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         フッター
+    ======================================== -->
+
+    <footer class="footer">
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

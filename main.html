@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ながさきごみナビ
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/main.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <a
+            href="index.html"
+            class="header-logo"
+        >
+            🗑️ ながさきごみナビ
+        </a>
+
+
+        <div class="selected-city">
+
+            <span id="city-name">
+                読み込み中...
+            </span>
+
+            <span
+                id="area-name"
+                class="selected-area"
+            ></span>
+
+            <a href="index.html">
+                変更
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <nav class="navigation">
+
+        <a
+            href="search.html"
+            class="nav-item"
+        >
+            <span>🔍</span>
+            <span>検索</span>
+        </a>
+
+
+        <a
+            href="calendar.html"
+            class="nav-item"
+        >
+            <span>📅</span>
+            <span>カレンダー</span>
+        </a>
+
+
+        <a
+            href="location.html"
+            class="nav-item"
+        >
+            <span>📍</span>
+            <span>回収場所</span>
+        </a>
+
+
+        <a
+            href="about.html"
+            class="nav-item"
+        >
+            <span>ℹ️</span>
+            <span>概要</span>
+        </a>
+
+    </nav>
+
+
+
+    <main class="main-container">
+
+
+        <!-- ===========================
+             ようこそ
+        ============================ -->
+
+        <section class="welcome">
+
+            <p class="small-text">
+                ようこそ
+            </p>
+
+            <h1>
+
+                <span id="welcome-city">
+                    読み込み中...
+                </span>
+
+                のごみ情報
+
+            </h1>
+
+            <p>
+                今日のごみ出しや分別方法をかんたんに確認できます。
+            </p>
+
+        </section>
+
+
+
+        <!-- ===========================
+             今日のごみ
+        ============================ -->
+
+        <section class="today-card">
+
+            <div class="today-header">
+
+                <span>
+                    今日のごみ
+                </span>
+
+                <span
+                    id="today-date"
+                    class="today-date"
+                >
+                    読み込み中...
+                </span>
+
+            </div>
+
+
+            <div
+                id="today-content"
+                class="today-content"
+            >
+            </div>
+
+
+            <div class="next-header">
+
+                <span>
+                    次のごみ
+                </span>
+
+                <span
+                    id="next-date"
+                    class="next-date"
+                >
+                    読み込み中...
+                </span>
+
+            </div>
+
+
+            <div
+                id="next-content"
+                class="next-content"
+            >
+            </div>
+
+            <a
+                href="calendar.html"
+                class="card-button"
+            >
+                カレンダーを見る
+            </a>
+
+        </section>
+
+
+
+        <!-- ===========================
+             クイックメニュー
+        ============================ -->
+
+        <section class="quick-menu">
+
+
+            <a
+                href="search.html"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    🔍
+                </div>
+
+                <div>
+
+                    <h2>
+                        ごみを調べる
+                    </h2>
+
+                    <p>
+                        名前や写真から<br>
+                        ごみの種類を検索
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="calendar.html"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <h2>
+                        カレンダー
+                    </h2>
+
+                    <p>
+                        ごみ収集の日を<br>
+                        カレンダーで確認
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="location.html"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h2>
+                        回収場所
+                    </h2>
+
+                    <p>
+                        ごみを出す場所を<br>
+                        確認
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <a
+                href="about.html"
+                class="quick-card"
+            >
+
+                <div class="quick-icon">
+                    ℹ️
+                </div>
+
+                <div>
+
+                    <h2>
+                        概要
+                    </h2>
+
+                    <p>
+                        本サイトの説明や<br>
+                        注意など
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </section>
+
+    </main>
+
+
+
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
