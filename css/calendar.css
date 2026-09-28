@@ -109,6 +109,7 @@
 .calendar-week div {
     padding: 12px 5px;
     color: #333333;
+    font-size: 18px;
 }
 
 
@@ -163,7 +164,7 @@
 .calendar-day-number {
     margin-bottom: 8px;
 
-    font-size: 14px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -586,6 +587,23 @@
 
     .calendar-location-date {
         font-size: 13px;
+    }
+
+    .calendar-week div {
+        font-size: 14px;
+    }
+    
+
+}
+
+/* スマホではタイトルを2行にする */
+@media (max-width: 700px) {
+
+    .calendar-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
     }
 
 }
