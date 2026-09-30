@@ -180,7 +180,7 @@ async function loadMunicipality() {
 
     const municipality =
         municipalities.find(
-            function(item) {
+            function (item) {
 
                 return item.id ===
                     municipalityId;
@@ -240,7 +240,7 @@ async function loadAreaName() {
 
     const municipalityData =
         areasData[
-            municipalityId
+        municipalityId
         ];
 
 
@@ -258,7 +258,7 @@ async function loadAreaName() {
 
     const area =
         municipalityData.areas.find(
-            function(item) {
+            function (item) {
 
                 return item.id ===
                     areaId;
@@ -473,7 +473,7 @@ function searchGarbage() {
 
 
     gomiData.forEach(
-        function(gomi) {
+        function (gomi) {
 
             /*
              * itemsが配列か確認
@@ -495,10 +495,10 @@ function searchGarbage() {
              */
 
             let matched = false;
-
+            let matchedItem = "";
 
             gomi.items.forEach(
-                function(item) {
+                function (item) {
 
                     if (
                         item
@@ -507,6 +507,7 @@ function searchGarbage() {
                     ) {
 
                         matched = true;
+                        matchedItem = item;
 
                     }
 
@@ -519,6 +520,9 @@ function searchGarbage() {
              */
 
             if (matched) {
+
+                gomi.matchedItem =
+                    matchedItem;
 
                 results.push(
                     gomi
@@ -638,7 +642,7 @@ function displaySearchResults(
     ============================ */
 
     results.forEach(
-        function(gomi) {
+        function (gomi) {
 
             createSearchItem(
                 gomi
@@ -648,7 +652,6 @@ function displaySearchResults(
     );
 
 }
-
 
 /* ===========================
    検索結果カード
@@ -665,7 +668,7 @@ function createSearchItem(
 
     const garbage =
         garbageData.find(
-            function(item) {
+            function (item) {
 
                 return item.name ===
                     gomi.name;
@@ -734,6 +737,13 @@ function createSearchItem(
 
             <p>
                 <span class="search-label">
+                    一致したごみ：
+                </span>
+                ${gomi.matchedItem || "検索したごみ"}
+            </p>
+
+            <p>
+                <span class="search-label">
                     分別：
                 </span>
                 ${garbage.separation}
@@ -779,6 +789,7 @@ function createSearchItem(
     );
 
 }
+
 
 
 /* ===========================
@@ -832,7 +843,7 @@ function saveUnresolvedGarbage(
 
 imageInput.addEventListener(
     "change",
-    function(event) {
+    function (event) {
 
         const file =
             event.target.files[0];
@@ -898,7 +909,7 @@ imageInput.addEventListener(
 
 
         reader.onload =
-            function() {
+            function () {
 
                 /*
                  * Base64形式の画像データ
@@ -945,7 +956,7 @@ imageInput.addEventListener(
 
 imageAiButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         /*
          * 画像がない場合
@@ -1044,7 +1055,7 @@ async function sendToAI(
      */
 
     setTimeout(
-        function() {
+        function () {
 
             showAITestResult(
                 data
@@ -1132,7 +1143,7 @@ function showAITestResult(
 
 searchButton.addEventListener(
     "click",
-    function() {
+    function () {
 
         searchGarbage();
 
@@ -1146,7 +1157,7 @@ searchButton.addEventListener(
 
 searchInput.addEventListener(
     "keydown",
-    function(event) {
+    function (event) {
 
         if (
             event.key ===
