@@ -432,10 +432,39 @@ async function loadGarbageData() {
 
 
 /* ===========================
+   検索結果をリセット
+=========================== */
+
+function resetSearchResult() {
+
+    /*
+     * 通常検索結果を消す
+     */
+
+    searchResult.innerHTML = "";
+
+
+    /*
+     * AI検索結果を消す
+     */
+
+    aiResult.innerHTML = "";
+
+}
+
+
+/* ===========================
    文字検索
 =========================== */
 
 function searchGarbage() {
+
+    /*
+     * 前回の検索結果をリセット
+     */
+
+    resetSearchResult();
+
 
     /*
      * 入力された文字
@@ -445,13 +474,6 @@ function searchGarbage() {
         searchInput.value
             .trim()
             .toLowerCase();
-
-
-    /*
-     * AI結果を一度消す
-     */
-
-    aiResult.innerHTML = "";
 
 
     /* ===========================
@@ -608,8 +630,10 @@ function displaySearchResults(
             "h2"
         );
 
+
     title.className =
         "search-result-title";
+
 
     title.textContent =
         "検索結果：" +
@@ -632,6 +656,7 @@ function displaySearchResults(
             document.createElement(
                 "div"
             );
+
 
         noResult.className =
             "no-result";
@@ -704,6 +729,7 @@ function createSearchItem(
             "div"
         );
 
+
     item.className =
         "search-item";
 
@@ -716,6 +742,7 @@ function createSearchItem(
         document.createElement(
             "img"
         );
+
 
     image.className =
         "search-item-image";
@@ -740,6 +767,7 @@ function createSearchItem(
         document.createElement(
             "div"
         );
+
 
     content.className =
         "search-item-content";
@@ -796,6 +824,7 @@ function createSearchItem(
     item.appendChild(
         image
     );
+
 
     item.appendChild(
         content
@@ -1165,11 +1194,13 @@ imageInput.addEventListener(
                 "画像を圧縮しました。"
             );
 
+
             console.log(
                 "元画像サイズ：",
                 file.size,
                 "bytes"
             );
+
 
             console.log(
                 "圧縮後Base64サイズ：",
@@ -1223,6 +1254,13 @@ imageAiButton.addEventListener(
             return;
 
         }
+
+
+        /*
+         * 前回の検索結果をリセット
+         */
+
+        resetSearchResult();
 
 
         /*
@@ -1280,10 +1318,10 @@ async function sendToAI(
     ============================ */
 
     aiResult.innerHTML = `
-        <div class="ai-loading">
-            🤖 AIでごみを判定しています...
-        </div>
-    `;
+    <div class="ai-loading">
+        🤖 AIでごみを判定しています<span class="loading-dots"></span>
+    </div>
+`;
 
 
     try {
@@ -1370,6 +1408,7 @@ async function sendToAI(
             const errorText =
                 await response.text();
 
+
             throw new Error(
                 "AIサーバーエラー: " +
                 response.status +
@@ -1442,7 +1481,6 @@ async function sendToAI(
 /* ===========================
    AI結果を表示
 =========================== */
-
 function showAIResult(
     result,
     inputText
@@ -1504,6 +1542,31 @@ function showAIResult(
 
 
     /* ===========================
+       画像
+    ============================ */
+
+    let imageHtml = "";
+
+
+    if (
+        garbage &&
+        garbage.img
+    ) {
+
+        imageHtml = `
+
+            <img
+                src="${garbage.img}"
+                alt="${garbage.name}"
+                class="ai-result-image"
+            >
+
+        `;
+
+    }
+
+
+    /* ===========================
        AI結果を表示
     ============================ */
 
@@ -1515,46 +1578,55 @@ function showAIResult(
                 🤖 AI判定
             </h2>
 
-            <p>
-                <span class="ai-label">
-                    ごみの名前：
-                </span>
-                ${result.name || inputText || "不明"}
-            </p>
+            <div class="ai-result-content">
 
-            <p>
-                <span class="ai-label">
-                    ごみの種類：
-                </span>
-                ${result.type}
-            </p>
+                ${imageHtml}
 
-            ${
-                garbage
-                ? `
+                <div class="ai-result-info">
+
                     <p>
                         <span class="ai-label">
-                            分別：
+                            ごみの名前：
                         </span>
-                        ${garbage.separation}
+                        ${result.name || inputText || "不明"}
                     </p>
 
                     <p>
                         <span class="ai-label">
-                            収集場所：
+                            ごみの種類：
                         </span>
-                        ${garbage.collectionPlace}
+                        ${result.type}
                     </p>
-                `
-                : ""
-            }
+
+                    ${
+                        garbage
+                        ? `
+                            <p>
+                                <span class="ai-label">
+                                    分別：
+                                </span>
+                                ${garbage.separation}
+                            </p>
+
+                            <p>
+                                <span class="ai-label">
+                                    収集場所：
+                                </span>
+                                ${garbage.collectionPlace}
+                            </p>
+                        `
+                        : ""
+                    }
+
+                </div>
+
+            </div>
 
         </div>
 
     `;
 
 }
-
 
 /* ===========================
    検索ボタン

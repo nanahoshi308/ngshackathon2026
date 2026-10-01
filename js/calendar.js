@@ -1228,32 +1228,42 @@ function displayGarbageInformation() {
 
             item.innerHTML = `
 
-                <h3>
-                    ${garbage.name}
-                </h3>
+    <div class="garbage-item-header">
 
-                <p>
-                    <strong>
-                        収集曜日：
-                    </strong>
-                    ${scheduleText || "情報なし"}
-                </p>
+        <img
+            src="${garbage.img}"
+            alt="${garbage.name}"
+            class="garbage-item-icon"
+        >
 
-                <p>
-                    <strong>
-                        分別：
-                    </strong>
-                    ${garbage.separation || "情報なし"}
-                </p>
+        <h3>
+            ${garbage.name}
+        </h3>
 
-                <p>
-                    <strong>
-                        収集場所：
-                    </strong>
-                    ${garbage.collectionPlace || "情報なし"}
-                </p>
+    </div>
 
-            `;
+    <p>
+        <strong>
+            収集曜日：
+        </strong>
+        ${scheduleText || "情報なし"}
+    </p>
+
+    <p>
+        <strong>
+            分別：
+        </strong>
+        ${garbage.separation || "情報なし"}
+    </p>
+
+    <p>
+        <strong>
+            収集場所：
+        </strong>
+        ${garbage.collectionPlace || "情報なし"}
+    </p>
+
+`;
 
 
             garbageListElement.appendChild(
