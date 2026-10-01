@@ -240,7 +240,7 @@ async function loadAreaName() {
 
     const municipalityData =
         areasData[
-        municipalityId
+            municipalityId
         ];
 
 
@@ -422,6 +422,12 @@ async function loadGarbageData() {
     gomiData =
         gomi.gomi;
 
+
+    console.log(
+        "読み込んだgomi.json：",
+        gomiData
+    );
+
 }
 
 
@@ -497,6 +503,7 @@ function searchGarbage() {
             let matched = false;
             let matchedItem = "";
 
+
             gomi.items.forEach(
                 function (item) {
 
@@ -521,11 +528,21 @@ function searchGarbage() {
 
             if (matched) {
 
-                gomi.matchedItem =
-                    matchedItem;
+                /*
+                 * 元のgomiデータを
+                 * 直接変更しないようにコピー
+                 */
+
+                const result =
+                    {
+                        ...gomi,
+                        matchedItem:
+                            matchedItem
+                    };
+
 
                 results.push(
-                    gomi
+                    result
                 );
 
             }
@@ -652,6 +669,7 @@ function displaySearchResults(
     );
 
 }
+
 
 /* ===========================
    検索結果カード
@@ -791,7 +809,6 @@ function createSearchItem(
 }
 
 
-
 /* ===========================
    解決できなかった
    ごみを保存
@@ -801,7 +818,7 @@ function createSearchItem(
  * 文字検索で見つからなかった
  * ごみを一時的にまとめる。
  *
- * このデータをあとでAIへ渡す。
+ * このデータをAIへ渡す。
  */
 
 function saveUnresolvedGarbage(
@@ -810,9 +827,11 @@ function saveUnresolvedGarbage(
 
     const unresolvedData = {
 
-        type: "text",
+        type:
+            "text",
 
-        value: keyword,
+        value:
+            keyword,
 
         municipality:
             municipalityId,
@@ -838,12 +857,204 @@ function saveUnresolvedGarbage(
 
 
 /* ===========================
+   画像を圧縮する
+=========================== */
+
+/*
+ * 画像をそのままAIへ送ると
+ * サイズが大きくなるため、
+ * ブラウザ側で縮小・圧縮する。
+ *
+ * 最大サイズ：1024px
+ * JPEG品質：0.7
+ */
+
+function compressImage(
+    file
+) {
+
+    return new Promise(
+        function (resolve, reject) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+                    const image =
+                        new Image();
+
+
+                    image.onload =
+                        function () {
+
+                            /*
+                             * 最大サイズ
+                             */
+
+                            const maxSize =
+                                1024;
+
+
+                            let width =
+                                image.width;
+
+                            let height =
+                                image.height;
+
+
+                            /*
+                             * 画像を縮小
+                             */
+
+                            if (
+                                width >
+                                    maxSize ||
+                                height >
+                                    maxSize
+                            ) {
+
+                                if (
+                                    width >
+                                    height
+                                ) {
+
+                                    height =
+                                        height *
+                                        maxSize /
+                                        width;
+
+                                    width =
+                                        maxSize;
+
+                                } else {
+
+                                    width =
+                                        width *
+                                        maxSize /
+                                        height;
+
+                                    height =
+                                        maxSize;
+
+                                }
+
+                            }
+
+
+                            /*
+                             * Canvasを作成
+                             */
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            canvas.width =
+                                width;
+
+                            canvas.height =
+                                height;
+
+
+                            const context =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            /*
+                             * Canvasへ画像を描画
+                             */
+
+                            context.drawImage(
+                                image,
+                                0,
+                                0,
+                                width,
+                                height
+                            );
+
+
+                            /*
+                             * JPEGへ変換
+                             *
+                             * 0.7 = 70%程度の品質
+                             */
+
+                            const compressedImage =
+                                canvas.toDataURL(
+                                    "image/jpeg",
+                                    0.7
+                                );
+
+
+                            /*
+                             * 圧縮した画像を返す
+                             */
+
+                            resolve(
+                                compressedImage
+                            );
+
+                        };
+
+
+                    image.onerror =
+                        function () {
+
+                            reject(
+                                new Error(
+                                    "画像の読み込みに失敗しました。"
+                                )
+                            );
+
+                        };
+
+
+                    image.src =
+                        reader.result;
+
+                };
+
+
+            reader.onerror =
+                function () {
+
+                    reject(
+                        new Error(
+                            "画像ファイルの読み込みに失敗しました。"
+                        )
+                    );
+
+                };
+
+
+            /*
+             * 元画像を読み込む
+             */
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+
+}
+
+
+/* ===========================
    画像選択
 =========================== */
 
 imageInput.addEventListener(
     "change",
-    function (event) {
+    async function (event) {
 
         const file =
             event.target.files[0];
@@ -900,51 +1111,94 @@ imageInput.addEventListener(
 
 
         /*
-         * FileReaderを使用して
-         * 画像を読み込む
+         * 圧縮中
          */
 
-        const reader =
-            new FileReader();
+        imageAiButton.disabled =
+            true;
+
+        imagePreviewArea.innerHTML = `
+            <p class="image-preview-message">
+                画像を処理しています...
+            </p>
+        `;
 
 
-        reader.onload =
-            function () {
+        try {
 
-                /*
-                 * Base64形式の画像データ
-                 */
+            /*
+             * 画像を圧縮
+             */
 
-                selectedImageData =
-                    reader.result;
-
-
-                /*
-                 * プレビュー表示
-                 */
-
-                imagePreviewArea.innerHTML = `
-                    <img
-                        src="${selectedImageData}"
-                        class="image-preview"
-                        alt="選択した画像"
-                    >
-                `;
+            selectedImageData =
+                await compressImage(
+                    file
+                );
 
 
-                /*
-                 * AIボタンを有効にする
-                 */
+            /*
+             * プレビュー表示
+             */
 
-                imageAiButton.disabled =
-                    false;
+            imagePreviewArea.innerHTML = `
+                <img
+                    src="${selectedImageData}"
+                    class="image-preview"
+                    alt="選択した画像"
+                >
+            `;
 
-            };
+
+            /*
+             * AIボタンを有効にする
+             */
+
+            imageAiButton.disabled =
+                false;
 
 
-        reader.readAsDataURL(
-            file
-        );
+            /*
+             * デバッグ用
+             */
+
+            console.log(
+                "画像を圧縮しました。"
+            );
+
+            console.log(
+                "元画像サイズ：",
+                file.size,
+                "bytes"
+            );
+
+            console.log(
+                "圧縮後Base64サイズ：",
+                selectedImageData.length,
+                "文字"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "画像圧縮エラー：",
+                error
+            );
+
+
+            selectedImageData =
+                null;
+
+            imageAiButton.disabled =
+                true;
+
+            imagePreviewArea.innerHTML = `
+                <p class="image-preview-message">
+                    画像の処理に失敗しました。
+                </p>
+            `;
+
+        }
 
     }
 );
@@ -977,7 +1231,8 @@ imageAiButton.addEventListener(
 
         const imageData = {
 
-            type: "image",
+            type:
+                "image",
 
             value:
                 selectedImageData,
@@ -1010,15 +1265,6 @@ imageAiButton.addEventListener(
    AIへデータを渡す
 =========================== */
 
-/*
- * 文字検索で見つからなかった場合と
- * 画像検索の場合の両方が
- * この関数に入ってくる。
- *
- * 後でAI APIを接続するときは
- * この関数を変更する。
- */
-
 async function sendToAI(
     data
 ) {
@@ -1040,64 +1286,226 @@ async function sendToAI(
     `;
 
 
-    /*
-     * ここではまだAI APIを
-     * 接続していない。
-     *
-     * 後でここにAI APIとの
-     * 通信処理を追加する。
-     */
+    try {
+
+        /* ===========================
+           Workerへ送るデータ
+        ============================ */
+
+        const requestData = {
+
+            type:
+                data.type,
+
+            gomiData:
+                data.gomiData
+
+        };
 
 
-    /*
-     * 現在はテストとして
-     * 3秒後に結果を表示する。
-     */
+        /* ===========================
+           文字検索の場合
+        ============================ */
 
-    setTimeout(
-        function () {
+        if (
+            data.type === "text"
+        ) {
 
-            showAITestResult(
-                data
+            requestData.question =
+                data.value;
+
+        }
+
+
+        /* ===========================
+           画像検索の場合
+        ============================ */
+
+        if (
+            data.type === "image"
+        ) {
+
+            requestData.image =
+                data.value;
+
+        }
+
+
+        console.log(
+            "Workerへ送信するデータ：",
+            requestData
+        );
+
+
+        /* ===========================
+           Cloudflare Workerへ送信
+        ============================ */
+
+        const response =
+            await fetch(
+                "https://nagasaki-gomi-ai.nagasaki-gominavi.workers.dev",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            requestData
+                        )
+                }
             );
 
-        },
-        1000
-    );
+
+        /* ===========================
+           HTTPエラー確認
+        ============================ */
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                "AIサーバーエラー: " +
+                response.status +
+                "\n" +
+                errorText
+            );
+
+        }
+
+
+        /* ===========================
+           Workerから結果を取得
+        ============================ */
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "AIからの結果：",
+            result
+        );
+
+
+        /* ===========================
+           AI結果を表示
+        ============================ */
+
+        showAIResult(
+            result,
+            data.type === "text"
+                ? data.value
+                : result.name
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "AI処理エラー：",
+            error
+        );
+
+
+        aiResult.innerHTML = `
+
+            <div class="ai-result-card">
+
+                <h2>
+                    🤖 AI判定
+                </h2>
+
+                <p>
+                    AIによる判定に失敗しました。
+                </p>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            </div>
+
+        `;
+
+    }
 
 }
 
 
 /* ===========================
-   AIテスト結果
+   AI結果を表示
 =========================== */
 
-/*
- * AI APIを接続するまでの
- * 仮の処理。
- */
-
-function showAITestResult(
-    data
+function showAIResult(
+    result,
+    inputText
 ) {
 
-    let inputText = "";
-
+    /*
+     * 該当なし
+     */
 
     if (
-        data.type === "text"
+        !result ||
+        !result.type ||
+        result.type === "該当なし"
     ) {
 
-        inputText =
-            data.value;
+        aiResult.innerHTML = `
 
-    } else {
+            <div class="ai-result-card">
 
-        inputText =
-            "アップロードされた画像";
+                <h2>
+                    🤖 AI判定
+                </h2>
+
+                <p>
+                    <span class="ai-label">
+                        入力：
+                    </span>
+                    ${inputText || "画像"}
+                </p>
+
+                <p>
+                    このごみを
+                    分類できませんでした。
+                </p>
+
+            </div>
+
+        `;
+
+        return;
 
     }
 
+
+    /*
+     * AIが判断したごみの種類から
+     * calendar.jsonを探す
+     */
+
+    const garbage =
+        garbageData.find(
+            function (item) {
+
+                return item.name ===
+                    result.type;
+
+            }
+        );
+
+
+    /* ===========================
+       AI結果を表示
+    ============================ */
 
     aiResult.innerHTML = `
 
@@ -1109,26 +1517,37 @@ function showAITestResult(
 
             <p>
                 <span class="ai-label">
-                    入力：
+                    ごみの名前：
                 </span>
-                ${inputText}
+                ${result.name || inputText || "不明"}
             </p>
 
             <p>
                 <span class="ai-label">
-                    判定結果：
+                    ごみの種類：
                 </span>
-                AI API接続後にここへ
-                判定結果を表示します。
+                ${result.type}
             </p>
 
-            <p>
-                <span class="ai-label">
-                    対象地域：
-                </span>
-                ${municipalityId}
-                ${areaId ? " / " + areaId : ""}
-            </p>
+            ${
+                garbage
+                ? `
+                    <p>
+                        <span class="ai-label">
+                            分別：
+                        </span>
+                        ${garbage.separation}
+                    </p>
+
+                    <p>
+                        <span class="ai-label">
+                            収集場所：
+                        </span>
+                        ${garbage.collectionPlace}
+                    </p>
+                `
+                : ""
+            }
 
         </div>
 
