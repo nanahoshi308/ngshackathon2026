@@ -240,7 +240,7 @@ async function loadAreaName() {
 
     const municipalityData =
         areasData[
-            municipalityId
+        municipalityId
         ];
 
 
@@ -521,9 +521,8 @@ function searchGarbage() {
             /*
              * 一致したか
              */
-
             let matched = false;
-            let matchedItem = "";
+            let matchedItems = [];
 
 
             gomi.items.forEach(
@@ -536,14 +535,15 @@ function searchGarbage() {
                     ) {
 
                         matched = true;
-                        matchedItem = item;
+
+                        matchedItems.push(
+                            item
+                        );
 
                     }
 
                 }
             );
-
-
             /*
              * 一致した場合
              */
@@ -556,11 +556,11 @@ function searchGarbage() {
                  */
 
                 const result =
-                    {
-                        ...gomi,
-                        matchedItem:
-                            matchedItem
-                    };
+                {
+                    ...gomi,
+                    matchedItems:
+                        matchedItems
+                };
 
 
                 results.push(
@@ -781,12 +781,15 @@ function createSearchItem(
                 ${garbage.name}
             </h2>
 
-            <p>
-                <span class="search-label">
-                    一致したごみ：
-                </span>
-                ${gomi.matchedItem || "検索したごみ"}
-            </p>
+<p>
+    <span class="search-label">
+        一致したごみ：
+    </span>
+    ${gomi.matchedItems
+                ? gomi.matchedItems.join("、")
+                : "検索したごみ"
+            }
+</p>
 
             <p>
                 <span class="search-label">
@@ -940,9 +943,9 @@ function compressImage(
 
                             if (
                                 width >
-                                    maxSize ||
+                                maxSize ||
                                 height >
-                                    maxSize
+                                maxSize
                             ) {
 
                                 if (
@@ -1598,9 +1601,8 @@ function showAIResult(
                         ${result.type}
                     </p>
 
-                    ${
-                        garbage
-                        ? `
+                    ${garbage
+            ? `
                             <p>
                                 <span class="ai-label">
                                     分別：
@@ -1615,8 +1617,8 @@ function showAIResult(
                                 ${garbage.collectionPlace}
                             </p>
                         `
-                        : ""
-                    }
+            : ""
+        }
 
                 </div>
 
