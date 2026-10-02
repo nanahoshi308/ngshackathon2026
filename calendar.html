@@ -5,24 +5,15 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
         カレンダー - ながさきごみナビ
     </title>
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <link rel="stylesheet" href="css/style.css">
 
-    <link
-        rel="stylesheet"
-        href="css/calendar.css"
-    >
+    <link rel="stylesheet" href="css/calendar.css">
 
 </head>
 
@@ -36,10 +27,7 @@
 
     <header class="header">
 
-        <a
-            href="index.html"
-            class="header-logo"
-        >
+        <a href="index.html" class="header-logo">
             🗑️ ながさきごみナビ
         </a>
 
@@ -50,10 +38,7 @@
                 読み込み中...
             </span>
 
-            <span
-                id="area-name"
-                class="selected-area"
-            ></span>
+            <span id="area-name" class="selected-area"></span>
 
             <a href="index.html">
                 変更
@@ -70,37 +55,25 @@
 
     <nav class="navigation">
 
-        <a
-            href="search.html"
-            class="nav-item"
-        >
+        <a href="search.html" class="nav-item">
             <span>🔍</span>
             <span>検索</span>
         </a>
 
 
-        <a
-            href="calendar.html"
-            class="nav-item"
-        >
+        <a href="calendar.html" class="nav-item">
             <span>📅</span>
             <span>カレンダー</span>
         </a>
 
 
-        <a
-            href="location.html"
-            class="nav-item"
-        >
+        <a href="location.html" class="nav-item">
             <span>📍</span>
             <span>指定場所</span>
         </a>
 
 
-        <a
-            href="about.html"
-            class="nav-item"
-        >
+        <a href="about.html" class="nav-item">
             <span>ℹ️</span>
             <span>概要</span>
         </a>
@@ -115,7 +88,143 @@
     <main class="calendar-container">
 
 
-        <h1 class="calendar-title">ごみ収集カレンダー<span id="calendar-area-name"></span></h1>
+        <!-- ===========================
+     カレンダータイトル
+============================ -->
+
+        <div class="calendar-title-row">
+
+            <h1 class="calendar-title">
+                ごみ収集カレンダー
+                <span id="calendar-area-name"></span>
+            </h1>
+
+
+            <!-- 通知設定ボタン -->
+
+            <button type="button" id="notification-button" class="notification-button" aria-label="通知設定">
+                🔔
+            </button>
+
+
+            <!-- ===========================
+         通知設定ポップアップ
+    ============================ -->
+
+            <div id="notification-popup" class="notification-popup">
+
+                <div class="notification-popup-title">
+
+                    <span>
+                        🔔 ごみ通知設定
+                    </span>
+
+                    <button type="button" id="notification-close" class="notification-close" aria-label="閉じる">
+                        ×
+                    </button>
+
+                </div>
+
+
+                <!-- ===========================
+             タブ
+        ============================ -->
+
+                <div class="notification-tabs">
+
+                    <button type="button" class="notification-tab active" data-tab="previous">
+                        前日
+                    </button>
+
+                    <button type="button" class="notification-tab" data-tab="today">
+                        当日
+                    </button>
+
+                </div>
+
+
+                <!-- ===========================
+             通知設定
+        ============================ -->
+
+                <div class="notification-settings">
+
+
+                    <!-- 通知ON/OFF -->
+
+                    <div class="notification-setting-row">
+
+                        <span class="notification-setting-label">
+                            通知
+                        </span>
+
+
+                        <label class="notification-switch">
+
+                            <input type="checkbox" id="notification-enabled">
+
+                            <span class="notification-slider"></span>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- 時間 -->
+
+                    <div class="notification-time-title">
+                        通知時刻
+                    </div>
+
+
+                    <div class="notification-time-picker">
+
+
+                        <!-- 時 -->
+
+                        <div class="notification-time-column">
+
+                            <div id="notification-hour-picker" class="notification-time-scroll">
+                            </div>
+
+                        </div>
+
+
+                        <div class="notification-time-colon">
+                            :
+                        </div>
+
+
+                        <!-- 分 -->
+
+                        <div class="notification-time-column">
+
+                            <div id="notification-minute-picker" class="notification-time-scroll">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="notification-time-selected">
+
+                        <span>
+                            設定時刻：
+                        </span>
+
+                        <strong id="notification-selected-time">
+                            07:00
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
 
 
         <!-- ===========================
@@ -124,10 +233,7 @@
 
         <div class="month-navigation">
 
-            <button
-                type="button"
-                id="previous-month"
-            >
+            <button type="button" id="previous-month">
                 ← 前の月
             </button>
 
@@ -137,10 +243,7 @@
             </h2>
 
 
-            <button
-                type="button"
-                id="next-month"
-            >
+            <button type="button" id="next-month">
                 次の月 →
             </button>
 
@@ -191,10 +294,7 @@
 
             <!-- 日付 -->
 
-            <div
-                id="calendar-days"
-                class="calendar-days"
-            >
+            <div id="calendar-days" class="calendar-days">
             </div>
 
 
@@ -212,10 +312,7 @@
             </h2>
 
 
-            <div
-                id="calendar-location-list"
-                class="calendar-location-list"
-            >
+            <div id="calendar-location-list" class="calendar-location-list">
             </div>
 
         </section>
@@ -232,10 +329,7 @@
             </h2>
 
 
-            <div
-                id="garbage-list"
-                class="garbage-list"
-            >
+            <div id="garbage-list" class="garbage-list">
             </div>
 
         </section>
@@ -243,9 +337,7 @@
     </main>
 
 
-    <script
-        src="js/calendar.js"
-    ></script>
+    <script src="js/calendar.js"></script>
 
 
 </body>

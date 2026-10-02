@@ -639,3 +639,598 @@
     }
 
 }
+
+
+/* ========================================
+   カレンダータイトル
+======================================== */
+
+.calendar-title-row {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+
+.calendar-title-row .calendar-title {
+    margin: 0;
+
+    color: #205b4a;
+
+    font-size: 32px;
+}
+
+
+/* ========================================
+   通知ボタン
+======================================== */
+
+.notification-button {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #31856d;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.notification-button:hover {
+    background-color: #edf6f2;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 3px 8px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+/* ========================================
+   通知設定ポップアップ
+======================================== */
+
+.notification-popup {
+    position: absolute;
+
+    top: 58px;
+
+    right: 0;
+
+    z-index: 1000;
+
+    width: 300px;
+
+    padding: 18px;
+
+    background-color: #ffffff;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.15);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(-8px);
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s,
+        visibility 0.2s;
+}
+
+
+.notification-popup.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0);
+}
+
+
+/* ========================================
+   ポップアップタイトル
+======================================== */
+
+.notification-popup-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+    color: #205b4a;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   閉じるボタン
+======================================== */
+
+.notification-close {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    padding: 0;
+
+    background-color: transparent;
+
+    border: none;
+
+    border-radius: 50%;
+
+    color: #777777;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.notification-close:hover {
+    background-color: #f2f2f2;
+
+    color: #333333;
+}
+
+
+/* ========================================
+   タブ
+======================================== */
+
+.notification-tabs {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    margin-bottom: 18px;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+.notification-tab {
+    padding: 10px 5px;
+
+    background-color: #ffffff;
+
+    border: none;
+
+    color: #555555;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+
+
+.notification-tab + .notification-tab {
+    border-left:
+        1px solid #d8e5e1;
+}
+
+
+.notification-tab.active {
+    background-color: #edf6f2;
+
+    color: #205b4a;
+}
+
+
+/* ========================================
+   通知設定
+======================================== */
+
+.notification-settings {
+    padding-top: 2px;
+}
+
+
+/* ========================================
+   ON / OFF 行
+======================================== */
+
+.notification-setting-row {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+
+.notification-setting-label {
+    color: #333333;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   ON / OFF スイッチ
+======================================== */
+
+.notification-switch {
+    position: relative;
+
+    display: inline-block;
+
+    width: 52px;
+    height: 30px;
+}
+
+
+.notification-switch input {
+    width: 0;
+    height: 0;
+
+    opacity: 0;
+}
+
+
+.notification-slider {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #cccccc;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s;
+}
+
+
+.notification-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    left: 4px;
+    top: 4px;
+
+    background-color: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 1px 4px
+        rgba(0, 0, 0, 0.2);
+
+    transition:
+        transform 0.2s;
+}
+
+
+.notification-switch input:checked
++ .notification-slider {
+    background-color: #31856d;
+}
+
+
+.notification-switch input:checked
++ .notification-slider::before {
+    transform:
+        translateX(22px);
+}
+
+
+/* ========================================
+   時刻タイトル
+======================================== */
+
+.notification-time-title {
+    margin-bottom: 8px;
+
+    color: #333333;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   時間選択
+======================================== */
+/* ========================================
+   時刻選択全体
+======================================== */
+
+.notification-time-picker {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+/* ========================================
+   時・分の列
+======================================== */
+
+.notification-time-column {
+    width: 90px;
+}
+
+
+/* ========================================
+   時・分のスクロール部分
+======================================== */
+
+.notification-time-scroll {
+    height: 150px;
+
+    overflow-y: auto;
+
+    padding: 55px 0;
+
+    background-color: #f8faf9;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    scroll-snap-type:
+        y mandatory;
+
+    scrollbar-width: thin;
+}
+
+
+/* ========================================
+   時・分
+======================================== */
+
+.notification-time-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 40px;
+
+    color: #888888;
+
+    font-size: 15px;
+
+    scroll-snap-align: center;
+
+    cursor: pointer;
+
+    transition:
+        color 0.15s,
+        background-color 0.15s;
+}
+
+
+/* ========================================
+   選択中の時・分
+======================================== */
+
+.notification-time-item.selected {
+    background-color: #edf6f2;
+
+    color: #205b4a;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   コロン
+======================================== */
+
+.notification-time-colon {
+    color: #205b4a;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 700px) {
+
+    .notification-time-column {
+        width: 80px;
+    }
+
+
+    .notification-time-scroll {
+        height: 140px;
+
+        padding: 50px 0;
+    }
+
+
+    .notification-time-item {
+        height: 40px;
+
+        font-size: 14px;
+    }
+
+
+    .notification-time-item.selected {
+        font-size: 16px;
+    }
+
+}
+
+/* 選択中の時刻 */
+
+.notification-time-item.selected {
+    background-color: #edf6f2;
+
+    color: #205b4a;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* ========================================
+   選択中の時間表示
+======================================== */
+
+.notification-time-selected {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 12px;
+
+    color: #666666;
+
+    font-size: 13px;
+}
+
+
+.notification-time-selected strong {
+    color: #205b4a;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 700px) {
+
+    .calendar-title-row {
+        align-items: flex-start;
+
+        margin-bottom: 25px;
+    }
+
+
+    .calendar-title-row .calendar-title {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 5px;
+
+        flex: 1;
+
+        font-size: 26px;
+
+        text-align: center;
+    }
+
+
+    .notification-button {
+        width: 42px;
+        height: 42px;
+
+        margin-left: 10px;
+
+        font-size: 19px;
+
+        flex-shrink: 0;
+    }
+
+
+    .notification-popup {
+        top: 52px;
+
+        right: 0;
+
+        width: min(
+            300px,
+            calc(100vw - 30px)
+        );
+    }
+
+}

@@ -55,6 +55,51 @@ const nextMonthButton =
 
 
 /* ========================================
+   通知設定 HTML要素
+======================================== */
+
+const notificationButton =
+    document.getElementById(
+        "notification-button"
+    );
+
+const notificationPopup =
+    document.getElementById(
+        "notification-popup"
+    );
+
+const notificationClose =
+    document.getElementById(
+        "notification-close"
+    );
+
+const notificationTabs =
+    document.querySelectorAll(
+        ".notification-tab"
+    );
+
+const notificationEnabled =
+    document.getElementById(
+        "notification-enabled"
+    );
+
+const notificationHourPicker =
+    document.getElementById(
+        "notification-hour-picker"
+    );
+
+const notificationMinutePicker =
+    document.getElementById(
+        "notification-minute-picker"
+    );
+
+const notificationSelectedTime =
+    document.getElementById(
+        "notification-selected-time"
+    );
+
+
+/* ========================================
    選択中の地域
 ======================================== */
 
@@ -74,6 +119,7 @@ const areaId =
 ======================================== */
 
 const weekDays = [
+
     "日曜日",
     "月曜日",
     "火曜日",
@@ -81,6 +127,7 @@ const weekDays = [
     "木曜日",
     "金曜日",
     "土曜日"
+
 ];
 
 
@@ -100,10 +147,85 @@ let calendarData = null;
 
 
 /* ========================================
+   通知設定
+======================================== */
+
+let notificationSettings = {
+
+    /*
+     * 前日の通知
+     */
+
+    previous: {
+
+        enabled: false,
+
+        time: "07:00"
+
+    },
+
+
+    /*
+     * 当日の通知
+     */
+
+    today: {
+
+        enabled: false,
+
+        time: "07:00"
+
+    }
+
+};
+
+
+/*
+ * 現在選択しているタブ
+ *
+ * previous → 前日
+ * today    → 当日
+ */
+
+let currentNotificationTab =
+    "previous";
+
+
+/* ========================================
+   Web Push設定
+======================================== */
+
+/*
+ * VAPID公開鍵
+ *
+ * 公開鍵なので
+ * JavaScriptに書いてOKです。
+ *
+ * Private Keyは絶対にここへ
+ * 書かないでください。
+ */
+
+const VAPID_PUBLIC_KEY =
+    "BNur60E10zcbXrEYwSya15rAqmZPsXH57SA9kzc0P9aAoelpFjbncR3uF3seyjEja8HneNDls-gc3X_ZV4cbdrI";
+
+
+/*
+ * Cloudflare WorkerのURL
+ */
+
+const PUSH_WORKER_URL =
+    "https://nagasaki-gomi-ai.nagasaki-gominavi.workers.dev";
+
+
+/* ========================================
    初期処理
 ======================================== */
 
 async function initialize() {
+
+    /*
+     * 市町村が選択されていない場合
+     */
 
     if (!municipalityId) {
 
@@ -115,17 +237,53 @@ async function initialize() {
     }
 
 
+    /*
+     * 通知設定を読み込む
+     */
+
+    loadNotificationSettings();
+
+
     try {
+
+        /*
+         * 市町村名を読み込む
+         */
 
         await loadMunicipality();
 
+
+        /*
+         * 地区名を読み込む
+         */
+
         await loadAreaName();
+
+
+        /*
+         * カレンダーデータを読み込む
+         */
 
         await loadCalendarData();
 
+
+        /*
+         * カレンダーを表示
+         */
+
         displayCalendar();
 
+
+        /*
+         * ごみ情報を表示
+         */
+
         displayGarbageInformation();
+
+
+        /*
+         * 指定場所を表示
+         */
 
         displayCalendarLocations();
 
@@ -138,9 +296,14 @@ async function initialize() {
 
 
         calendarDays.innerHTML = `
+
             <div class="calendar-error">
-                カレンダー情報を読み込めませんでした。
+
+                カレンダー情報を
+                読み込めませんでした。
+
             </div>
+
         `;
 
     }
@@ -202,17 +365,24 @@ async function loadMunicipality() {
 /* ========================================
    地区名
 ======================================== */
+
 async function loadAreaName() {
+
+    /*
+     * 地区が選択されていない場合
+     */
 
     if (!areaId) {
 
         areaName.textContent =
             "";
 
+
         calendarAreaName.textContent =
             "（" +
             cityName.textContent +
             "）";
+
 
         return;
 
@@ -240,7 +410,7 @@ async function loadAreaName() {
 
     const municipalityData =
         areasData[
-        municipalityId
+            municipalityId
         ];
 
 
@@ -272,6 +442,7 @@ async function loadAreaName() {
         areaName.textContent =
             area.name;
 
+
         calendarAreaName.textContent =
             "（" +
             cityName.textContent +
@@ -293,6 +464,10 @@ async function loadCalendarData() {
     let path;
 
 
+    /*
+     * 地区がある場合
+     */
+
     if (areaId) {
 
         path =
@@ -302,7 +477,14 @@ async function loadCalendarData() {
             areaId +
             "/calendar.json";
 
-    } else {
+    }
+
+
+    /*
+     * 地区がない場合
+     */
+
+    else {
 
         path =
             "data/" +
@@ -358,6 +540,10 @@ function displayCalendar() {
         currentDate.getMonth();
 
 
+    /*
+     * 月タイトル
+     */
+
     monthTitle.textContent =
         year +
         "年" +
@@ -365,9 +551,17 @@ function displayCalendar() {
         "月";
 
 
+    /*
+     * カレンダーを空にする
+     */
+
     calendarDays.innerHTML =
         "";
 
+
+    /*
+     * 月初の日付
+     */
 
     const firstDay =
         new Date(
@@ -377,9 +571,17 @@ function displayCalendar() {
         );
 
 
+    /*
+     * 月初の曜日
+     */
+
     const firstWeekDay =
         firstDay.getDay();
 
+
+    /*
+     * 月末の日付
+     */
 
     const lastDate =
         new Date(
@@ -392,6 +594,10 @@ function displayCalendar() {
     const daysInMonth =
         lastDate.getDate();
 
+
+    /*
+     * 前月の最終日
+     */
 
     const previousLastDate =
         new Date(
@@ -406,7 +612,9 @@ function displayCalendar() {
 
 
     /*
-     * 6週間分
+     * 6週間分表示
+     *
+     * 7日 × 6週間 = 42マス
      */
 
     for (
@@ -430,7 +638,9 @@ function displayCalendar() {
         let date;
 
 
-        /* 前月 */
+        /* ========================================
+           前月
+        ======================================== */
 
         if (
             i < firstWeekDay
@@ -458,7 +668,9 @@ function displayCalendar() {
         }
 
 
-        /* 今月 */
+        /* ========================================
+           今月
+        ======================================== */
 
         else if (
             i <
@@ -482,7 +694,9 @@ function displayCalendar() {
         }
 
 
-        /* 翌月 */
+        /* ========================================
+           翌月
+        ======================================== */
 
         else {
 
@@ -508,11 +722,17 @@ function displayCalendar() {
         }
 
 
+        /*
+         * 曜日を取得
+         */
+
         const dayOfWeek =
             date.getDay();
 
 
-        /* 日曜日 */
+        /* ========================================
+           日曜日
+        ======================================== */
 
         if (
             dayOfWeek === 0
@@ -525,7 +745,9 @@ function displayCalendar() {
         }
 
 
-        /* 土曜日 */
+        /* ========================================
+           土曜日
+        ======================================== */
 
         if (
             dayOfWeek === 6
@@ -538,7 +760,9 @@ function displayCalendar() {
         }
 
 
-        /* 今日 */
+        /* ========================================
+           今日
+        ======================================== */
 
         const today =
             new Date();
@@ -562,7 +786,9 @@ function displayCalendar() {
         }
 
 
-        /* 日付番号 */
+        /* ========================================
+           日付番号
+        ======================================== */
 
         const numberElement =
             document.createElement(
@@ -583,21 +809,28 @@ function displayCalendar() {
         );
 
 
-        /*
-         * 今月の場合だけ
-         * ごみ・指定場所を表示
-         */
+        /* ========================================
+           今月の場合
+        ======================================== */
 
         if (
             date.getMonth() ===
             month
         ) {
 
+            /*
+             * その日のごみを取得
+             */
+
             const garbageList =
                 findGarbageForDate(
                     date
                 );
 
+
+            /*
+             * ごみを表示
+             */
 
             garbageList.forEach(
                 function (garbage) {
@@ -610,6 +843,10 @@ function displayCalendar() {
                 }
             );
 
+
+            /*
+             * 指定場所を表示
+             */
 
             createLocationEvents(
                 dayElement,
@@ -639,11 +876,24 @@ function findGarbageForDate(
     const result = [];
 
 
+    /*
+     * 曜日
+     */
+
     const day =
         weekDays[
-        date.getDay()
+            date.getDay()
         ];
 
+
+    /*
+     * 第何週か
+     *
+     * 1～7日   → 第1週
+     * 8～14日  → 第2週
+     * 15～21日 → 第3週
+     * ...
+     */
 
     const weekNumber =
         Math.ceil(
@@ -651,9 +901,17 @@ function findGarbageForDate(
         );
 
 
+    /*
+     * 配列は0から始まる
+     */
+
     const index =
         weekNumber - 1;
 
+
+    /*
+     * データがない場合
+     */
 
     if (
         !calendarData ||
@@ -666,6 +924,10 @@ function findGarbageForDate(
 
     }
 
+
+    /*
+     * 全ごみを確認
+     */
 
     calendarData.garbage.forEach(
         function (garbage) {
@@ -681,8 +943,16 @@ function findGarbageForDate(
             }
 
 
+            /*
+             * そのごみの収集曜日を確認
+             */
+
             garbage.schedule.forEach(
                 function (schedule) {
+
+                    /*
+                     * 曜日が違う
+                     */
 
                     if (
                         schedule.day !==
@@ -693,6 +963,10 @@ function findGarbageForDate(
 
                     }
 
+
+                    /*
+                     * restrictionがない
+                     */
 
                     if (
                         !Array.isArray(
@@ -705,11 +979,19 @@ function findGarbageForDate(
                     }
 
 
+                    /*
+                     * その週が収集対象か確認
+                     */
+
                     if (
                         schedule.restriction[
-                        index
+                            index
                         ] === 1
                     ) {
+
+                        /*
+                         * まだ追加されていなければ追加
+                         */
 
                         if (
                             !result.includes(
@@ -747,7 +1029,7 @@ function createGarbageEvent(
 ) {
 
     /*
-     * 画像
+     * ごみ画像
      */
 
     const image =
@@ -769,7 +1051,7 @@ function createGarbageEvent(
 
 
     /*
-     * ごみ画像をクリック
+     * 画像クリック
      */
 
     image.addEventListener(
@@ -807,7 +1089,7 @@ function createGarbageEvent(
 
 
     /*
-     * ごみ名
+     * ごみの名前
      */
 
     const name =
@@ -844,6 +1126,10 @@ function getCalendarLocations() {
         );
 
 
+    /*
+     * データがない場合
+     */
+
     if (!data) {
 
         return [];
@@ -867,11 +1153,13 @@ function getCalendarLocations() {
                 function (location) {
 
                     return (
+
                         location.municipalityId ===
                         municipalityId &&
 
                         location.areaId ===
                         (areaId || "")
+
                     );
 
                 }
@@ -904,10 +1192,14 @@ function isLocationCollectionDay(
     date
 ) {
 
+    /*
+     * 曜日が違う
+     */
+
     if (
         location.day !==
         weekDays[
-        date.getDay()
+            date.getDay()
         ]
     ) {
 
@@ -915,6 +1207,10 @@ function isLocationCollectionDay(
 
     }
 
+
+    /*
+     * restrictionがない
+     */
 
     if (
         !Array.isArray(
@@ -927,6 +1223,10 @@ function isLocationCollectionDay(
     }
 
 
+    /*
+     * 第何週か
+     */
+
     const weekNumber =
         Math.ceil(
             date.getDate() / 7
@@ -937,9 +1237,13 @@ function isLocationCollectionDay(
         weekNumber - 1;
 
 
+    /*
+     * その週が回収日か
+     */
+
     return (
         location.restriction[
-        index
+            index
         ] === 1
     );
 
@@ -962,103 +1266,137 @@ function createLocationEvents(
     locations.forEach(
         function (location) {
 
+            /*
+             * その日に回収されない場合
+             */
+
             if (
-                isLocationCollectionDay(
+                !isLocationCollectionDay(
                     location,
                     date
                 )
             ) {
 
-                const event =
-                    document.createElement(
-                        "div"
-                    );
-
-                event.className =
-                    "calendar-location-event";
-
-                const image =
-                    document.createElement(
-                        "img"
-                    );
-
-                image.className =
-                    "garbage-image";
-
-                image.src =
-                    "img/sitei.webp";
-
-                image.alt =
-                    location.name;
-
-                image.addEventListener(
-                    "click",
-                    function () {
-
-                        const target =
-                            findLocationInformation(
-                                location
-                            );
-
-                        if (target) {
-                            scrollToElement(
-                                target
-                            );
-                        }
-                    }
-                );
-
-                event.appendChild(
-                    image
-                );
-
-                const name =
-                    document.createElement(
-                        "div"
-                    );
-
-                name.className =
-                    "calendar-garbage-name";
-
-                name.textContent =
-                    location.name;
-
-                event.appendChild(
-                    name
-                );
-
-
-                /*
-                 * 回収場所をクリック
-                 */
-
-                event.addEventListener(
-                    "click",
-                    function () {
-
-                        const target =
-                            findLocationInformation(
-                                location
-                            );
-
-
-                        if (target) {
-
-                            scrollToElement(
-                                target
-                            );
-
-                        }
-
-                    }
-                );
-
-
-                dayElement.appendChild(
-                    event
-                );
+                return;
 
             }
+
+
+            const event =
+                document.createElement(
+                    "div"
+                );
+
+
+            event.className =
+                "calendar-location-event";
+
+
+            /*
+             * 指定場所アイコン
+             */
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "garbage-image";
+
+
+            image.src =
+                "img/sitei.webp";
+
+
+            image.alt =
+                location.name;
+
+
+            /*
+             * 画像クリック
+             */
+
+            image.addEventListener(
+                "click",
+                function () {
+
+                    const target =
+                        findLocationInformation(
+                            location
+                        );
+
+
+                    if (target) {
+
+                        scrollToElement(
+                            target
+                        );
+
+                    }
+
+                }
+            );
+
+
+            event.appendChild(
+                image
+            );
+
+
+            /*
+             * 指定場所名
+             */
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+
+            name.className =
+                "calendar-garbage-name";
+
+
+            name.textContent =
+                location.name;
+
+
+            event.appendChild(
+                name
+            );
+
+
+            /*
+             * 回収場所をクリック
+             */
+
+            event.addEventListener(
+                "click",
+                function () {
+
+                    const target =
+                        findLocationInformation(
+                            location
+                        );
+
+
+                    if (target) {
+
+                        scrollToElement(
+                            target
+                        );
+
+                    }
+
+                }
+            );
+
+
+            dayElement.appendChild(
+                event
+            );
 
         }
     );
@@ -1159,6 +1497,10 @@ function displayGarbageInformation() {
         "";
 
 
+    /*
+     * データがない場合
+     */
+
     if (
         !calendarData ||
         !Array.isArray(
@@ -1170,6 +1512,10 @@ function displayGarbageInformation() {
 
     }
 
+
+    /*
+     * ごみ情報を1つずつ表示
+     */
 
     calendarData.garbage.forEach(
         function (garbage, index) {
@@ -1185,14 +1531,18 @@ function displayGarbageInformation() {
 
 
             /*
-             * ごみ画像から
-             * このカードを特定するためのID
+             * カレンダーの画像から
+             * このカードを特定するID
              */
 
             item.id =
                 "garbage-item-" +
                 index;
 
+
+            /*
+             * 収集曜日
+             */
 
             let scheduleText =
                 "";
@@ -1226,44 +1576,60 @@ function displayGarbageInformation() {
             }
 
 
+            /*
+             * HTML
+             */
+
             item.innerHTML = `
 
-    <div class="garbage-item-header">
+                <div class="garbage-item-header">
 
-        <img
-            src="${garbage.img}"
-            alt="${garbage.name}"
-            class="garbage-item-icon"
-        >
+                    <img
+                        src="${garbage.img}"
+                        alt="${garbage.name}"
+                        class="garbage-item-icon"
+                    >
 
-        <h3>
-            ${garbage.name}
-        </h3>
+                    <h3>
+                        ${garbage.name}
+                    </h3>
 
-    </div>
+                </div>
 
-    <p>
-        <strong>
-            収集曜日：
-        </strong>
-        ${scheduleText || "情報なし"}
-    </p>
 
-    <p>
-        <strong>
-            分別：
-        </strong>
-        ${garbage.separation || "情報なし"}
-    </p>
+                <p>
 
-    <p>
-        <strong>
-            収集場所：
-        </strong>
-        ${garbage.collectionPlace || "情報なし"}
-    </p>
+                    <strong>
+                        収集曜日：
+                    </strong>
 
-`;
+                    ${scheduleText || "情報なし"}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        分別：
+                    </strong>
+
+                    ${garbage.separation || "情報なし"}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        収集場所：
+                    </strong>
+
+                    ${garbage.collectionPlace || "情報なし"}
+
+                </p>
+
+            `;
 
 
             garbageListElement.appendChild(
@@ -1339,8 +1705,8 @@ function displayCalendarLocations() {
 
             /*
              * 後から
-             * 回収場所を特定するために
-             * data属性を付ける
+             * 回収場所を特定するための
+             * data属性
              */
 
             item.dataset.locationName =
@@ -1407,6 +1773,10 @@ function displayCalendarLocations() {
                 "回収日時の情報がありません。";
 
 
+            /*
+             * カードに追加
+             */
+
             item.appendChild(
                 jichikai
             );
@@ -1431,11 +1801,1537 @@ function displayCalendarLocations() {
 
 }
 
+/* ==================================================
+   通知設定
+================================================== */
+
 
 /* ========================================
-   前の月
+   通知設定の保存先キー
 ======================================== */
 
+function getNotificationStorageKey() {
+
+    return (
+        "notificationSettings_" +
+        municipalityId +
+        "_" +
+        (areaId || "all")
+    );
+
+}
+
+
+/* ========================================
+   通知設定を読み込む
+======================================== */
+
+function loadNotificationSettings() {
+
+    /*
+     * 市町村・地区ごとに
+     * 保存場所を分ける
+     */
+
+    const key =
+        getNotificationStorageKey();
+
+
+    const data =
+        localStorage.getItem(
+            key
+        );
+
+
+    /*
+     * 保存された設定がない場合
+     *
+     * 初期値のままにする
+     */
+
+    if (!data) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const saved =
+            JSON.parse(data);
+
+
+        /*
+         * 前日の設定
+         */
+
+        if (
+            saved.previous
+        ) {
+
+            notificationSettings.previous = {
+
+                enabled:
+                    saved.previous.enabled === true,
+
+                time:
+                    saved.previous.time ||
+                    "07:00"
+
+            };
+
+        }
+
+
+        /*
+         * 当日の設定
+         */
+
+        if (
+            saved.today
+        ) {
+
+            notificationSettings.today = {
+
+                enabled:
+                    saved.today.enabled === true,
+
+                time:
+                    saved.today.time ||
+                    "07:00"
+
+            };
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "通知設定の読み込みに失敗しました。",
+            error
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   通知設定を保存
+======================================== */
+
+function saveNotificationSettings() {
+
+    const key =
+        getNotificationStorageKey();
+
+
+    localStorage.setItem(
+
+        key,
+
+        JSON.stringify(
+            notificationSettings
+        )
+
+    );
+
+
+    console.log(
+        "通知設定を保存しました。",
+        notificationSettings
+    );
+
+}
+
+
+/* ========================================
+   Base64URL → Uint8Array
+======================================== */
+
+function urlBase64ToUint8Array(
+    base64String
+) {
+
+    const padding =
+        "=".repeat(
+            (
+                4 -
+                base64String.length % 4
+            ) % 4
+        );
+
+
+    const base64 =
+        (
+            base64String +
+            padding
+        )
+        .replace(
+            /-/g,
+            "+"
+        )
+        .replace(
+            /_/g,
+            "/"
+        );
+
+
+    const rawData =
+        window.atob(
+            base64
+        );
+
+
+    const outputArray =
+        new Uint8Array(
+            rawData.length
+        );
+
+
+    for (
+        let i = 0;
+        i < rawData.length;
+        i++
+    ) {
+
+        outputArray[i] =
+            rawData.charCodeAt(i);
+
+    }
+
+
+    return outputArray;
+
+}
+
+
+/* ========================================
+   Service Workerを登録
+======================================== */
+
+async function registerServiceWorker() {
+
+    /*
+     * Service Workerに対応しているか
+     */
+
+    if (
+        !("serviceWorker" in navigator)
+    ) {
+
+        throw new Error(
+            "このブラウザはService Workerに対応していません。"
+        );
+
+    }
+
+
+    /*
+     * Service Workerを登録
+     */
+
+    const registration =
+        await navigator.serviceWorker.register(
+            "/service-worker.js"
+        );
+
+
+    console.log(
+        "Service Workerを登録しました。",
+        registration
+    );
+
+
+    /*
+     * Service Workerの準備を待つ
+     */
+
+    const readyRegistration =
+        await navigator.serviceWorker.ready;
+
+
+    return readyRegistration;
+
+}
+
+
+/* ========================================
+   Push購読を取得
+======================================== */
+
+async function getPushSubscription() {
+
+    /*
+     * Service Workerを登録
+     */
+
+    const registration =
+        await registerServiceWorker();
+
+
+    /*
+     * すでに購読しているか確認
+     */
+
+    let subscription =
+        await registration.pushManager.getSubscription();
+
+
+    /*
+     * まだ購読していない場合
+     */
+
+    if (!subscription) {
+
+        subscription =
+            await registration.pushManager.subscribe({
+
+                userVisibleOnly: true,
+
+                applicationServerKey:
+                    urlBase64ToUint8Array(
+                        VAPID_PUBLIC_KEY
+                    )
+
+            });
+
+    }
+
+
+    console.log(
+        "Push購読を取得しました。",
+        subscription
+    );
+
+
+    return subscription;
+
+}
+
+
+/* ========================================
+   Cloudflare Workerへ
+   Push設定を登録
+======================================== */
+
+async function sendPushRegistration(
+    subscription
+) {
+
+    /*
+     * Workerへ送るデータ
+     */
+
+    const data = {
+
+        type:
+            "register-push",
+
+        subscription:
+            subscription.toJSON(),
+
+        municipalityId:
+            municipalityId,
+
+        areaId:
+            areaId || "",
+
+        previousEnabled:
+            notificationSettings.previous.enabled,
+
+        previousTime:
+            notificationSettings.previous.time,
+
+        todayEnabled:
+            notificationSettings.today.enabled,
+
+        todayTime:
+            notificationSettings.today.time
+
+    };
+
+
+    console.log(
+        "WorkerへPush設定を送信します。",
+        data
+    );
+
+
+    /*
+     * Workerへ送信
+     */
+
+    const response =
+        await fetch(
+            PUSH_WORKER_URL,
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify(
+                        data
+                    )
+
+            }
+        );
+
+
+    /*
+     * Workerからの返事
+     */
+
+    const result =
+        await response.json();
+
+
+    console.log(
+        "WorkerからのPush登録結果：",
+        result
+    );
+
+
+    /*
+     * エラー
+     */
+
+    if (
+        !response.ok ||
+        !result.success
+    ) {
+
+        throw new Error(
+
+            result.message ||
+            "Push通知の登録に失敗しました。"
+
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* ========================================
+   Push通知を登録
+======================================== */
+
+async function registerPushNotification() {
+
+    try {
+
+        /*
+         * Notificationに対応しているか
+         */
+
+        if (
+            !("Notification" in window)
+        ) {
+
+            alert(
+                "このブラウザは通知に対応していません。"
+            );
+
+            return false;
+
+        }
+
+
+        /*
+         * PushManagerに対応しているか
+         */
+
+        if (
+            !("PushManager" in window)
+        ) {
+
+            alert(
+                "このブラウザはPush通知に対応していません。"
+            );
+
+            return false;
+
+        }
+
+
+        /*
+         * 通知許可を取得
+         */
+
+        let permission =
+            Notification.permission;
+
+
+        /*
+         * まだ許可を聞いていない場合
+         */
+
+        if (
+            permission ===
+            "default"
+        ) {
+
+            permission =
+                await Notification.requestPermission();
+
+        }
+
+
+        /*
+         * 通知が拒否された場合
+         */
+
+        if (
+            permission !==
+            "granted"
+        ) {
+
+            alert(
+                "通知が許可されていません。\n" +
+                "ブラウザのサイト設定から通知を許可してください。"
+            );
+
+            return false;
+
+        }
+
+
+        /*
+         * Push購読を取得
+         */
+
+        const subscription =
+            await getPushSubscription();
+
+
+        /*
+         * Cloudflare Workerへ送信
+         */
+
+        await sendPushRegistration(
+            subscription
+        );
+
+
+        console.log(
+            "Push通知の登録が完了しました。"
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "Push通知の登録に失敗しました。",
+            error
+        );
+
+
+        alert(
+            "通知設定に失敗しました。\n" +
+            "ブラウザのコンソールを確認してください。"
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* ========================================
+   Push設定を更新
+======================================== */
+
+/*
+ * すでにPush通知を登録している状態で
+ * 時刻などを変更した場合に使用します。
+ */
+
+async function updatePushRegistration() {
+
+    /*
+     * 通知が一つもONでない場合
+     *
+     * Workerへ送る必要はない
+     */
+
+    if (
+        !notificationSettings.previous.enabled &&
+        !notificationSettings.today.enabled
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * 既存のPush購読を取得
+         */
+
+        const registration =
+            await navigator.serviceWorker.ready;
+
+
+        const subscription =
+            await registration.pushManager.getSubscription();
+
+
+        /*
+         * 購読がない場合
+         */
+
+        if (!subscription) {
+
+            console.log(
+                "Push購読がありません。"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Workerへ設定を送る
+         */
+
+        await sendPushRegistration(
+            subscription
+        );
+
+
+        console.log(
+            "Push通知設定を更新しました。"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Push通知設定の更新に失敗しました。",
+            error
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   Push通知の登録を解除
+======================================== */
+/* ========================================
+   Push通知の登録を解除
+======================================== */
+
+async function unregisterPushNotification() {
+
+    console.log(
+        "Push通知の登録解除処理を開始します。"
+    );
+
+
+    try {
+
+        /*
+         * Service Workerの登録を取得
+         *
+         * navigator.serviceWorker.ready ではなく
+         * getRegistration()を使用する
+         */
+        const registration =
+            await navigator.serviceWorker.getRegistration();
+
+
+        /*
+         * Service Workerがない場合
+         */
+        if (!registration) {
+
+            console.error(
+                "Service Workerが登録されていません。"
+            );
+
+            return false;
+
+        }
+
+
+        console.log(
+            "Service Workerを取得しました。",
+            registration
+        );
+
+
+        /*
+         * 現在のPush購読を取得
+         */
+        const subscription =
+            await registration.pushManager.getSubscription();
+
+
+        /*
+         * Push購読がない場合
+         */
+        if (!subscription) {
+
+            console.warn(
+                "ブラウザにPush購読がありません。"
+            );
+
+
+            /*
+             * 現在はendpointが取得できないため
+             * Worker側の削除はできない
+             */
+
+            return false;
+
+        }
+
+
+        /*
+         * endpointを取得
+         */
+        const endpoint =
+            subscription.endpoint;
+
+
+        console.log(
+            "Push通知の登録解除を開始します。",
+            endpoint
+        );
+
+
+        /*
+         * Cloudflare Workerへ
+         * 登録解除を要求
+         */
+        const response =
+            await fetch(
+                PUSH_WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            type:
+                                "unregister-push",
+
+                            endpoint:
+                                endpoint
+
+                        })
+
+                }
+            );
+
+
+        /*
+         * Workerの結果を取得
+         */
+        const result =
+            await response.json();
+
+
+        console.log(
+            "WorkerからのPush登録解除結果：",
+            result
+        );
+
+
+        /*
+         * Worker側で失敗した場合
+         */
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+
+                result.message ||
+                "Push通知の登録解除に失敗しました。"
+
+            );
+
+        }
+
+
+        /*
+         * ブラウザ側のPush購読も解除
+         */
+        const unsubscribed =
+            await subscription.unsubscribe();
+
+
+        console.log(
+            "ブラウザのPush購読を解除しました。",
+            unsubscribed
+        );
+
+
+        /*
+         * 完了
+         */
+        console.log(
+            "Push通知の登録解除が完了しました。"
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "Push通知の登録解除に失敗しました。",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+/* ========================================
+   時刻一覧を作成
+======================================== */
+
+function createNotificationTimePicker() {
+
+    /*
+     * ======================================
+     * 時
+     * ======================================
+     *
+     * 00 ～ 23
+     */
+
+    notificationHourPicker.innerHTML =
+        "";
+
+
+    for (
+        let hour = 0;
+        hour < 24;
+        hour++
+    ) {
+
+        const time =
+            String(hour).padStart(
+                2,
+                "0"
+            );
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "notification-time-item";
+
+
+        item.textContent =
+            time;
+
+
+        item.dataset.value =
+            time;
+
+
+        /*
+         * 時をクリック
+         */
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                setNotificationHour(
+                    time
+                );
+
+            }
+        );
+
+
+        notificationHourPicker.appendChild(
+            item
+        );
+
+    }
+
+
+    /*
+     * ======================================
+     * 分
+     * ======================================
+     *
+     * 00 ～ 59
+     *
+     * 1分刻み
+     */
+
+    notificationMinutePicker.innerHTML =
+        "";
+
+
+    for (
+        let minute = 0;
+        minute < 60;
+        minute++
+    ) {
+
+        const time =
+            String(minute).padStart(
+                2,
+                "0"
+            );
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "notification-time-item";
+
+
+        item.textContent =
+            time;
+
+
+        item.dataset.value =
+            time;
+
+
+        /*
+         * 分をクリック
+         */
+
+        item.addEventListener(
+            "click",
+            function () {
+
+                setNotificationMinute(
+                    time
+                );
+
+            }
+        );
+
+
+        notificationMinutePicker.appendChild(
+            item
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   現在の通知設定を取得
+======================================== */
+
+function getCurrentNotificationSetting() {
+
+    return notificationSettings[
+        currentNotificationTab
+    ];
+
+}
+
+
+/* ========================================
+   時刻を「時」と「分」に分ける
+======================================== */
+
+function getHourAndMinute(
+    time
+) {
+
+    const parts =
+        time.split(":");
+
+
+    return {
+
+        hour:
+            parts[0],
+
+        minute:
+            parts[1]
+
+    };
+
+}
+
+
+/* ========================================
+   通知ポップアップを更新
+======================================== */
+
+function updateNotificationPopup() {
+
+    /*
+     * 現在のタブの設定を取得
+     */
+
+    const setting =
+        getCurrentNotificationSetting();
+
+
+    /*
+     * ON / OFF
+     */
+
+    notificationEnabled.checked =
+        setting.enabled;
+
+
+    /*
+     * 設定時刻を表示
+     */
+
+    notificationSelectedTime.textContent =
+        setting.time;
+
+
+    /*
+     * 時と分に分ける
+     */
+
+    const time =
+        getHourAndMinute(
+            setting.time
+        );
+
+
+    /* ========================================
+       時を選択状態にする
+    ======================================== */
+
+    const hourItems =
+        notificationHourPicker.querySelectorAll(
+            ".notification-time-item"
+        );
+
+
+    hourItems.forEach(
+        function (item) {
+
+            if (
+                item.dataset.value ===
+                time.hour
+            ) {
+
+                /*
+                 * 選択状態
+                 */
+
+                item.classList.add(
+                    "selected"
+                );
+
+
+                /*
+                 * 選択した時を
+                 * 中央に移動
+                 */
+
+                item.scrollIntoView({
+
+                    block: "center",
+
+                    behavior: "auto"
+
+                });
+
+            } else {
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ========================================
+       分を選択状態にする
+    ======================================== */
+
+    const minuteItems =
+        notificationMinutePicker.querySelectorAll(
+            ".notification-time-item"
+        );
+
+
+    minuteItems.forEach(
+        function (item) {
+
+            if (
+                item.dataset.value ===
+                time.minute
+            ) {
+
+                /*
+                 * 選択状態
+                 */
+
+                item.classList.add(
+                    "selected"
+                );
+
+
+                /*
+                 * 選択した分を
+                 * 中央に移動
+                 */
+
+                item.scrollIntoView({
+
+                    block: "center",
+
+                    behavior: "auto"
+
+                });
+
+            } else {
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* ========================================
+       タブの見た目
+    ======================================== */
+
+    notificationTabs.forEach(
+        function (tab) {
+
+            if (
+                tab.dataset.tab ===
+                currentNotificationTab
+            ) {
+
+                tab.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                tab.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   時を変更
+======================================== */
+
+async function setNotificationHour(
+    hour
+) {
+
+    /*
+     * 現在の通知設定
+     */
+
+    const setting =
+        getCurrentNotificationSetting();
+
+
+    /*
+     * 現在の分を取得
+     */
+
+    const time =
+        getHourAndMinute(
+            setting.time
+        );
+
+
+    /*
+     * 時だけ変更
+     */
+
+    setting.time =
+        hour +
+        ":" +
+        time.minute;
+
+
+    /*
+     * 保存
+     */
+
+    saveNotificationSettings();
+
+
+    /*
+     * 画面を更新
+     */
+
+    updateNotificationPopup();
+
+
+    /*
+     * 通知がONなら
+     * Worker側の設定も更新
+     */
+
+    await updatePushRegistration();
+
+}
+
+
+/* ========================================
+   分を変更
+======================================== */
+
+async function setNotificationMinute(
+    minute
+) {
+
+    /*
+     * 現在の通知設定
+     */
+
+    const setting =
+        getCurrentNotificationSetting();
+
+
+    /*
+     * 現在の時を取得
+     */
+
+    const time =
+        getHourAndMinute(
+            setting.time
+        );
+
+
+    /*
+     * 分だけ変更
+     */
+
+    setting.time =
+        time.hour +
+        ":" +
+        minute;
+
+
+    /*
+     * 保存
+     */
+
+    saveNotificationSettings();
+
+
+    /*
+     * 画面を更新
+     */
+
+    updateNotificationPopup();
+
+
+    /*
+     * 通知がONなら
+     * Worker側の設定も更新
+     */
+
+    await updatePushRegistration();
+
+}
+
+
+/* ========================================
+   通知 ON / OFF
+======================================== */
+
+notificationEnabled.addEventListener(
+    "change",
+    async function () {
+
+        notificationSettings[
+            currentNotificationTab
+        ].enabled =
+            notificationEnabled.checked;
+
+
+        /*
+         * 通知をONにした場合
+         */
+
+        if (
+            notificationEnabled.checked
+        ) {
+
+            const success =
+                await registerPushNotification();
+
+
+            if (
+                !success
+            ) {
+
+                notificationSettings[
+                    currentNotificationTab
+                ].enabled =
+                    false;
+
+                notificationEnabled.checked =
+                    false;
+
+            }
+
+        }
+
+
+        /*
+         * 通知をOFFにした場合
+         */
+
+        else {
+
+            /*
+             * 前日・当日の両方がOFFなら
+             * D1から端末を削除する
+             */
+
+            if (
+                !notificationSettings.previous.enabled &&
+                !notificationSettings.today.enabled
+            ) {
+
+                const success =
+                    await unregisterPushNotification();
+
+
+                if (
+                    !success
+                ) {
+
+                    console.error(
+                        "Push登録解除に失敗しました。"
+                    );
+
+                }
+
+            }
+
+            /*
+             * どちらか一方がONなら
+             * D1側の設定だけ更新する
+             */
+
+            else {
+
+                await updatePushRegistration();
+
+            }
+
+        }
+
+
+        /*
+         * ローカルにも保存
+         */
+
+        saveNotificationSettings();
+
+    }
+);
+
+
+/* ========================================
+   前日 / 当日のタブ切り替え
+======================================== */
+
+notificationTabs.forEach(
+    function (tab) {
+
+        tab.addEventListener(
+            "click",
+            function () {
+
+                /*
+                 * 押されたタブを記録
+                 */
+
+                currentNotificationTab =
+                    tab.dataset.tab;
+
+
+                /*
+                 * 設定を表示
+                 */
+
+                updateNotificationPopup();
+
+            }
+        );
+
+    }
+);
+
+
+/* ========================================
+   通知設定を開く
+======================================== */
+
+notificationButton.addEventListener(
+    "click",
+    function (event) {
+
+        /*
+         * 外側クリック処理に
+         * イベントが伝わらないようにする
+         */
+
+        event.stopPropagation();
+
+
+        /*
+         * 開く / 閉じる
+         */
+
+        notificationPopup.classList.toggle(
+            "show"
+        );
+
+
+        /*
+         * 開いたとき
+         */
+
+        if (
+            notificationPopup.classList.contains(
+                "show"
+            )
+        ) {
+
+            updateNotificationPopup();
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   閉じるボタン
+======================================== */
+
+notificationClose.addEventListener(
+    "click",
+    function () {
+
+        notificationPopup.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+/* ========================================
+   ポップアップ内部をクリック
+======================================== */
+
+notificationPopup.addEventListener(
+    "click",
+    function (event) {
+
+        /*
+         * ポップアップ内をクリックしても
+         * 外側クリック扱いにしない
+         */
+
+        event.stopPropagation();
+
+    }
+);
+
+
+/* ========================================
+   ポップアップ外をクリック
+======================================== */
+
+document.addEventListener(
+    "click",
+    function () {
+
+        notificationPopup.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+/* ========================================
+   カレンダー月変更
+======================================== */
+
+
+/*
+ * 前の月
+ */
 previousMonthButton.addEventListener(
     "click",
     function () {
@@ -1444,17 +3340,15 @@ previousMonthButton.addEventListener(
             currentDate.getMonth() - 1
         );
 
-
         displayCalendar();
 
     }
 );
 
 
-/* ========================================
-   次の月
-======================================== */
-
+/*
+ * 次の月
+ */
 nextMonthButton.addEventListener(
     "click",
     function () {
@@ -1463,7 +3357,6 @@ nextMonthButton.addEventListener(
             currentDate.getMonth() + 1
         );
 
-
         displayCalendar();
 
     }
@@ -1471,7 +3364,22 @@ nextMonthButton.addEventListener(
 
 
 /* ========================================
-   初期化
+   初期表示
 ======================================== */
 
+/*
+ * 通知時間ピッカーを作成
+ */
+createNotificationTimePicker();
+
+
+/*
+ * 通知設定を画面へ反映
+ */
+updateNotificationPopup();
+
+
+/*
+ * カレンダーなどを読み込む
+ */
 initialize();
