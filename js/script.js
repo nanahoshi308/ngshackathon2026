@@ -33,6 +33,51 @@ const startButton =
     document.getElementById("start-button");
 
 
+    /*
+ * 変更画面から来たか確認
+ */
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const isChange =
+    params.get("change") === "true";
+
+
+/*
+ * 「変更」ではない場合だけ
+ * 保存されている地域を確認
+ */
+if (!isChange) {
+
+    const municipality =
+        localStorage.getItem(
+            "municipality"
+        );
+
+    const area =
+        localStorage.getItem(
+            "area"
+        );
+
+
+    /*
+     * 市町村と地域が保存済みなら
+     * main.htmlへ移動
+     */
+    if (
+        municipality &&
+        area
+    ) {
+
+        window.location.href =
+            "main.html";
+
+    }
+
+}
+
 // ========================================
 // JSONを読み込む
 // ========================================
