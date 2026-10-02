@@ -138,7 +138,8 @@
             "name": "使用済み乾電池・ボタン電池",
             "img": "img/kami.webp",
 
-            "collectionPlace": "詳細はこちら  <a>https://webtown.nagayo.jp/kiji0032963/3_2963_22741_up_qurk4mxz.pdf</a>"
+            "collectionPlace": "詳細はこちら",
+            "collectionPlaceUrl": "https://webtown.nagayo.jp/kiji0032963/3_2963_22741_up_qurk4mxz.pdf"
         },
         {
             "name": "水銀を含む体温計・血圧計",

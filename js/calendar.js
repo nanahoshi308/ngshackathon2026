@@ -1580,56 +1580,84 @@ function displayGarbageInformation() {
              * HTML
              */
 
-            item.innerHTML = `
+            /*
+ * 収集場所
+ */
 
-                <div class="garbage-item-header">
-
-                    <img
-                        src="${garbage.img}"
-                        alt="${garbage.name}"
-                        class="garbage-item-icon"
-                    >
-
-                    <h3>
-                        ${garbage.name}
-                    </h3>
-
-                </div>
+let collectionPlaceHTML =
+    garbage.collectionPlace ||
+    "情報なし";
 
 
-                <p>
+/*
+ * URLが設定されている場合
+ * リンクにする
+ */
 
-                    <strong>
-                        収集曜日：
-                    </strong>
+if (garbage.collectionPlaceUrl) {
 
-                    ${scheduleText || "情報なし"}
+    collectionPlaceHTML =
+        `<a
+            href="${garbage.collectionPlaceUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            ${garbage.collectionPlace || "詳細はこちら"}
+        </a>`;
 
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        分別：
-                    </strong>
-
-                    ${garbage.separation || "情報なし"}
-
-                </p>
+}
 
 
-                <p>
+item.innerHTML = `
 
-                    <strong>
-                        収集場所：
-                    </strong>
+    <div class="garbage-item-header">
 
-                    ${garbage.collectionPlace || "情報なし"}
+        <img
+            src="${garbage.img}"
+            alt="${garbage.name}"
+            class="garbage-item-icon"
+        >
 
-                </p>
+        <h3>
+            ${garbage.name}
+        </h3>
 
-            `;
+    </div>
+
+
+    <p>
+
+        <strong>
+            収集曜日：
+        </strong>
+
+        ${scheduleText || "情報なし"}
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            分別：
+        </strong>
+
+        ${garbage.separation || "情報なし"}
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            収集場所：
+        </strong>
+
+        ${collectionPlaceHTML}
+
+    </p>
+
+`;
 
 
             garbageListElement.appendChild(
