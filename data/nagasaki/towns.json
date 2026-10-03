@@ -1,0 +1,6614 @@
+[
+    {
+        "town": "かき道１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "かき道２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "かき道３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "かき道４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "かき道５丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "かき道６丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "けやき台町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "さくらの里１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "さくらの里２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "さくらの里３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "つつじヶ丘１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "つつじヶ丘２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "つつじヶ丘３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "つつじヶ丘４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "つつじヶ丘５丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "みなと坂１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "みなと坂２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "エミネント葉山町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "ダイヤランド１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "ダイヤランド２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "ダイヤランド３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "ダイヤランド４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "万屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "万才町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三ツ山町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三京町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三原１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三原２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三原３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三和町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三景台町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三芳町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三重田町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "三重町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上大野町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上小島１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "上小島２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "上小島３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上小島４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "上小島５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸町１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸町２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸町３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸町４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上戸石町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上浦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上田町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "上町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上野町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上銭座町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "上黒崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "下大野町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "下町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "下西山町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "下黒崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中園町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中小島１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中小島２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中川１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中川２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中新町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "中里町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "丸尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "丸山町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "丹馬",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "丹馬団地",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "五島町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "京太郎町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "京泊１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "京泊２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "京泊３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "今博多町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "以下宿町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "伊勢町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "伊王島１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "伊王島２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "伊良林１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "伊良林２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "伊良林３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "住吉台町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "住吉町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "元町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "元船町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "光町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "入船町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八つ尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八千代町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八幡町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八景町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八百屋町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "八郎岳町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "出島町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "出来大工町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "出雲１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "出雲２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "出雲３丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "勝山町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "北栄町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "北浦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "北陽町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "十人町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "千々町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "千歳町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "南が丘町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "南山手町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "南町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "南越町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "古川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "古河町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "古町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "古賀町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "古道町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "向町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "四杖町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "国分町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "園田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "土井首町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "坂本１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "坂本２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "坂本３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "城山台１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "城山台２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "城栄町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "堀切東",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "堀切西",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "塩浜町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "多以良町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "大井手町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大園町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大宮町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "大山町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大手１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大手２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大手３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大橋町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "大浜町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大浦東町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大浦町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大籠町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大谷町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "大鳥町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "大黒町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "天神町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "太田尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "夫婦川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "女ノ都２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "女ノ都３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "女ノ都４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "安保",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "宝栄町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "宝町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "宮崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "宮摺町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "家野町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "宿町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "寄合町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "富士見町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "寺町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小ヶ倉１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小ヶ倉２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小ヶ倉３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小峰町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小曽根町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江原１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江原２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江原３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江原４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江原５丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小江町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小浦町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小瀬戸町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "小菅町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "尾上",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "尾上町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "岡町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "岩屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "岩川町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "岩瀬道町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "岩見町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "川上町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "川内町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "川原町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "川口町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "川平町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "布巻町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "常磐町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平和町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平山台１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平山台２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平山町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平戸小屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平瀬町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平野町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "平間町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "幸町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "弁天町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "式見町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "弥生町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "彦見町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "御船蔵町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "恵美須町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "恵里上",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "愛宕１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "愛宕２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "愛宕３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "愛宕４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "戸町１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "戸町２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "戸町３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "戸町４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "戸町５丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "戸石町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "扇町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "手熊町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "文教町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新中川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新地町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "新大工町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新小ヶ倉１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新小ヶ倉２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新戸町１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新戸町２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新戸町３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新戸町４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "新牧野町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "日の出町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "早坂町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "旭町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "星取１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "星取２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "春日町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "春木町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "昭和１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "昭和２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "昭和３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "晴海台町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "曙町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "木場町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "木鉢１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "木鉢２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "末石町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "本原町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "本尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "本河内１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "本河内２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "本河内３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "本河内４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "本石灰町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "東出津町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "東古川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "東小島町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "東山手町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "東山町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "東琴平１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "東琴平２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "東町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "東立神町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "松が枝町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "松原町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "松山町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "松崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "柳田町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "柳谷町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "柿泊町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "栄町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "栗の浦",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "桜木町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "桜町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "桜馬場１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "桜馬場２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "桶屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "梁川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "梅香崎町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "椎の木町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "椿が丘町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "横尾１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "横尾２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "横尾３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "横尾４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "横尾５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "樫山町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "樺島町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "橋口町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "毛井首町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "水の浦町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "永田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江の浦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江川町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "江平１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江平２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江平３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江戸町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "江里町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "池島町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "油屋町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "油木町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "泉町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "泉１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "泉２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "泉３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "浜口町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "浜平１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "浜平２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "浜町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "浦上",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "浦下",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "浪の平町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "海老瀬",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深堀１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "深堀２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深堀３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深堀４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深堀５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深堀６丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深浦",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "深浦団地",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "淵町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "清水町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "滑石１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "滑石２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "滑石３丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "滑石４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "滑石５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "滑石６丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "潮見町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "炉粕町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "為石町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "片渕１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "片渕２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "片渕３丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "片渕４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "片渕５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "牧島町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "牧野町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "玉園町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "現川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海大平町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海尾戸町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海形上町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海戸根原町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海戸根町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "琴海村松町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田の浦",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田の浦団地",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田上１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田上２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田上３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田上４丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田中町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "田手原町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "界１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "界２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "畝刈町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "畦別当町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "畦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "白木町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "白鳥町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "目覚町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "相川町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "相生町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "矢の平１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "矢の平２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "矢の平３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "矢の平４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "矢上町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "石神町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "磯道町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神の島１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神の島２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神の島３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦上大中尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦上道徳町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦下大中尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦下道徳町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦丸尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦北大中尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦口福町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦向町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦夏井町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦扇山町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "神浦江川町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "福田本町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "秋月町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲佐町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "稲田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "稲田町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立山１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立山２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立山３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立山４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立山５丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "立岩町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "竹の久保町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "竿浦町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "筑後町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "築町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "籠町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "米山町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "網場町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "緑ヶ丘町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "緑町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "脇岬町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "興善町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "船大工町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "船石町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "芒塚町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "花丘町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "花園町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "若竹町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "若草町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "若葉町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "茂木町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木/金",
+        "other_days": [
+            "wednesday",
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "茂里町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木/金",
+        "other_days": [
+            "thursday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "草住町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "葉山１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "葉山２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "藤田尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "虹が丘町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "蚊焼町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西出津町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "西北町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西坂町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "西小島１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "西小島２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山台１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山台２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山本町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "西山２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西山４丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西海町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西琴平町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "西立神町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "見崎町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "諏訪町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "豊洋台１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "豊洋台２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "賑町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "赤迫１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "赤迫２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "赤迫３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "赤首町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "辰の口",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "里",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "野母崎樺島町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "金堀町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "金屋町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "銀屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "銅座町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "銭座町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "錦１丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "錦２丁目",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "錦３丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鍛冶屋町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "長浜",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "長浦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "青山町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "音無町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "風頭町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "飯香浦町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "飽の浦町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "館内町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "馬手ｹ浦",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "馬町",
+        "moeru": "月・木/火・金",
+        "moeru_days": [
+            "monday",
+            "thursday",
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "高丘１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水/木",
+        "other_days": [
+            "wednesday",
+            "thursday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "高丘２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "高城台１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "高城台２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "高尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水/金",
+        "other_days": [
+            "wednesday",
+            "friday"
+        ],
+        "needs_confirm": true
+    },
+    {
+        "town": "高島町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "高平町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "高浜町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "魚の町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴滝１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴滝２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴滝３丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "木",
+        "other_days": [
+            "thursday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴見台１丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴見台２丁目",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "金",
+        "other_days": [
+            "friday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鳴見町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鶴の尾町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鶴見台１丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鶴見台２丁目",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "鹿尾町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "麹屋町",
+        "moeru": "火・金",
+        "moeru_days": [
+            "tuesday",
+            "friday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    },
+    {
+        "town": "黒浜町",
+        "moeru": "月・木",
+        "moeru_days": [
+            "monday",
+            "thursday"
+        ],
+        "other": "水",
+        "other_days": [
+            "wednesday"
+        ],
+        "needs_confirm": false
+    }
+]
