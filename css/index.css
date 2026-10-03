@@ -2,6 +2,12 @@
    index.html
    地域選択画面
 ======================================== */
+.emoji-icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.15em;
+    object-fit: contain;
+}
 
 
 /* ========================================
