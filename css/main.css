@@ -490,6 +490,20 @@
 
 }
 
+.next-garbage-name {
+
+    color: #333333;
+
+    font-size: 12px;
+
+    line-height: 1.3;
+
+    word-break: keep-all;
+
+    overflow-wrap: anywhere;
+
+}
+
 .next-garbage-day {
 
     color: #205b4a;

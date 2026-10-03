@@ -848,9 +848,13 @@ function displayNextGarbage(
 
                     <img
                         src="${next.garbage.img}"
-                        alt="${next.garbage.name}"
+                        alt=""
                         class="next-garbage-img"
                     >
+
+                    <span class="next-garbage-name">
+                        ${next.garbage.name}
+                    </span>
 
                     <span class="next-garbage-day">
                         ${formatNextDay(next)}
