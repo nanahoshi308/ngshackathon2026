@@ -3,11 +3,12 @@
   {"id": "koshi", "name": "古紙", "img": "img/kami.webp", "separation": "種類ごとに分けてひもでしばってください。雑がみは紙袋や透明のビニール袋でも出せます。ビニール、雑誌付録のDVDや化粧品サンプルなどは取りはずしてください。", "collection_place": "ごみステーション", "collection_place_url": null, "date_note": "燃やせるごみ週2回のうち、初めの曜日（週1回）"},
   {"id": "moenai", "name": "燃やせないごみ", "img": "img/moenai.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
   {"id": "shigen", "name": "資源ごみ", "img": "img/bin.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
-  {"id": "pura", "name": "プラスチック製容器包装", "img": "img/pura.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
-  {"id": "kyoten", "name": "資源物等拠点回収", "img": "img/denti.webp", "separation": "小型家電・充電池・古着・水銀使用製品・スプレー缶・ライター類を回収しています。一度回収ボックスに投入したものは返却できません。", "collection_place": "地域センター（滑石・高島・三重を除く）、市役所１階14番窓口など", "collection_place_url": null, "date_note": null},
+  {"id": "pura", "name": "プラスチックごみ", "img": "img/pura.webp", "separation": "プラスチック製容器包装に加えて、プラスチックでできた製品（歯ブラシ、バケツ、ハンガーなど）もまとめて出せます。長さ50㎝以上のもの（ビニールひもやビデオテープなど）、厚さが5㎜以上のもの（まな板など）は燃やせるごみへ。「プラスチック製容器包装」のごみ袋も引き続き使えます。", "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
+  {"id": "kyoten", "name": "資源物等拠点回収", "img": "img/denti.webp", "separation": "小型家電（回収ボックスの入口25㎝×10㎝に入るもの）、充電式電池（モバイルバッテリーなど）、古布（古着）、水銀体温計・水銀温度計・水銀血圧計、中身が残っているスプレー缶・カセットボンベ・ライターを無料で回収しています。個人情報は事前に消去してください。投入したものは返却できません。", "collection_place": "長崎市役所及び一部の地域センター（品目により回収場所が異なります）", "collection_place_url": null, "date_note": null},
   {"id": "keikou", "name": "蛍光管", "img": "img/keikou.webp", "separation": null, "collection_place": null, "collection_place_url": null, "date_note": null},
   {"id": "kandenti", "name": "乾電池", "img": "img/kandenti.webp", "separation": null, "collection_place": null, "collection_place_url": null, "date_note": null},
   {"id": "button", "name": "ボタン電池", "img": "img/kandenti.webp", "separation": null, "collection_place": null, "collection_place_url": null, "date_note": null},
   {"id": "sodai", "name": "粗大ごみ", "img": "img/sodai.webp", "separation": "市の委託業者に電話で予約し（095-801-2200）、金融機関で「粗大ごみ処理ステッカー」を買って貼り、指定された日時に出してください。1回に2個まで。", "collection_place": "玄関先等（申込制）", "collection_place_url": null, "date_note": "予約時に指定された日時"},
-  {"id": "atumenai", "name": "市では収集しないもの", "img": "img/atumenai.webp", "separation": "販売店や専門の許可業者にご相談ください。家電4品目は家電リサイクル法により処分してください。", "collection_place": null, "collection_place_url": null, "date_note": null}
+  {"id": "atumenai", "name": "市では収集しないもの", "img": "img/atumenai.webp", "separation": "販売店や専門の許可業者にご相談ください。家電4品目は家電リサイクル法により処分してください。", "collection_place": null, "collection_place_url": null, "date_note": null},
+  {"id": "other", "name": "その他（備考を参照）", "img": "img/atumenai.webp", "separation": "品目ごとの備考を確認してください。", "collection_place": null, "collection_place_url": null, "date_note": null}
 ]
