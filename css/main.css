@@ -11,52 +11,6 @@
 
 
 /* ========================================
-   市町村・地区表示
-======================================== */
-
-.selected-city {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-.selected-city a {
-
-    color: #31856d;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-}
-
-.selected-city a:hover {
-
-    text-decoration: underline;
-
-}
-
-.selected-area {
-
-    padding-left: 10px;
-
-    border-left:
-        1px solid #cccccc;
-
-    color: #666666;
-
-    font-size: 14px;
-
-}
-
-
-/* ========================================
    メインコンテナ
 ======================================== */
 
@@ -688,22 +642,6 @@
         width: 92%;
 
         padding-top: 35px;
-
-    }
-
-
-    .selected-city {
-
-        gap: 6px;
-
-    }
-
-
-    .selected-area {
-
-        padding-left: 6px;
-
-        font-size: 12px;
 
     }
 

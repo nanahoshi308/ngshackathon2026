@@ -318,127 +318,50 @@
     </main>
 
 
+    <script src="js/data.js"></script>
+
     <script>
 
         /*
-         * 選択中の市町村・地区を表示
+         * 選択中の市町村・町名を表示（他ページと同じく GomiData を使う）
          */
-
-        const cityName =
-            document.getElementById(
-                "city-name"
-            );
-
-        const areaName =
-            document.getElementById(
-                "area-name"
-            );
-
-
-        const municipalityId =
-            localStorage.getItem(
-                "municipality"
-            );
-
-        const areaId =
-            localStorage.getItem(
-                "area"
-            );
-
 
         async function loadLocation() {
 
-            if (!municipalityId) {
+            const cityName =
+                document.getElementById("city-name");
+
+            const areaName =
+                document.getElementById("area-name");
+
+            const selection =
+                GomiData.getSelection();
+
+            if (!selection.municipalityId) {
 
                 cityName.textContent =
                     "市町村未選択";
-
-                areaName.textContent =
-                    "";
 
                 return;
 
             }
 
-
             try {
 
-                const response =
-                    await fetch(
-                        "data/municipalities.json"
-                    );
-
                 const municipalities =
-                    await response.json();
-
+                    await GomiData.loadMunicipalities();
 
                 const municipality =
-                    municipalities.find(
-                        function(item) {
-
-                            return item.id ===
-                                municipalityId;
-
-                        }
-                    );
-
+                    municipalities.find(function (item) {
+                        return item.id === selection.municipalityId;
+                    });
 
                 if (municipality) {
-
-                    cityName.textContent =
-                        municipality.name;
-
+                    cityName.textContent = municipality.name;
                 }
 
-
-                if (!areaId) {
-
-                    return;
-
-                }
-
-
-                const areaResponse =
-                    await fetch(
-                        "data/areas.json"
-                    );
-
-                const areasData =
-                    await areaResponse.json();
-
-
-                const municipalityData =
-                    areasData[
-                        municipalityId
-                    ];
-
-
-                if (
-                    municipalityData &&
-                    Array.isArray(
-                        municipalityData.areas
-                    )
-                ) {
-
-                    const area =
-                        municipalityData.areas.find(
-                            function(item) {
-
-                                return item.id ===
-                                    areaId;
-
-                            }
-                        );
-
-
-                    if (area) {
-
-                        areaName.textContent =
-                            area.name;
-
-                    }
-
-                }
+                areaName.textContent =
+                    await GomiData.getSelectionLabel();
 
             } catch (error) {
 

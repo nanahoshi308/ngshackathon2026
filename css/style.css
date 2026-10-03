@@ -203,6 +203,22 @@ a {
     padding: 5px 12px;
 
     border-radius: 20px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+.selected-area {
+    padding-left: 12px;
+
+    border-left: 1px solid #cccccc;
+
+    color: #666666;
+}
+
+.selected-area:empty {
+    display: none;
 }
 
 
@@ -1023,7 +1039,13 @@ a {
     }
 
     .selected-city {
+        gap: 6px;
+
         font-size: 12px;
+    }
+
+    .selected-area {
+        padding-left: 6px;
     }
 
     .navigation {
