@@ -87,6 +87,15 @@ let gomiData = null;
 
 
 /*
+ * 品目の読み { 品目名: ひらがな }
+ *
+ * 漢字の品目をひらがなで検索するために使用する
+ */
+
+let readings = {};
+
+
+/*
  * 現在選択されている画像
  */
 
@@ -257,6 +266,16 @@ async function loadGarbageData() {
         gomi.gomi;
 
 
+    /*
+     * 品目の読み（漢字の品目をひらがなで探すため）
+     */
+
+    readings =
+        await GomiData.loadReadings(
+            municipalityId
+        );
+
+
     console.log(
         "読み込んだgomi.json：",
         gomiData
@@ -368,6 +387,8 @@ function searchGarbage() {
 
                     if (
                         GomiData.normalizeText(item)
+                            .includes(normalizedKeyword) ||
+                        GomiData.normalizeText(readings[item])
                             .includes(normalizedKeyword)
                     ) {
 

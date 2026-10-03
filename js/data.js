@@ -334,6 +334,34 @@ const GomiData = (function () {
 
 
     /* ===========================
+       読み（ひらがな）
+       { 町名・品目名: 読み }
+       漢字の町名・品目をひらがなでも検索できるようにする。
+       readings.json がない市町村は空
+    =========================== */
+
+    async function loadReadings(municipalityId) {
+
+        let rows = [];
+
+        try {
+            rows = await loadMunicipalityTable(municipalityId, "readings");
+        } catch (error) {
+            rows = [];
+        }
+
+        const readings = {};
+
+        rows.forEach(function (r) {
+            readings[r.name] = r.kana;
+        });
+
+        return readings;
+
+    }
+
+
+    /* ===========================
        kyoten.json 相当
        { kyoten: [{ jichikai, places: [{ name, date, day?, restriction? }] }] }
     =========================== */
@@ -512,6 +540,7 @@ const GomiData = (function () {
         loadCalendar: loadCalendar,
         loadGomi: loadGomi,
         loadKyoten: loadKyoten,
+        loadReadings: loadReadings,
         getSelection: getSelection,
         saveSelection: saveSelection,
         ensureSelection: ensureSelection,

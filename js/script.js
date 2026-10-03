@@ -176,6 +176,14 @@ async function loadData() {
             );
 
 
+        const readingLists =
+            await Promise.all(
+                municipalities.map(function(m) {
+                    return GomiData.loadReadings(m.id);
+                })
+            );
+
+
         municipalities.forEach(function(m, index) {
 
             townLists[index].forEach(function(town) {
@@ -183,6 +191,9 @@ async function loadData() {
                 town.municipalityId = m.id;
 
                 town.municipalityName = m.name;
+
+                // 漢字の町名をひらがなでも探せるように
+                town.kana = readingLists[index][town.name] || "";
 
                 allTowns.push(town);
 
@@ -507,7 +518,8 @@ function renderTownResults() {
     const matches =
         allTowns.filter(function(town) {
 
-            return normalizeText(town.name).includes(query);
+            return normalizeText(town.name).includes(query) ||
+                normalizeText(town.kana).includes(query);
 
         });
 
