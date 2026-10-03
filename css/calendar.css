@@ -492,6 +492,10 @@
     font-weight: bold;
 }
 
+.calendar-location-name .icon {
+    color: #31856d;
+}
+
 
 .calendar-location-date {
     margin: 0;
@@ -697,6 +701,8 @@
         1px solid #31856d;
 
     border-radius: 50%;
+
+    color: #31856d;
 
     font-size: 22px;
 

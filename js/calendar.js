@@ -1645,9 +1645,13 @@ function displayCalendarLocations() {
                 "calendar-location-name";
 
 
-            name.textContent =
-                "📍 " +
-                location.name;
+            name.innerHTML =
+                ICONS.pin;
+
+            name.append(
+                " " +
+                location.name
+            );
 
 
             /*

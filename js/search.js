@@ -1156,7 +1156,7 @@ async function sendToAI(
 
     aiResult.innerHTML = `
     <div class="ai-loading">
-        🤖 AIでごみを判定しています<span class="loading-dots"></span>
+        ${ICONS.robot} AIでごみを判定しています<span class="loading-dots"></span>
     </div>
 `;
 
@@ -1295,7 +1295,7 @@ async function sendToAI(
             <div class="ai-result-card">
 
                 <h2>
-                    🤖 AI判定
+                    ${ICONS.robot} AI判定
                 </h2>
 
                 <p>
@@ -1338,7 +1338,7 @@ function showAIResult(
             <div class="ai-result-card">
 
                 <h2>
-                    🤖 AI判定
+                    ${ICONS.robot} AI判定
                 </h2>
 
                 <p>
@@ -1412,7 +1412,7 @@ function showAIResult(
         <div class="ai-result-card">
 
             <h2>
-                🤖 AI判定
+                ${ICONS.robot} AI判定
             </h2>
 
             <div class="ai-result-content">

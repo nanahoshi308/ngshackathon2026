@@ -254,6 +254,32 @@ a {
     color: white;
 }
 
+.nav-item .icon {
+    font-size: 18px;
+}
+
+
+/* =========================
+   SVGアイコン
+   線は文字色、面は同色の淡い塗り
+========================= */
+
+.icon {
+    width: 1em;
+    height: 1em;
+
+    flex-shrink: 0;
+
+    vertical-align: -0.15em;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 
 /* =========================
    メインページ
@@ -420,6 +446,8 @@ a {
     background: #edf6f2;
 
     border-radius: 15px;
+
+    color: #31856d;
 
     font-size: 30px;
 }

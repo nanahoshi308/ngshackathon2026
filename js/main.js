@@ -695,7 +695,7 @@ function displayTodayGarbage(
             <div class="no-garbage">
 
                 <div class="no-garbage-icon">
-                    😊
+                    ${ICONS.smile}
                 </div>
 
                 <p>
@@ -726,7 +726,7 @@ function displayTodayGarbage(
         todayContent.innerHTML = `
 
             <div class="garbage-icon">
-                🗑️
+                ${ICONS.trash}
             </div>
 
             <div>
@@ -765,7 +765,7 @@ function displayTodayGarbage(
                 <div class="today-garbage-item">
 
                     <div class="garbage-icon">
-                        🗑️
+                        ${ICONS.trash}
                     </div>
 
                     <span>
@@ -865,7 +865,7 @@ function displayNextGarbage(
         nextContent.innerHTML = `
 
             <div class="garbage-icon">
-                🗑️
+                ${ICONS.trash}
             </div>
 
             <div>
@@ -904,7 +904,7 @@ function displayNextGarbage(
                 <div class="next-garbage-item">
 
                     <div class="garbage-icon">
-                        🗑️
+                        ${ICONS.trash}
                     </div>
 
                     <span>

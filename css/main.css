@@ -219,6 +219,8 @@
 
     border-radius: 50%;
 
+    color: #31856d;
+
     font-size: 40px;
 
 }
@@ -318,6 +320,8 @@
 .no-garbage-icon {
 
     margin-bottom: 10px;
+
+    color: #31856d;
 
     font-size: 40px;
 
@@ -596,6 +600,8 @@
     background-color: #edf6f2;
 
     border-radius: 50%;
+
+    color: #31856d;
 
     font-size: 28px;
 
