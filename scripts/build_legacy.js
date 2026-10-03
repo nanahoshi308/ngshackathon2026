@@ -124,6 +124,20 @@ function validate(m, t) {
     t.readings.forEach(function (r) {
         check(townNames.has(r.name) || itemNames.has(r.name), "readings: 町・品目がない " + r.name);
         check(/^[ぁ-ゖー0-9]+$/.test(r.kana), "readings: 読みはひらがな（と数字）で " + r.name + " → " + r.kana);
+
+        if (!r.tokens) {
+            return;
+        }
+        // トークンは [表記, 読み, (別の読み)]。表記をつなぐと町名、読みをつなぐと kana になる
+        check(r.tokens.every(function (token) {
+            return token.length >= 2 && token.slice(1).every(function (kana) {
+                return /^[ぁ-ゖー0-9]+$/.test(kana);
+            });
+        }), "readings: tokens の形が不正 " + r.name);
+        check(r.tokens.map(function (token) { return token[0]; }).join("") === r.name.normalize("NFKC"),
+            "readings: tokens の表記が町名と合わない " + r.name);
+        check(r.tokens.map(function (token) { return token[1]; }).join("") === r.kana,
+            "readings: tokens の読みが kana と合わない " + r.name);
     });
 
     return errors;

@@ -33,7 +33,7 @@ data/tables/
 | `{市町村}/categories.json` | ごみの種類 | `id, name, img, separation, collection_place, collection_place_url, date_note` |
 | `{市町村}/items.json` | 品目とその種類 | `name, category_id, note` |
 | `{市町村}/kyoten.json` | 拠点回収（自治会 × 場所） | `jichikai, place, weekday, weeks, label` |
-| `{市町村}/readings.json` | 町名・品目名の読み（検索用） | `name, kana` |
+| `{市町村}/readings.json` | 町名・品目名の読み（検索用） | `name, kana, tokens` |
 
 - 利用者が選ぶ単位は **町**。収集日は町ごとに持つ（同じ地区の町は同じ行が並ぶ）。
 - 表どうしは名前の一致ではなく ID / 町名でつなぐ（`items.category_id` → `categories.id`、`schedules.town` → `towns.name`）。
@@ -50,8 +50,11 @@ data/tables/
   - `variant_group` は選択肢のまとまり（例: `"燃やせるごみ・古紙"`）、`variant` はその中の1つ（例: `"火・金"`）
   - 利用者は町を選んだあと、グループごとに1つ選ぶ。選ばれた `variant` の行だけが使われる
   - 曜日が1通りなら両方 `null`
-- `readings`: 漢字の町名・品目をひらがなで検索できるようにするための読み。**手で管理する**（長崎市も生成スクリプトの対象外）
+- `readings`: 漢字の町名・品目をひらがなで検索できるようにするための読み
   - `name` は `towns.name` か `items.name` と完全一致させる。`kana` はひらがなと数字のみ（例: `"にしこしま1ちょうめ"`）
-  - 載っていない町・品目は表記どおりにしか検索できない（ひらがな/カタカナの違いは画面側で吸収する）
-  - 現在は試作で、長崎市の一部のみ登録している
+  - **町の行は `scripts/build_readings.py` が生成する**（全町）。読みを直すときは `scripts/readings_overrides.json` に書いて再生成する
+  - 品目の行は手で管理する（`tokens` なし）。生成スクリプトはそのまま残す。載っていない品目は表記どおりにしか検索できない
+  - `tokens`（町のみ）: 町名を区切った `[表記, 読み, (別の読み)]` の列。表記をつなぐと町名（NFKC 後）、読みをつなぐと `kana` になる
+    - 例: `[["西", "にし"], ["小島", "こしま"], ["1丁目", "1ちょうめ", "いっちょうめ"]]`
+    - 検索ではトークンの切れ目ごとにどの表記で入力してもよい（「にし小島いっちょうめ」「西こしま1丁」）
 - `kyoten.label`: 画面に表示する日時の文言。`weekday` / `weeks` が決められない常設の回収場所は `null`

@@ -388,7 +388,7 @@ function searchGarbage() {
                     if (
                         GomiData.normalizeText(item)
                             .includes(normalizedKeyword) ||
-                        GomiData.normalizeText(readings[item])
+                        GomiData.normalizeText((readings[item] || {}).kana)
                             .includes(normalizedKeyword)
                     ) {
 

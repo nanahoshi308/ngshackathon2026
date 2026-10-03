@@ -335,8 +335,9 @@ const GomiData = (function () {
 
     /* ===========================
        読み（ひらがな）
-       { 町名・品目名: 読み }
+       { 町名・品目名: { kana, tokens } }
        漢字の町名・品目をひらがなでも検索できるようにする。
+       tokens は町だけ（matchTokens を参照）。
        readings.json がない市町村は空
     =========================== */
 
@@ -353,7 +354,10 @@ const GomiData = (function () {
         const readings = {};
 
         rows.forEach(function (r) {
-            readings[r.name] = r.kana;
+            readings[r.name] = {
+                kana: r.kana,
+                tokens: r.tokens || null
+            };
         });
 
         return readings;
@@ -530,8 +534,55 @@ const GomiData = (function () {
     }
 
 
+    /*
+     * 町名のトークン（[["本原", "もとはら"], ["1丁目", "1ちょうめ", "いっちょうめ"]]）に
+     * 漢字・かなを混ぜた入力が一致するか。トークンの切れ目ごとにどの表記で読んでもよい
+     * 例: 「もとはら1丁」「本原いっちょう」
+     * query は normalizeText 済みのもの
+     */
+
+    function matchTokens(tokens, query) {
+
+        if (!tokens || query === "") {
+            return false;
+        }
+
+        const forms = tokens.map(function (token) {
+            return token.map(normalizeText);
+        });
+
+        function matchFrom(index, rest) {
+
+            if (rest === "") {
+                return true;
+            }
+
+            if (index >= forms.length) {
+                return false;
+            }
+
+            return forms[index].some(function (form) {
+                // 打ちかけ（「丁」→「丁目」）
+                if (form.startsWith(rest)) {
+                    return true;
+                }
+                return rest.startsWith(form) &&
+                    matchFrom(index + 1, rest.slice(form.length));
+            });
+
+        }
+
+        // 途中のトークンから打ってもよい（「1丁目」「小島」）
+        return forms.some(function (_, index) {
+            return matchFrom(index, query);
+        });
+
+    }
+
+
     return {
         normalizeText: normalizeText,
+        matchTokens: matchTokens,
         loadTable: loadTable,
         loadMunicipalityTable: loadMunicipalityTable,
         loadMunicipalities: loadMunicipalities,

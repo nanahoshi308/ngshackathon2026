@@ -116,3 +116,18 @@ scripts/
 ├── build_legacy.js       # 表の検査 + 互換JSONの生成
 └── README.md
 ```
+
+## 町名の読み（build_readings.py）
+
+`data/tables/{市町村}/readings.json` の町の行（読みと検索用のトークン）を作る。標準ライブラリのみ。
+
+```bash
+python3 build_readings.py
+```
+
+- 読みのもとはバス停の辞書（`references/長崎バス_停留所辞書.txt` と、長崎県営バス GTFS の `references/translations.txt`）。
+  リポジトリには入れていないので、手元に置いてから実行する
+- 町名・語幹がバス停名にあればその読み、なければ語幹で始まるバス停（「本原教会前」など）の読みから後ろの部分を除いて多数決
+- 辞書で読めない町・誤る町は `readings_overrides.json`（町名 → 読み）に書く。辞書より優先される
+- 推定した読み・候補が割れた読みは `readings_report.txt` に出る（未解決があると終了コード 1）
+- 実行後は `node build_legacy.js` で検査する

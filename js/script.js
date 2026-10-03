@@ -193,7 +193,11 @@ async function loadData() {
                 town.municipalityName = m.name;
 
                 // 漢字の町名をひらがなでも探せるように
-                town.kana = readingLists[index][town.name] || "";
+                const reading = readingLists[index][town.name] || {};
+
+                town.kana = reading.kana || "";
+
+                town.tokens = reading.tokens || null;
 
                 allTowns.push(town);
 
@@ -519,7 +523,8 @@ function renderTownResults() {
         allTowns.filter(function(town) {
 
             return normalizeText(town.name).includes(query) ||
-                normalizeText(town.kana).includes(query);
+                normalizeText(town.kana).includes(query) ||
+                GomiData.matchTokens(town.tokens, query);
 
         });
 
