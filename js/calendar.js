@@ -484,14 +484,18 @@ function displayCalendar() {
 
 
     /*
-     * 6週間分表示
-     *
-     * 7日 × 6週間 = 42マス
+     * 月末を含む週まで表示
+     * （翌月だけの週がまるごと並ばないよう、月によって4〜6週）
      */
+
+    const totalCells =
+        Math.ceil(
+            (firstWeekDay + daysInMonth) / 7
+        ) * 7;
 
     for (
         let i = 0;
-        i < 42;
+        i < totalCells;
         i++
     ) {
 
