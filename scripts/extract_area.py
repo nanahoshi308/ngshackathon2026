@@ -161,52 +161,23 @@ def _parse_town_row(cells, section):
     return town
 
 
-def group_by_schedule(towns):
-    """
-    同一スケジュールの町をグループ化し、既存フォーマットに近い構造にする。
-
-    グループキー: (燃やせるごみ曜日, その他曜日)
-    """
-    groups = {}
-    for town in towns:
-        key = (town["moeru"], town["other"])
-        if key not in groups:
-            groups[key] = {
-                "moeru": town["moeru"],
-                "moeru_days": town["moeru_days"],
-                "other": town["other"],
-                "other_days": town["other_days"],
-                "towns": [],
-            }
-        groups[key]["towns"].append(town["name"])
-
-    result = []
-    for i, (key, group) in enumerate(sorted(groups.items())):
-        result.append({
-            "id": f"g{i+1:02d}",
-            "name": f"燃やせる:{group['moeru']} / その他:{group['other']}",
-            "moeru": group["moeru"],
-            "moeru_days": group["moeru_days"],
-            "other": group["other"],
-            "other_days": group["other_days"],
-            "towns": sorted(group["towns"]),
-        })
-
-    return result
-
-
 def build_output(towns):
-    """最終的なJSON出力を構築"""
-    grouped = group_by_schedule(towns)
+    """正規化形式: 1行1レコードのフラットなリスト"""
+    records = []
+    for town in towns:
+        needs_confirm = "/" in town["moeru"] or "/" in town["other"]
+        record = {
+            "town": town["name"],
+            "moeru": town["moeru"],
+            "moeru_days": town["moeru_days"],
+            "other": town["other"],
+            "other_days": town["other_days"],
+            "needs_confirm": needs_confirm,
+        }
+        records.append(record)
 
-    return {
-        "municipality": "nagasaki",
-        "municipality_name": "長崎市",
-        "total_towns": len(towns),
-        "total_groups": len(grouped),
-        "groups": grouped,
-        "all_towns": sorted([t["name"] for t in towns]),
-    }
+    records.sort(key=lambda x: x["town"])
+    return records
 
 
 def main():
@@ -223,31 +194,20 @@ def main():
     towns = extract_areas(pdf_path)
     print(f"抽出した町数: {len(towns)}")
 
-    output = build_output(towns)
-    print(f"スケジュールグループ数: {output['total_groups']}")
+    records = build_output(towns)
 
     out_dir = Path(__file__).parent.parent / "data" / "nagasaki"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    out_path = out_dir / "areas.json"
+    out_path = out_dir / "towns.json"
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=4)
+        json.dump(records, f, ensure_ascii=False, indent=4)
 
     print(f"出力完了: {out_path}")
+    print(f"レコード数: {len(records)}件")
 
-    town_list_path = out_dir / "town_list.json"
-    town_list = []
-    for town in towns:
-        town_list.append({
-            "name": town["name"],
-            "moeru": town["moeru"],
-            "other": town["other"],
-        })
-    town_list.sort(key=lambda x: x["name"])
-    with open(town_list_path, "w", encoding="utf-8") as f:
-        json.dump(town_list, f, ensure_ascii=False, indent=4)
-
-    print(f"町名一覧出力: {town_list_path}")
+    slash_count = sum(1 for r in records if "/" in r["moeru"] or "/" in r["other"])
+    print(f"曜日分岐あり: {slash_count}件")
 
 
 if __name__ == "__main__":

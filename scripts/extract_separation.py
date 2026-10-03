@@ -208,59 +208,25 @@ def _is_valid_name(name):
 
 
 def build_output(items):
-    by_category = {}
+    """正規化形式: 1行1レコードのフラットなリスト"""
+    seen = set()
+    records = []
     for item in items:
-        cat = item["category"]
-        if cat not in by_category:
-            by_category[cat] = []
-        entry = {"name": item["name"]}
+        key = (item["name"], item["category"])
+        if key in seen:
+            continue
+        seen.add(key)
+
+        record = {
+            "item": item["name"],
+            "category": item["category"],
+        }
         if item.get("note"):
-            entry["note"] = item["note"]
-        by_category[cat].append(entry)
+            record["note"] = item["note"]
+        records.append(record)
 
-    for cat in by_category:
-        seen = set()
-        deduped = []
-        for item in by_category[cat]:
-            if item["name"] not in seen:
-                seen.add(item["name"])
-                deduped.append(item)
-        by_category[cat] = sorted(deduped, key=lambda x: x["name"])
-
-    category_order = [
-        "燃やせるごみ",
-        "燃やせないごみ",
-        "プラスチックごみ",
-        "資源ごみ",
-        "古紙",
-        "蛍光管",
-        "乾電池",
-        "ボタン電池",
-        "資源物等拠点回収",
-        "粗大ごみ",
-        "市では収集しません",
-    ]
-
-    gomi_list = []
-    for cat_name in category_order:
-        if cat_name in by_category:
-            cat_items = by_category[cat_name]
-            gomi_list.append({
-                "name": cat_name,
-                "items": [item["name"] for item in cat_items],
-                "items_with_notes": cat_items,
-            })
-
-    for cat_name in sorted(by_category.keys()):
-        if cat_name not in category_order:
-            cat_items = by_category[cat_name]
-            gomi_list.append({
-                "name": cat_name,
-                "items": [item["name"] for item in cat_items],
-                "items_with_notes": cat_items,
-            })
-
-    return {"gomi": gomi_list}
+    records.sort(key=lambda x: (x["category"], x["item"]))
+    return records
 
 
 def main():
@@ -280,23 +246,23 @@ def main():
     cats = set(item["category"] for item in items)
     print(f"カテゴリ: {', '.join(sorted(cats))}")
 
-    output = build_output(items)
+    records = build_output(items)
 
     out_dir = Path(__file__).parent.parent / "data" / "nagasaki"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     out_path = out_dir / "gomi.json"
     with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=4)
+        json.dump(records, f, ensure_ascii=False, indent=4)
 
     print(f"\n出力完了: {out_path}")
+    print(f"レコード数: {len(records)}件")
 
+    from collections import Counter
+    cat_counts = Counter(r["category"] for r in records)
     print("\n--- カテゴリ別品目数 ---")
-    for g in output["gomi"]:
-        print(f"  {g['name']}: {len(g['items'])}件")
-
-    total = sum(len(g["items"]) for g in output["gomi"])
-    print(f"\n  合計: {total}件")
+    for cat, count in sorted(cat_counts.items()):
+        print(f"  {cat}: {count}件")
 
 
 if __name__ == "__main__":
