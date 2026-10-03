@@ -1458,7 +1458,7 @@ function displayGarbageInformation() {
 
             let collectionPlaceHTML =
                 garbage.collectionPlace ||
-                "情報なし";
+                "";
 
 
             /*
@@ -1480,6 +1480,34 @@ function displayGarbageInformation() {
             }
 
 
+            /*
+             * 情報のある項目だけ表示する
+             * （「情報なし」が並ぶとページが長くなるだけなので）
+             */
+
+            const rows = [
+                ["収集曜日", scheduleText],
+                ["分別", garbage.separation],
+                ["収集場所", collectionPlaceHTML]
+            ].filter(function (row) {
+
+                return row[1];
+
+            });
+
+
+            /*
+             * どの項目も情報がない種類はカードごと出さない
+             * （収集日がないのでカレンダーから参照されることもない）
+             */
+
+            if (rows.length === 0) {
+
+                return;
+
+            }
+
+
             item.innerHTML = `
 
                 <div class="garbage-item-header">
@@ -1496,38 +1524,18 @@ function displayGarbageInformation() {
 
                 </div>
 
+                ${rows.map(function (row) {
 
-                <p>
+                    return `
+                        <p>
+                            <strong>
+                                ${row[0]}：
+                            </strong>
+                            ${row[1]}
+                        </p>
+                    `;
 
-                    <strong>
-                        収集曜日：
-                    </strong>
-
-                    ${scheduleText || "情報なし"}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        分別：
-                    </strong>
-
-                    ${garbage.separation || "情報なし"}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        収集場所：
-                    </strong>
-
-                    ${collectionPlaceHTML}
-
-                </p>
+                }).join("")}
 
             `;
 
