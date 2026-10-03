@@ -496,12 +496,12 @@ function displaySearchResults(
             "no-result";
 
 
-        noResult.innerHTML = `
-            「${keyword}」に一致する
-            ごみが見つかりませんでした。
-            <br><br>
-            AIで判定しています...
-        `;
+        /*
+         * AIの判定中表示は下の aiResult に出すので、ここでは出さない
+         * （判定後も「判定しています」が残ってしまうため）
+         */
+        noResult.textContent =
+            "「" + keyword + "」に一致するごみが見つかりませんでした。";
 
 
         searchResult.appendChild(
