@@ -32,6 +32,9 @@ let stepIndex = 0;
 // 一度に表示する検索結果の数
 const MAX_RESULTS = 50;
 
+// 現在地から出す町の候補の数
+const GPS_MAX_SUGGESTIONS = 3;
+
 
 // 国土地理院の逆ジオコーダ（緯度経度 → 市区町村コード・町字名）
 const REVERSE_GEOCODER_URL =
@@ -686,27 +689,13 @@ async function locate() {
             await getPosition();
 
 
-        const response =
-            await fetch(
-                REVERSE_GEOCODER_URL +
-                "?lat=" + position.coords.latitude +
-                "&lon=" + position.coords.longitude
+        const addresses =
+            await getNearbyAddresses(
+                position.coords
             );
 
-        if (!response.ok) {
-
-            throw new Error(
-                "住所を調べられませんでした。"
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-        suggestFromAddress(
-            data.results || {}
+        suggestFromAddresses(
+            addresses
         );
 
     } catch (error) {
@@ -776,11 +765,107 @@ function kanjiChomeToNumber(name) {
 }
 
 
-function suggestFromAddress(address) {
+/*
+ * 現在地とその周り8方向の住所を調べる
+ * GPSの誤差や町境に近い場合に備えて、近くの町も候補に出す
+ * 戻り値は現在地を先頭にした住所の配列
+ */
+
+async function getNearbyAddresses(coords) {
+
+    // 誤差の大きさに合わせて、100〜300mの範囲で周りを調べる
+    const radius =
+        Math.min(
+            Math.max(coords.accuracy || 0, 100),
+            300
+        );
+
+    const latStep =
+        radius / 111000;
+
+    const lonStep =
+        radius / (111000 * Math.cos(coords.latitude * Math.PI / 180));
+
+
+    const points = [
+        [0, 0],
+        [1, 0], [0, 1], [-1, 0], [0, -1],
+        [1, 1], [1, -1], [-1, 1], [-1, -1]
+    ].map(function(offset) {
+
+        const scale =
+            offset[0] !== 0 && offset[1] !== 0 ?
+                Math.SQRT1_2 :
+                1;
+
+        return {
+            lat: coords.latitude + offset[0] * latStep * scale,
+            lon: coords.longitude + offset[1] * lonStep * scale
+        };
+
+    });
+
+
+    const results =
+        await Promise.allSettled(
+            points.map(fetchAddress)
+        );
+
+
+    if (results[0].status === "rejected") {
+
+        throw results[0].reason;
+
+    }
+
+
+    return results
+        .filter(function(result) {
+            return result.status === "fulfilled" && result.value;
+        })
+        .map(function(result) {
+            return result.value;
+        });
+
+}
+
+
+async function fetchAddress(point) {
+
+    const response =
+        await fetch(
+            REVERSE_GEOCODER_URL +
+            "?lat=" + point.lat +
+            "&lon=" + point.lon
+        );
+
+    if (!response.ok) {
+
+        throw new Error(
+            "住所を調べられませんでした。"
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+    return data.results || null;
+
+}
+
+
+/*
+ * 住所に当てはまる町を探す
+ * exact: 町名が一致したもの
+ * partial: 丁目・町・郷を除いた名前を含むもの
+ */
+
+function findTownsForAddress(address) {
 
     const municipalityId =
         MUNICIPALITY_CODES[address.muniCd];
-
 
     const municipalityTowns =
         allTowns.filter(function(t) {
@@ -788,31 +873,17 @@ function suggestFromAddress(address) {
         });
 
 
-    if (!municipalityId || municipalityTowns.length === 0) {
-
-        showGpsMessage(
-            "現在地は長崎市・長与町の外のようです。町名を入力してください。"
-        );
-
-        return;
-
-    }
-
-
     const addressName =
         normalizeText(
             kanjiChomeToNumber(address.lv01Nm || "")
         );
 
-
-    // 町名が一致すればそれだけを出す
     const exact =
         municipalityTowns.filter(function(t) {
             return normalizeText(t.name) === addressName;
         });
 
 
-    // 一致しなければ、丁目・町・郷を除いた名前で探す
     const baseName =
         addressName.replace(/(\d+丁目|町|郷)$/, "");
 
@@ -824,43 +895,79 @@ function suggestFromAddress(address) {
             });
 
 
-    const municipalityName =
-        municipalityTowns[0].municipalityName;
+    return {
+        municipalityId: municipalityId,
+        municipalityTowns: municipalityTowns,
+        exact: exact,
+        partial: partial
+    };
 
-    const place =
-        municipalityName + (address.lv01Nm || "");
+}
 
 
-    if (exact.length > 0) {
+function suggestFromAddresses(addresses) {
 
-        showGpsMessage("");
+    const found =
+        addresses.map(findTownsForAddress);
 
-        showSuggestions(
-            "現在地（" + place + "）の候補",
-            exact.concat(
-                partial.filter(function(t) {
-                    return !exact.includes(t);
-                })
-            ).slice(0, 10)
+    const center =
+        found[0];
+
+
+    // 現在地の町 → 周りの町 → 名前の似た町 の順に並べる
+    const candidates = [];
+
+    found
+        .map(function(f) { return f.exact; })
+        .concat(found.map(function(f) { return f.partial; }))
+        .forEach(function(towns) {
+
+            towns.forEach(function(t) {
+
+                if (!candidates.includes(t)) {
+                    candidates.push(t);
+                }
+
+            });
+
+        });
+
+
+    if (!center.municipalityId && candidates.length === 0) {
+
+        showGpsMessage(
+            "現在地は長崎市・長与町の外のようです。町名を入力してください。"
         );
 
-    } else if (partial.length > 0) {
+        return;
+
+    }
+
+
+    const place =
+        (center.municipalityTowns.length > 0 ?
+            center.municipalityTowns[0].municipalityName :
+            "") +
+        (addresses[0].lv01Nm || "");
+
+
+    if (candidates.length > 0) {
 
         showGpsMessage("");
 
         showSuggestions(
             "現在地（" + place + "付近）の候補",
-            partial.slice(0, 10)
+            candidates.slice(0, GPS_MAX_SUGGESTIONS)
         );
 
-    } else if (municipalityId === "nagayo") {
+    } else if (center.municipalityId === "nagayo") {
 
         // 長与町は自治会名なので住所からは絞り込めないことが多い
         showGpsMessage("");
 
         showSuggestions(
             "現在地は" + place + "付近です。お住まいの自治会を選んでください",
-            municipalityTowns
+            center.municipalityTowns
         );
 
     } else {
