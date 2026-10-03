@@ -1577,13 +1577,8 @@ function displayCalendarLocations() {
 
             <div class="no-calendar-location">
 
-                カレンダーに追加した
-                指定場所はありません。
-
-                <br>
-
-                「指定場所」ページから
-                追加できます。
+                カレンダーに追加した指定場所はありません。<br>
+                「指定場所」ページから追加できます。
 
             </div>
 
