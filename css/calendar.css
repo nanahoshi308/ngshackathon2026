@@ -141,7 +141,10 @@
     display: grid;
 
     grid-template-columns:
-        repeat(7, 1fr);
+        repeat(7, minmax(0, 1fr));
+
+    /* style.css の旧カレンダー用 gap を打ち消す */
+    gap: 0;
 }
 
 
@@ -159,6 +162,9 @@
 
     border-bottom:
         1px solid #e5e5e5;
+
+    /* style.css の旧カレンダー用の角丸を打ち消す */
+    border-radius: 0;
 }
 
 
@@ -231,6 +237,24 @@
 
 .calendar-day.today {
     background-color: #edf6f2;
+
+    /* style.css の border: 2px を打ち消し、通常のマスと同じ罫線に戻す */
+    border: none;
+
+    border-right:
+        1px solid #e5e5e5;
+
+    border-bottom:
+        1px solid #e5e5e5;
+
+    /* マス全体を囲む */
+    box-shadow:
+        inset 0 0 0 2px #31856d;
+}
+
+
+.calendar-day.today:nth-child(7n) {
+    border-right: none;
 }
 
 
@@ -467,7 +491,7 @@
     border-left:
         4px solid #31856d;
 
-    border-radius: 10px;
+    border-radius: 0 10px 10px 0;
 }
 
 

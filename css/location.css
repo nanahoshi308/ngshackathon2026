@@ -163,7 +163,7 @@
 
     background-color: #f8fbfa;
 
-    border-radius: 9px;
+    border-radius: 0 9px 9px 0;
 
     border-left:
         4px solid #31856d;
