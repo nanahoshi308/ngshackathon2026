@@ -91,28 +91,16 @@ async function loadData() {
         // 市町村データ
         // ========================================
 
-        const municipalityResponse =
-            await fetch(
-                "data/municipalities.json"
-            );
-
-
         municipalitiesData =
-            await municipalityResponse.json();
+            await GomiData.loadMunicipalities();
 
 
         // ========================================
         // 地区データ
         // ========================================
 
-        const areaResponse =
-            await fetch(
-                "data/areas.json"
-            );
-
-
         areasData =
-            await areaResponse.json();
+            await GomiData.loadAreasData();
 
 
         // 市町村一覧を作成

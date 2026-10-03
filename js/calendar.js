@@ -317,23 +317,8 @@ async function initialize() {
 
 async function loadMunicipality() {
 
-    const response =
-        await fetch(
-            "data/municipalities.json"
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "municipalities.jsonが見つかりません"
-        );
-
-    }
-
-
     const municipalities =
-        await response.json();
+        await GomiData.loadMunicipalities();
 
 
     const municipality =
@@ -389,23 +374,8 @@ async function loadAreaName() {
     }
 
 
-    const response =
-        await fetch(
-            "data/areas.json"
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "areas.jsonが見つかりません"
-        );
-
-    }
-
-
     const areasData =
-        await response.json();
+        await GomiData.loadAreasData();
 
 
     const municipalityData =
@@ -461,54 +431,11 @@ async function loadAreaName() {
 
 async function loadCalendarData() {
 
-    let path;
-
-
-    /*
-     * 地区がある場合
-     */
-
-    if (areaId) {
-
-        path =
-            "data/" +
-            municipalityId +
-            "/" +
-            areaId +
-            "/calendar.json";
-
-    }
-
-
-    /*
-     * 地区がない場合
-     */
-
-    else {
-
-        path =
-            "data/" +
-            municipalityId +
-            "/calendar.json";
-
-    }
-
-
-    const response =
-        await fetch(path);
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "calendar.jsonが見つかりません"
-        );
-
-    }
-
-
     calendarData =
-        await response.json();
+        await GomiData.loadCalendar(
+            municipalityId,
+            areaId
+        );
 
 
     if (
