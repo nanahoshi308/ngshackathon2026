@@ -1,6 +1,11 @@
 // ========================================
 // ながさきごみナビ
 // 地域選択用 JavaScript
+//
+// 1画面に1項目ずつ聞いていく
+//   1. 町名（長崎市・長与町をまとめて検索）
+//   2. ごみステーションの曜日（必要な町のみ、グループごとに1画面）
+//   3. 収集曜日の確認
 // ========================================
 
 
@@ -8,10 +13,8 @@
 // データ
 // ========================================
 
-let municipalitiesData = [];
-
-// 選択中の市町村の町名一覧
-let townsData = [];
+// 全市町村の町名 [{ name, area, variantGroups, municipalityId, municipalityName }]
+let allTowns = [];
 
 // 選択中の町
 let selectedTown = null;
@@ -19,20 +22,64 @@ let selectedTown = null;
 // ステーションごとの曜日の選択 { グループ: 曜日 }
 let selectedVariants = {};
 
+// 画面の並び [{ type: "town" | "variant" | "confirm", group? }]
+let steps = [{ type: "town" }];
+
+// 表示中の画面
+let stepIndex = 0;
+
 
 // 一度に表示する検索結果の数
-const MAX_RESULTS = 100;
+const MAX_RESULTS = 50;
+
+
+// 国土地理院の逆ジオコーダ（緯度経度 → 市区町村コード・町字名）
+const REVERSE_GEOCODER_URL =
+    "https://mreversegeocoder.gsi.go.jp/reverse-geocoder/LonLatToAddress";
+
+// 市区町村コード → 市町村ID
+const MUNICIPALITY_CODES = {
+    "42201": "nagasaki",
+    "42307": "nagayo"
+};
 
 
 // ========================================
 // HTMLの要素
 // ========================================
 
-const municipalitySelect =
-    document.getElementById("municipality");
+const backButton =
+    document.getElementById("back-button");
 
-const townGroup =
-    document.getElementById("town-group");
+const wizardProgress =
+    document.getElementById("wizard-progress");
+
+const stepTown =
+    document.getElementById("step-town");
+
+const stepVariant =
+    document.getElementById("step-variant");
+
+const stepConfirm =
+    document.getElementById("step-confirm");
+
+const gpsButton =
+    document.getElementById("gps-button");
+
+const gpsButtonText =
+    document.getElementById("gps-button-text");
+
+const gpsMessage =
+    document.getElementById("gps-message");
+
+const suggestBox =
+    document.getElementById("suggest-box");
+
+const suggestLabel =
+    document.getElementById("suggest-label");
+
+const suggestList =
+    document.getElementById("suggest-list");
 
 const townSearch =
     document.getElementById("town-search");
@@ -43,23 +90,29 @@ const townCount =
 const townResults =
     document.getElementById("town-results");
 
-const selectedTownBox =
-    document.getElementById("selected-town");
+const variantTown =
+    document.getElementById("variant-town");
 
-const selectedTownName =
-    document.getElementById("selected-town-name");
+const variantTitle =
+    document.getElementById("variant-title");
 
-const townClearButton =
-    document.getElementById("town-clear");
+const variantOptions =
+    document.getElementById("variant-options");
 
-const variantGroup =
-    document.getElementById("variant-group");
+const confirmTown =
+    document.getElementById("confirm-town");
 
-const variantList =
-    document.getElementById("variant-list");
+const confirmList =
+    document.getElementById("confirm-list");
 
 const startButton =
     document.getElementById("start-button");
+
+const fixVariantButton =
+    document.getElementById("fix-variant-button");
+
+const fixTownButton =
+    document.getElementById("fix-town-button");
 
 
 /*
@@ -73,6 +126,9 @@ const params =
 const isChange =
     params.get("change") === "true";
 
+const savedSelection =
+    GomiData.getSelection();
+
 
 /*
  * 「変更」ではない場合だけ
@@ -80,17 +136,13 @@ const isChange =
  */
 if (!isChange) {
 
-    const selection =
-        GomiData.getSelection();
-
-
     /*
      * 市町村と町が保存済みなら
      * main.htmlへ移動
      */
     if (
-        selection.municipalityId &&
-        selection.town
+        savedSelection.municipalityId &&
+        savedSelection.town
     ) {
 
         window.location.href =
@@ -109,49 +161,31 @@ async function loadData() {
 
     try {
 
-        municipalitiesData =
+        const municipalities =
             await GomiData.loadMunicipalities();
 
 
-        // 市町村一覧を作成
-        createMunicipalityList();
+        const townLists =
+            await Promise.all(
+                municipalities.map(function(m) {
+                    return GomiData.loadTowns(m.id);
+                })
+            );
 
 
-        // ========================================
-        // 「変更」のときは保存済みの地域を復元
-        // ========================================
+        municipalities.forEach(function(m, index) {
 
-        const selection =
-            GomiData.getSelection();
+            townLists[index].forEach(function(town) {
 
-        if (
-            selection.municipalityId &&
-            municipalitiesData.some(function(m) {
-                return m.id === selection.municipalityId;
-            })
-        ) {
+                town.municipalityId = m.id;
 
-            municipalitySelect.value =
-                selection.municipalityId;
+                town.municipalityName = m.name;
 
-            await changeMunicipality();
+                allTowns.push(town);
 
+            });
 
-            const town =
-                townsData.find(function(t) {
-                    return t.name === selection.town;
-                });
-
-            if (town) {
-
-                selectedVariants =
-                    selection.variants;
-
-                selectTown(town);
-
-            }
-
-        }
+        });
 
     } catch (error) {
 
@@ -160,125 +194,221 @@ async function loadData() {
             error
         );
 
-    }
-
-}
-
-
-// ========================================
-// 市町村一覧を作成
-// ========================================
-
-function createMunicipalityList() {
-
-
-    // 一度空にする
-    municipalitySelect.innerHTML = "";
-
-
-    // 初期項目
-    const defaultOption =
-        document.createElement("option");
-
-    defaultOption.value = "";
-
-    defaultOption.textContent =
-        "市町村を選択してください";
-
-    municipalitySelect.appendChild(
-        defaultOption
-    );
-
-
-    // 市町村を追加
-    municipalitiesData.forEach(
-        function(municipality) {
-
-            const option =
-                document.createElement("option");
-
-            option.value =
-                municipality.id;
-
-            option.textContent =
-                municipality.name;
-
-            municipalitySelect.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-// ========================================
-// 市町村が変更されたとき
-// ========================================
-
-municipalitySelect.addEventListener(
-    "change",
-    function() {
-
-        selectedVariants = {};
-
-        changeMunicipality();
-
-    }
-);
-
-
-async function changeMunicipality() {
-
-    const municipalityId =
-        municipalitySelect.value;
-
-
-    // 町の選択をリセット
-    townsData = [];
-
-    clearTown();
-
-    townSearch.value = "";
-
-
-    // 市町村が未選択
-    if (municipalityId === "") {
-
-        townGroup.classList.add("hidden");
-
-        updateButton();
+        townCount.textContent =
+            "町名を読み込めませんでした。時間をおいて再度お試しください。";
 
         return;
 
     }
 
 
-    try {
+    // ========================================
+    // 「変更」のときは前回の町を候補に出す
+    // ========================================
 
-        townsData =
-            await GomiData.loadTowns(
-                municipalityId
-            );
+    const savedTown =
+        findTown(
+            savedSelection.municipalityId,
+            savedSelection.town
+        );
 
-    } catch (error) {
+    if (savedTown) {
 
-        console.error(
-            "町名の読み込みに失敗しました。",
-            error
+        showSuggestions(
+            "前回の設定",
+            [savedTown]
         );
 
     }
 
 
-    townGroup.classList.remove("hidden");
-
     renderTownResults();
 
-    updateButton();
+
+    // 位置情報がすでに許可されていれば、そのまま現在地を調べる
+    autoLocate();
 
 }
+
+
+function findTown(municipalityId, name) {
+
+    return allTowns.find(function(t) {
+
+        return t.municipalityId === municipalityId &&
+            t.name === name;
+
+    }) || null;
+
+}
+
+
+// ========================================
+// 画面の切り替え
+// ========================================
+
+function buildSteps() {
+
+    steps = [{ type: "town" }];
+
+    if (selectedTown) {
+
+        selectedTown.variantGroups.forEach(function(group) {
+
+            steps.push({ type: "variant", group: group });
+
+        });
+
+        steps.push({ type: "confirm" });
+
+    }
+
+}
+
+
+/*
+ * 進む画面はブラウザの履歴にも積み、
+ * スマホの「戻る」でも1画面ずつ戻れるようにする
+ */
+
+function goTo(index) {
+
+    if (index > stepIndex) {
+
+        history.pushState(
+            { step: index },
+            ""
+        );
+
+        showStep(index);
+
+    } else if (index < stepIndex) {
+
+        history.go(index - stepIndex);
+
+    }
+
+}
+
+
+window.addEventListener(
+    "popstate",
+    function(event) {
+
+        const index =
+            event.state && typeof event.state.step === "number" ?
+                event.state.step :
+                0;
+
+        // 町が未選択のまま先の画面には進めない
+        showStep(
+            selectedTown ?
+                Math.min(index, steps.length - 1) :
+                0
+        );
+
+    }
+);
+
+
+function showStep(index) {
+
+    stepIndex = index;
+
+    const step =
+        steps[index];
+
+
+    stepTown.hidden =
+        step.type !== "town";
+
+    stepVariant.hidden =
+        step.type !== "variant";
+
+    stepConfirm.hidden =
+        step.type !== "confirm";
+
+
+    if (step.type === "variant") {
+
+        renderVariant(step.group);
+
+    }
+
+    if (step.type === "confirm") {
+
+        renderConfirm();
+
+    }
+
+
+    /*
+     * 最初の画面の「戻る」は、
+     * 変更で来たときだけ元の画面へ戻す
+     */
+
+    backButton.hidden =
+        index === 0 &&
+        !(isChange && savedSelection.town);
+
+
+    renderProgress();
+
+    window.scrollTo(0, 0);
+
+}
+
+
+function renderProgress() {
+
+    wizardProgress.innerHTML = "";
+
+
+    // 町を選ぶ前は、確認までの最短の数を出しておく
+    const total =
+        Math.max(steps.length, 2);
+
+
+    for (let i = 0; i < total; i++) {
+
+        const dot =
+            document.createElement("li");
+
+        dot.className =
+            "wizard-dot" +
+            (i < stepIndex ? " done" : "") +
+            (i === stepIndex ? " current" : "");
+
+        wizardProgress.appendChild(dot);
+
+    }
+
+
+    wizardProgress.setAttribute(
+        "aria-label",
+        "設定 " + (stepIndex + 1) + " / " + total
+    );
+
+}
+
+
+backButton.addEventListener(
+    "click",
+    function() {
+
+        if (stepIndex === 0) {
+
+            window.location.href =
+                "main.html";
+
+            return;
+
+        }
+
+        history.back();
+
+    }
+);
 
 
 // ========================================
@@ -302,6 +432,55 @@ function normalizeText(text) {
 
 
 // ========================================
+// 町名の候補ボタン
+// ========================================
+
+function createTownButton(town) {
+
+    const item =
+        document.createElement("li");
+
+    const button =
+        document.createElement("button");
+
+    button.type = "button";
+
+    button.className =
+        "town-result";
+
+    button.textContent =
+        town.name;
+
+
+    const municipality =
+        document.createElement("span");
+
+    municipality.className =
+        "town-result-municipality";
+
+    municipality.textContent =
+        town.municipalityName;
+
+    button.appendChild(municipality);
+
+
+    button.addEventListener(
+        "click",
+        function() {
+
+            selectTown(town);
+
+        }
+    );
+
+    item.appendChild(button);
+
+    return item;
+
+}
+
+
+// ========================================
 // 町名の検索結果を表示
 // ========================================
 
@@ -320,8 +499,12 @@ function renderTownResults() {
     townResults.innerHTML = "";
 
 
-    // 町を選択済みなら一覧は出さない
-    if (selectedTown) {
+    const query =
+        normalizeText(townSearch.value);
+
+
+    // 何も入力していないときは候補を出さない
+    if (query === "") {
 
         townCount.textContent = "";
 
@@ -330,20 +513,10 @@ function renderTownResults() {
     }
 
 
-    const query =
-        normalizeText(townSearch.value);
-
-
     const matches =
-        townsData.filter(function(town) {
+        allTowns.filter(function(town) {
 
-            if (query === "") {
-                return true;
-            }
-
-            return normalizeText(town.name).includes(query) ||
-                (town.areaName !== null &&
-                    normalizeText(town.areaName).includes(query));
+            return normalizeText(town.name).includes(query);
 
         });
 
@@ -363,7 +536,7 @@ function renderTownResults() {
             matches.length +
             "件中 " +
             MAX_RESULTS +
-            "件を表示しています。町名を入力して絞り込んでください。";
+            "件を表示しています。続けて入力して絞り込んでください。";
 
     } else {
 
@@ -381,54 +554,322 @@ function renderTownResults() {
         .slice(0, MAX_RESULTS)
         .forEach(function(town) {
 
-            const item =
-                document.createElement("li");
+            townResults.appendChild(
+                createTownButton(town)
+            );
 
-            const button =
-                document.createElement("button");
+        });
 
-            button.type = "button";
-
-            button.className =
-                "town-result";
-
-            button.textContent =
-                town.name;
+}
 
 
-            // 地区がある場合は地区名も表示
-            if (town.areaName) {
+function showSuggestions(label, towns) {
 
-                const area =
-                    document.createElement("span");
+    suggestList.innerHTML = "";
 
-                area.className =
-                    "town-result-area";
+    suggestLabel.textContent =
+        label;
 
-                area.textContent =
-                    town.areaName;
+    towns.forEach(function(town) {
 
-                button.appendChild(area);
+        suggestList.appendChild(
+            createTownButton(town)
+        );
+
+    });
+
+    suggestBox.hidden =
+        towns.length === 0;
+
+}
+
+
+// ========================================
+// 現在地から町名を推測
+// ========================================
+
+gpsButton.addEventListener(
+    "click",
+    function() {
+
+        locate();
+
+    }
+);
+
+
+async function autoLocate() {
+
+    if (
+        !navigator.permissions ||
+        !navigator.geolocation
+    ) {
+        return;
+    }
+
+    try {
+
+        const status =
+            await navigator.permissions.query({
+                name: "geolocation"
+            });
+
+        if (status.state === "granted") {
+
+            locate();
+
+        }
+
+    } catch (error) {
+
+        // 調べられないブラウザでは、ボタンを押してもらう
+
+    }
+
+}
+
+
+function getPosition() {
+
+    return new Promise(function(resolve, reject) {
+
+        navigator.geolocation.getCurrentPosition(
+            resolve,
+            reject,
+            {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 60000
+            }
+        );
+
+    });
+
+}
+
+
+function showGpsMessage(text) {
+
+    gpsMessage.textContent =
+        text;
+
+    gpsMessage.hidden =
+        text === "";
+
+}
+
+
+async function locate() {
+
+    if (!navigator.geolocation) {
+
+        showGpsMessage(
+            "この端末では現在地を使えません。町名を入力してください。"
+        );
+
+        return;
+
+    }
+
+
+    gpsButton.disabled = true;
+
+    gpsButtonText.textContent =
+        "現在地を確認しています…";
+
+    showGpsMessage("");
+
+
+    try {
+
+        const position =
+            await getPosition();
+
+
+        const response =
+            await fetch(
+                REVERSE_GEOCODER_URL +
+                "?lat=" + position.coords.latitude +
+                "&lon=" + position.coords.longitude
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "住所を調べられませんでした。"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+        suggestFromAddress(
+            data.results || {}
+        );
+
+    } catch (error) {
+
+        console.error(
+            "現在地の取得に失敗しました。",
+            error
+        );
+
+        showGpsMessage(
+            error.code === 1 ?
+                "位置情報の利用が許可されていません。町名を入力してください。" :
+                "現在地を確認できませんでした。町名を入力してください。"
+        );
+
+    } finally {
+
+        gpsButton.disabled = false;
+
+        gpsButtonText.textContent =
+            "現在地から探す";
+
+    }
+
+}
+
+
+/*
+ * 漢数字の丁目を算用数字にそろえる
+ * 例: 上小島三丁目 → 上小島3丁目
+ */
+
+function kanjiChomeToNumber(name) {
+
+    const digits = {
+        "一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
+        "六": 6, "七": 7, "八": 8, "九": 9
+    };
+
+    return name.replace(
+        /([一二三四五六七八九十]+)丁目$/,
+        function(match, kanji) {
+
+            let number = 0;
+
+            if (kanji.includes("十")) {
+
+                const parts =
+                    kanji.split("十");
+
+                number =
+                    (digits[parts[0]] || 1) * 10 +
+                    (digits[parts[1]] || 0);
+
+            } else {
+
+                number =
+                    digits[kanji];
 
             }
 
+            return number + "丁目";
 
-            button.addEventListener(
-                "click",
-                function() {
+        }
+    );
 
-                    selectedVariants = {};
+}
 
-                    selectTown(town);
 
-                }
-            );
+function suggestFromAddress(address) {
 
-            item.appendChild(button);
+    const municipalityId =
+        MUNICIPALITY_CODES[address.muniCd];
 
-            townResults.appendChild(item);
 
+    const municipalityTowns =
+        allTowns.filter(function(t) {
+            return t.municipalityId === municipalityId;
         });
+
+
+    if (!municipalityId || municipalityTowns.length === 0) {
+
+        showGpsMessage(
+            "現在地は長崎市・長与町の外のようです。町名を入力してください。"
+        );
+
+        return;
+
+    }
+
+
+    const addressName =
+        normalizeText(
+            kanjiChomeToNumber(address.lv01Nm || "")
+        );
+
+
+    // 町名が一致すればそれだけを出す
+    const exact =
+        municipalityTowns.filter(function(t) {
+            return normalizeText(t.name) === addressName;
+        });
+
+
+    // 一致しなければ、丁目・町・郷を除いた名前で探す
+    const baseName =
+        addressName.replace(/(\d+丁目|町|郷)$/, "");
+
+    const partial =
+        baseName === "" ?
+            [] :
+            municipalityTowns.filter(function(t) {
+                return normalizeText(t.name).includes(baseName);
+            });
+
+
+    const municipalityName =
+        municipalityTowns[0].municipalityName;
+
+    const place =
+        municipalityName + (address.lv01Nm || "");
+
+
+    if (exact.length > 0) {
+
+        showGpsMessage("");
+
+        showSuggestions(
+            "現在地（" + place + "）の候補",
+            exact.concat(
+                partial.filter(function(t) {
+                    return !exact.includes(t);
+                })
+            ).slice(0, 10)
+        );
+
+    } else if (partial.length > 0) {
+
+        showGpsMessage("");
+
+        showSuggestions(
+            "現在地（" + place + "付近）の候補",
+            partial.slice(0, 10)
+        );
+
+    } else if (municipalityId === "nagayo") {
+
+        // 長与町は自治会名なので住所からは絞り込めないことが多い
+        showGpsMessage("");
+
+        showSuggestions(
+            "現在地は" + place + "付近です。お住まいの自治会を選んでください",
+            municipalityTowns
+        );
+
+    } else {
+
+        showGpsMessage(
+            "現在地は" + place + "付近ですが、町名の候補が見つかりませんでした。町名を入力してください。"
+        );
+
+    }
 
 }
 
@@ -439,207 +880,257 @@ function renderTownResults() {
 
 function selectTown(town) {
 
+    if (town !== selectedTown) {
+
+        // 前回と同じ町なら、前回の曜日を初期値にする
+        const isSaved =
+            town.municipalityId === savedSelection.municipalityId &&
+            town.name === savedSelection.town;
+
+        selectedVariants =
+            isSaved ?
+                Object.assign({}, savedSelection.variants) :
+                {};
+
+    }
+
     selectedTown = town;
 
+    buildSteps();
 
-    selectedTownName.textContent =
-        town.areaName ?
-            town.name + "（" + town.areaName + "）" :
-            town.name;
-
-    selectedTownBox.classList.remove("hidden");
-
-    townSearch.classList.add("hidden");
-
-
-    renderTownResults();
-
-    renderVariants();
-
-    updateButton();
+    goTo(1);
 
 }
 
 
 // ========================================
-// 町の選択を解除
+// ごみステーションの曜日を選ぶ
 // ========================================
 
-townClearButton.addEventListener(
+function townLabel() {
+
+    return selectedTown.municipalityName +
+        " " +
+        selectedTown.name;
+
+}
+
+
+function renderVariant(group) {
+
+    variantTown.textContent =
+        townLabel();
+
+    variantTitle.textContent =
+        "「" + group.group + "」の収集日は？";
+
+
+    variantOptions.innerHTML = "";
+
+    group.options.forEach(function(option) {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+            "choice-button" +
+            (selectedVariants[group.group] === option ? " selected" : "");
+
+        button.textContent =
+            option + "曜日";
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                selectedVariants[group.group] =
+                    option;
+
+                goTo(stepIndex + 1);
+
+            }
+        );
+
+        variantOptions.appendChild(button);
+
+    });
+
+}
+
+
+// ========================================
+// 収集曜日の確認
+// ========================================
+
+/*
+ * [{ day: "月曜日", restriction: [1,1,1,1,1] }, ...] を
+ * 「毎週 月・木曜日」「第2・4 金曜日」のような文にする
+ */
+
+function formatSchedule(schedule) {
+
+    const groups = new Map();
+
+    schedule.forEach(function(s) {
+
+        const key =
+            s.restriction.join("");
+
+        if (!groups.has(key)) {
+
+            groups.set(key, {
+                restriction: s.restriction,
+                days: []
+            });
+
+        }
+
+        groups.get(key).days.push(
+            s.day.charAt(0)
+        );
+
+    });
+
+
+    return Array.from(groups.values(), function(g) {
+
+        const weeks =
+            g.restriction.every(function(x) { return x === 1; }) ?
+                "毎週" :
+                "第" +
+                g.restriction
+                    .map(function(x, i) { return x ? i + 1 : null; })
+                    .filter(Boolean)
+                    .join("・");
+
+        return weeks + " " + g.days.join("・") + "曜日";
+
+    }).join("、");
+
+}
+
+
+async function renderConfirm() {
+
+    confirmTown.textContent =
+        townLabel();
+
+    fixVariantButton.hidden =
+        selectedTown.variantGroups.length === 0;
+
+    confirmList.innerHTML = "";
+
+
+    let calendar;
+
+    try {
+
+        calendar =
+            await GomiData.loadCalendar(
+                selectedTown.municipalityId,
+                {
+                    town: selectedTown.name,
+                    variants: selectedVariants
+                }
+            );
+
+    } catch (error) {
+
+        console.error(
+            "収集日の読み込みに失敗しました。",
+            error
+        );
+
+        confirmList.innerHTML =
+            '<li class="confirm-error">収集日を読み込めませんでした。</li>';
+
+        return;
+
+    }
+
+
+    calendar.garbage
+        .filter(function(g) {
+            return g.schedule;
+        })
+        .forEach(function(g) {
+
+            const item =
+                document.createElement("li");
+
+            item.className =
+                "confirm-item";
+
+
+            const icon =
+                document.createElement("img");
+
+            icon.className =
+                "confirm-icon";
+
+            icon.src = g.img;
+
+            icon.alt = "";
+
+
+            const name =
+                document.createElement("span");
+
+            name.className =
+                "confirm-name";
+
+            name.textContent =
+                g.name;
+
+
+            const days =
+                document.createElement("span");
+
+            days.className =
+                "confirm-days";
+
+            days.textContent =
+                formatSchedule(g.schedule);
+
+
+            item.appendChild(icon);
+
+            item.appendChild(name);
+
+            item.appendChild(days);
+
+            confirmList.appendChild(item);
+
+        });
+
+}
+
+
+fixVariantButton.addEventListener(
     "click",
     function() {
 
-        selectedVariants = {};
-
-        clearTown();
-
-        renderTownResults();
-
-        updateButton();
-
-        townSearch.focus();
+        goTo(1);
 
     }
 );
 
 
-function clearTown() {
+fixTownButton.addEventListener(
+    "click",
+    function() {
 
-    selectedTown = null;
-
-    selectedTownBox.classList.add("hidden");
-
-    townSearch.classList.remove("hidden");
-
-    variantGroup.classList.add("hidden");
-
-    variantList.innerHTML = "";
-
-}
-
-
-// ========================================
-// ごみステーションの曜日の選択肢を表示
-// ========================================
-
-function renderVariants() {
-
-    variantList.innerHTML = "";
-
-
-    if (
-        !selectedTown ||
-        selectedTown.variantGroups.length === 0
-    ) {
-
-        variantGroup.classList.add("hidden");
-
-        return;
+        goTo(0);
 
     }
-
-
-    selectedTown.variantGroups.forEach(
-        function(variantGroupData, groupIndex) {
-
-            const fieldset =
-                document.createElement("fieldset");
-
-            fieldset.className =
-                "variant-fieldset";
-
-
-            const legend =
-                document.createElement("legend");
-
-            legend.textContent =
-                variantGroupData.group;
-
-            fieldset.appendChild(legend);
-
-
-            variantGroupData.options.forEach(
-                function(option) {
-
-                    const label =
-                        document.createElement("label");
-
-                    label.className =
-                        "variant-option";
-
-
-                    const radio =
-                        document.createElement("input");
-
-                    radio.type = "radio";
-
-                    radio.name =
-                        "variant-" + groupIndex;
-
-                    radio.value = option;
-
-                    radio.checked =
-                        selectedVariants[variantGroupData.group] === option;
-
-
-                    radio.addEventListener(
-                        "change",
-                        function() {
-
-                            selectedVariants[variantGroupData.group] =
-                                option;
-
-                            updateButton();
-
-                        }
-                    );
-
-
-                    const text =
-                        document.createElement("span");
-
-                    text.textContent =
-                        option;
-
-
-                    label.appendChild(radio);
-
-                    label.appendChild(text);
-
-                    fieldset.appendChild(label);
-
-                }
-            );
-
-
-            variantList.appendChild(fieldset);
-
-        }
-    );
-
-
-    variantGroup.classList.remove("hidden");
-
-}
+);
 
 
 // ========================================
-// ボタンの状態を更新
-// ========================================
-
-function updateButton() {
-
-    // 町が未選択
-    if (!selectedTown) {
-
-        startButton.disabled = true;
-
-        return;
-
-    }
-
-
-    // ステーションの曜日が未選択のグループがある
-    const allChosen =
-        selectedTown.variantGroups.every(
-            function(group) {
-
-                return group.options.includes(
-                    selectedVariants[group.group]
-                );
-
-            }
-        );
-
-
-    startButton.disabled =
-        !allChosen;
-
-}
-
-
-// ========================================
-// ごみ情報を見る
+// 保存してごみ情報を見る
 // ========================================
 
 startButton.addEventListener(
@@ -663,7 +1154,7 @@ startButton.addEventListener(
 
 
         GomiData.saveSelection({
-            municipalityId: municipalitySelect.value,
+            municipalityId: selectedTown.municipalityId,
             town: selectedTown.name,
             area: selectedTown.area,
             variants: variants
@@ -681,5 +1172,12 @@ startButton.addEventListener(
 // ========================================
 // 開始
 // ========================================
+
+history.replaceState(
+    { step: 0 },
+    ""
+);
+
+showStep(0);
 
 loadData();

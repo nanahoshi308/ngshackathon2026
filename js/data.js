@@ -442,7 +442,7 @@ const GomiData = (function () {
 
     /*
      * 画面に表示する地域名
-     * 例: 「皆前（A地区）」「かき道５丁目（火・金／金）」
+     * 例: 「皆前」「かき道５丁目（火・金／金）」
      * ごみステーションの曜日を選んだ場合はそれも添える
      */
 
@@ -464,10 +464,6 @@ const GomiData = (function () {
             });
 
         const notes = [];
-
-        if (town && town.areaName) {
-            notes.push(town.areaName);
-        }
 
         if (town) {
             town.variantGroups.forEach(function (group) {
