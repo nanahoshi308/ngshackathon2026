@@ -190,59 +190,8 @@ async function loadMunicipality() {
 
 async function loadAreaName() {
 
-    /*
-     * 地区がない場合
-     */
-
-    if (!areaId) {
-
-        areaName.textContent =
-            "";
-
-        return;
-
-    }
-
-
-    const areasData =
-        await GomiData.loadAreasData();
-
-
-    const municipalityData =
-        areasData[
-        municipalityId
-        ];
-
-
-    if (
-        !municipalityData ||
-        !Array.isArray(
-            municipalityData.areas
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const area =
-        municipalityData.areas.find(
-            function (item) {
-
-                return item.id ===
-                    areaId;
-
-            }
-        );
-
-
-    if (area) {
-
-        areaName.textContent =
-            area.name;
-
-    }
+    areaName.textContent =
+        await GomiData.getSelectionLabel();
 
 }
 
@@ -260,7 +209,7 @@ async function loadGarbageData() {
     const calendar =
         await GomiData.loadCalendar(
             municipalityId,
-            areaId
+            GomiData.getSelection()
         );
 
 
@@ -680,14 +629,14 @@ function createSearchItem(
                 <span class="search-label">
                     分別：
                 </span>
-                ${garbage.separation}
+                ${garbage.separation || "情報なし"}
             </p>
 
             <p>
                 <span class="search-label">
                     収集場所：
                 </span>
-                ${garbage.collectionPlace}
+                ${garbage.collectionPlace || "情報なし"}
             </p>
 
         `;
@@ -1492,14 +1441,14 @@ function showAIResult(
                                 <span class="ai-label">
                                     分別：
                                 </span>
-                                ${garbage.separation}
+                                ${garbage.separation || "情報なし"}
                             </p>
 
                             <p>
                                 <span class="ai-label">
                                     収集場所：
                                 </span>
-                                ${garbage.collectionPlace}
+                                ${garbage.collectionPlace || "情報なし"}
                             </p>
                         `
             : ""
@@ -1554,4 +1503,8 @@ searchInput.addEventListener(
    開始
 =========================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

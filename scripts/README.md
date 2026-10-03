@@ -33,8 +33,7 @@ curl -o gomi_sep.pdf https://www.city.nagasaki.lg.jp/uploaded/attachment/53682.p
 ```
 
 **出力:**
-- `../data/nagasaki/areas.json` - 曜日別データ
-- `../data/nagasaki/town_list.json` - 全町名の一覧
+- `../data/nagasaki/towns.json` - 町別の収集曜日（抽出結果そのまま）
 
 ### extract_separation.py - ごみ分別一覧の抽出
 
@@ -48,6 +47,41 @@ curl -o gomi_sep.pdf https://www.city.nagasaki.lg.jp/uploaded/attachment/53682.p
 **出力:**
 - `../data/nagasaki/gomi.json` - カテゴリ別ごみ分別データ
 
+### nagasaki_to_tables.py - 抽出結果をアプリ用の表に変換
+
+`extract_area.py` / `extract_separation.py` の出力を、アプリが読む `data/tables/nagasaki/` の形式に変換する。
+標準ライブラリのみで動く。
+
+```bash
+python3 nagasaki_to_tables.py
+```
+
+**入力:** `../data/nagasaki/towns.json`, `../data/nagasaki/gomi.json`, `../data/tables/nagasaki/categories.json`（手で管理）
+
+**出力:** `../data/tables/nagasaki/towns.json`, `schedules.json`, `items.json`
+
+- 「月・木/火・金」のような `/` 区切りは、ごみステーションによって曜日が異なるものとして `variant_group` / `variant` に展開する
+- 燃やせないごみ・資源ごみ・プラスチックは2列目の曜日に毎週、古紙は燃やせるごみの初めの曜日に毎週としている（要確認）
+
+### build_legacy.js - 表の検査と互換JSONの生成
+
+`data/tables/` の参照整合性を検査し、`data/` 直下の互換用JSONを生成する（Node.js）。
+表を編集したら必ず実行する。
+
+```bash
+node build_legacy.js
+```
+
+## 長崎市データの更新手順
+
+```bash
+cd scripts
+.venv/bin/python3 extract_area.py <gomi_area.pdf>
+.venv/bin/python3 extract_separation.py <gomi_sep.pdf>
+python3 nagasaki_to_tables.py
+node build_legacy.js
+```
+
 ## ディレクトリ構成
 
 ```
@@ -56,5 +90,7 @@ scripts/
 ├── requirements.txt    # 依存パッケージ
 ├── extract_area.py     # 町別収集曜日 PDF → JSON
 ├── extract_separation.py # ごみ分別一覧 PDF → JSON
+├── nagasaki_to_tables.py # 抽出結果 → data/tables/nagasaki/
+├── build_legacy.js       # 表の検査 + 互換JSONの生成
 └── README.md
 ```

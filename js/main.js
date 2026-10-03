@@ -180,63 +180,10 @@ async function loadAreaName(
     areaId
 ) {
 
-    /*
-     * 地区がない場合
-     */
-
-    if (!areaId) {
-
-        areaName.textContent = "";
-
-        return;
-
-    }
-
-
     try {
 
-        const areasData =
-            await GomiData.loadAreasData();
-
-
-        const municipalityData =
-            areasData[municipalityId];
-
-
-        if (
-            !municipalityData ||
-            !municipalityData.areas
-        ) {
-
-            return;
-
-        }
-
-
-        /*
-         * 選択された地区を探す
-         */
-
-        const area =
-            municipalityData.areas.find(
-                function(item) {
-
-                    return item.id === areaId;
-
-                }
-            );
-
-
-        /*
-         * 地区名を表示
-         */
-
-        if (area) {
-
-            areaName.textContent =
-                area.name;
-
-        }
+        areaName.textContent =
+            await GomiData.getSelectionLabel();
 
     } catch (error) {
 
@@ -288,7 +235,7 @@ async function loadGarbageData(
         const calendarData =
             await GomiData.loadCalendar(
                 municipalityId,
-                areaId
+                GomiData.getSelection()
             );
 
 
@@ -987,4 +934,8 @@ function displayNextGarbage(
    実行
 ======================================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

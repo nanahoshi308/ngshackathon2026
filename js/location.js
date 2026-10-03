@@ -141,58 +141,20 @@ async function loadMunicipality() {
 
 async function loadAreaName() {
 
-    if (!areaId) {
-
-        areaName.textContent =
-            "";
-
-        return;
-
-    }
+    const label =
+        await GomiData.getSelectionLabel();
 
 
-    const areasData =
-        await GomiData.loadAreasData();
+    areaName.textContent =
+        label;
 
 
-    const municipalityData =
-        areasData[
-            municipalityId
-        ];
-
-
-    if (
-        !municipalityData ||
-        !Array.isArray(
-            municipalityData.areas
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const area =
-        municipalityData.areas.find(
-            function(item) {
-
-                return item.id ===
-                    areaId;
-
-            }
-        );
-
-
-    if (area) {
-
-        areaName.textContent =
-            area.name;
+    if (label) {
 
         municipalityName.textContent =
             cityName.textContent +
             " " +
-            area.name;
+            label;
 
     }
 
@@ -852,4 +814,8 @@ async function syncNotificationKyoten() {
    開始
 =========================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

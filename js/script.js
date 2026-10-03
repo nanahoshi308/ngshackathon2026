@@ -10,7 +10,18 @@
 
 let municipalitiesData = [];
 
-let areasData = {};
+// 選択中の市町村の町名一覧
+let townsData = [];
+
+// 選択中の町
+let selectedTown = null;
+
+// ステーションごとの曜日の選択 { グループ: 曜日 }
+let selectedVariants = {};
+
+
+// 一度に表示する検索結果の数
+const MAX_RESULTS = 100;
 
 
 // ========================================
@@ -20,20 +31,38 @@ let areasData = {};
 const municipalitySelect =
     document.getElementById("municipality");
 
-const areaGroup =
-    document.getElementById("area-group");
+const townGroup =
+    document.getElementById("town-group");
 
-const areaList =
-    document.getElementById("area-list");
+const townSearch =
+    document.getElementById("town-search");
 
-const areaSelect =
-    document.getElementById("area");
+const townCount =
+    document.getElementById("town-count");
+
+const townResults =
+    document.getElementById("town-results");
+
+const selectedTownBox =
+    document.getElementById("selected-town");
+
+const selectedTownName =
+    document.getElementById("selected-town-name");
+
+const townClearButton =
+    document.getElementById("town-clear");
+
+const variantGroup =
+    document.getElementById("variant-group");
+
+const variantList =
+    document.getElementById("variant-list");
 
 const startButton =
     document.getElementById("start-button");
 
 
-    /*
+/*
  * 変更画面から来たか確認
  */
 const params =
@@ -51,24 +80,17 @@ const isChange =
  */
 if (!isChange) {
 
-    const municipality =
-        localStorage.getItem(
-            "municipality"
-        );
-
-    const area =
-        localStorage.getItem(
-            "area"
-        );
+    const selection =
+        GomiData.getSelection();
 
 
     /*
-     * 市町村と地域が保存済みなら
+     * 市町村と町が保存済みなら
      * main.htmlへ移動
      */
     if (
-        municipality &&
-        area
+        selection.municipalityId &&
+        selection.town
     ) {
 
         window.location.href =
@@ -78,6 +100,7 @@ if (!isChange) {
 
 }
 
+
 // ========================================
 // JSONを読み込む
 // ========================================
@@ -86,26 +109,49 @@ async function loadData() {
 
     try {
 
-
-        // ========================================
-        // 市町村データ
-        // ========================================
-
         municipalitiesData =
             await GomiData.loadMunicipalities();
-
-
-        // ========================================
-        // 地区データ
-        // ========================================
-
-        areasData =
-            await GomiData.loadAreasData();
 
 
         // 市町村一覧を作成
         createMunicipalityList();
 
+
+        // ========================================
+        // 「変更」のときは保存済みの地域を復元
+        // ========================================
+
+        const selection =
+            GomiData.getSelection();
+
+        if (
+            selection.municipalityId &&
+            municipalitiesData.some(function(m) {
+                return m.id === selection.municipalityId;
+            })
+        ) {
+
+            municipalitySelect.value =
+                selection.municipalityId;
+
+            await changeMunicipality();
+
+
+            const town =
+                townsData.find(function(t) {
+                    return t.name === selection.town;
+                });
+
+            if (town) {
+
+                selectedVariants =
+                    selection.variants;
+
+                selectTown(town);
+
+            }
+
+        }
 
     } catch (error) {
 
@@ -130,45 +176,32 @@ function createMunicipalityList() {
     municipalitySelect.innerHTML = "";
 
 
-    // ========================================
     // 初期項目
-    // ========================================
-
     const defaultOption =
         document.createElement("option");
 
-
     defaultOption.value = "";
-
 
     defaultOption.textContent =
         "市町村を選択してください";
-
 
     municipalitySelect.appendChild(
         defaultOption
     );
 
 
-    // ========================================
     // 市町村を追加
-    // ========================================
-
     municipalitiesData.forEach(
         function(municipality) {
-
 
             const option =
                 document.createElement("option");
 
-
             option.value =
                 municipality.id;
 
-
             option.textContent =
                 municipality.name;
-
 
             municipalitySelect.appendChild(
                 option
@@ -188,317 +221,384 @@ municipalitySelect.addEventListener(
     "change",
     function() {
 
+        selectedVariants = {};
 
-        const municipalityId =
-            municipalitySelect.value;
-
-
-        // 地区をリセット
-        resetArea();
-
-
-        // ========================================
-        // 市町村が未選択
-        // ========================================
-
-        if (municipalityId === "") {
-
-            updateButton();
-
-            return;
-
-        }
-
-
-        // ========================================
-        // 市町村の地区データ
-        // ========================================
-
-        const municipalityAreaData =
-            areasData[municipalityId];
-
-
-        // ========================================
-        // 地区データがない
-        // ========================================
-
-        if (
-            !municipalityAreaData ||
-            !municipalityAreaData.areas
-        ) {
-
-            updateButton();
-
-            return;
-
-        }
-
-
-        const areas =
-            municipalityAreaData.areas;
-
-
-        // ========================================
-        // 地区がない
-        // ========================================
-
-        if (areas.length === 0) {
-
-            updateButton();
-
-            return;
-
-        }
-
-
-        // ========================================
-        // 地区一覧を表示
-        // ========================================
-
-        createAreaList(
-            areas
-        );
-
-
-        // ========================================
-        // 地区選択欄を作成
-        // ========================================
-
-        createAreaSelect(
-            areas
-        );
-
-
-        // ボタン状態を更新
-        updateButton();
+        changeMunicipality();
 
     }
 );
 
 
-// ========================================
-// 地区一覧を表示
-// ========================================
+async function changeMunicipality() {
 
-function createAreaList(areas) {
-
-
-    // 地区エリアを表示
-    areaGroup.classList.remove(
-        "hidden"
-    );
+    const municipalityId =
+        municipalitySelect.value;
 
 
-    // 一度空にする
-    areaList.innerHTML = "";
+    // 町の選択をリセット
+    townsData = [];
+
+    clearTown();
+
+    townSearch.value = "";
 
 
-    // ========================================
-    // 地区を1つずつ表示
-    // ========================================
+    // 市町村が未選択
+    if (municipalityId === "") {
 
-    areas.forEach(
-        function(area) {
+        townGroup.classList.add("hidden");
 
+        updateButton();
 
-            // ========================================
-            // 地区全体の枠
-            // ========================================
+        return;
 
-            const areaCard =
-                document.createElement("div");
+    }
 
 
-            areaCard.className =
-                "area-card";
+    try {
 
-
-            // ========================================
-            // 地区名
-            // ========================================
-
-            const areaName =
-                document.createElement("h4");
-
-
-            areaName.textContent =
-                area.name;
-
-
-            areaCard.appendChild(
-                areaName
+        townsData =
+            await GomiData.loadTowns(
+                municipalityId
             );
 
+    } catch (error) {
 
-            // ========================================
-            // 詳細一覧
-            // ========================================
+        console.error(
+            "町名の読み込みに失敗しました。",
+            error
+        );
 
-            const detailList =
-                document.createElement("ul");
-
-
-            // ========================================
-            // syousaiを表示
-            // ========================================
-
-            if (
-                Array.isArray(area.syousai)
-            ) {
+    }
 
 
-                area.syousai.forEach(
-                    function(detail) {
+    townGroup.classList.remove("hidden");
+
+    renderTownResults();
+
+    updateButton();
+
+}
 
 
-                        const detailItem =
-                            document.createElement("li");
+// ========================================
+// 検索用に文字をそろえる
+// 全角/半角、カタカナ/ひらがな、空白の違いを無視
+// ========================================
+
+function normalizeText(text) {
+
+    return text
+        .normalize("NFKC")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/[ァ-ヶ]/g, function(char) {
+            return String.fromCharCode(
+                char.charCodeAt(0) - 0x60
+            );
+        });
+
+}
 
 
-                        detailItem.textContent =
-                            detail;
+// ========================================
+// 町名の検索結果を表示
+// ========================================
+
+townSearch.addEventListener(
+    "input",
+    function() {
+
+        renderTownResults();
+
+    }
+);
 
 
-                        detailList.appendChild(
-                            detailItem
-                        );
+function renderTownResults() {
 
-                    }
-                );
+    townResults.innerHTML = "";
+
+
+    // 町を選択済みなら一覧は出さない
+    if (selectedTown) {
+
+        townCount.textContent = "";
+
+        return;
+
+    }
+
+
+    const query =
+        normalizeText(townSearch.value);
+
+
+    const matches =
+        townsData.filter(function(town) {
+
+            if (query === "") {
+                return true;
+            }
+
+            return normalizeText(town.name).includes(query) ||
+                (town.areaName !== null &&
+                    normalizeText(town.areaName).includes(query));
+
+        });
+
+
+    // ========================================
+    // 件数
+    // ========================================
+
+    if (matches.length === 0) {
+
+        townCount.textContent =
+            "該当する町名がありません。";
+
+    } else if (matches.length > MAX_RESULTS) {
+
+        townCount.textContent =
+            matches.length +
+            "件中 " +
+            MAX_RESULTS +
+            "件を表示しています。町名を入力して絞り込んでください。";
+
+    } else {
+
+        townCount.textContent =
+            matches.length + "件";
+
+    }
+
+
+    // ========================================
+    // 候補
+    // ========================================
+
+    matches
+        .slice(0, MAX_RESULTS)
+        .forEach(function(town) {
+
+            const item =
+                document.createElement("li");
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "town-result";
+
+            button.textContent =
+                town.name;
+
+
+            // 地区がある場合は地区名も表示
+            if (town.areaName) {
+
+                const area =
+                    document.createElement("span");
+
+                area.className =
+                    "town-result-area";
+
+                area.textContent =
+                    town.areaName;
+
+                button.appendChild(area);
 
             }
 
 
-            // 詳細一覧を追加
-            areaCard.appendChild(
-                detailList
+            button.addEventListener(
+                "click",
+                function() {
+
+                    selectedVariants = {};
+
+                    selectTown(town);
+
+                }
             );
 
+            item.appendChild(button);
 
-            // ========================================
-            // 地区カードを一覧に追加
-            // ========================================
+            townResults.appendChild(item);
 
-            areaList.appendChild(
-                areaCard
-            );
-
-        }
-    );
+        });
 
 }
 
 
 // ========================================
-// 地区選択欄を作成
+// 町を選択
 // ========================================
 
-function createAreaSelect(areas) {
+function selectTown(town) {
+
+    selectedTown = town;
 
 
-    // 一度空にする
-    areaSelect.innerHTML = "";
+    selectedTownName.textContent =
+        town.areaName ?
+            town.name + "（" + town.areaName + "）" :
+            town.name;
+
+    selectedTownBox.classList.remove("hidden");
+
+    townSearch.classList.add("hidden");
 
 
-    // ========================================
-    // 初期項目
-    // ========================================
+    renderTownResults();
 
-    const defaultOption =
-        document.createElement("option");
+    renderVariants();
 
-
-    defaultOption.value = "";
-
-
-    defaultOption.textContent =
-        "地区を選択してください";
-
-
-    areaSelect.appendChild(
-        defaultOption
-    );
-
-
-    // ========================================
-    // 地区を追加
-    // ========================================
-
-    areas.forEach(
-        function(area) {
-
-
-            const option =
-                document.createElement("option");
-
-
-            option.value =
-                area.id;
-
-
-            option.textContent =
-                area.name;
-
-
-            areaSelect.appendChild(
-                option
-            );
-
-        }
-    );
+    updateButton();
 
 }
 
 
 // ========================================
-// 地区が変更されたとき
+// 町の選択を解除
 // ========================================
 
-areaSelect.addEventListener(
-    "change",
+townClearButton.addEventListener(
+    "click",
     function() {
 
+        selectedVariants = {};
+
+        clearTown();
+
+        renderTownResults();
+
         updateButton();
+
+        townSearch.focus();
 
     }
 );
 
 
+function clearTown() {
+
+    selectedTown = null;
+
+    selectedTownBox.classList.add("hidden");
+
+    townSearch.classList.remove("hidden");
+
+    variantGroup.classList.add("hidden");
+
+    variantList.innerHTML = "";
+
+}
+
+
 // ========================================
-// 地区をリセット
+// ごみステーションの曜日の選択肢を表示
 // ========================================
 
-function resetArea() {
+function renderVariants() {
+
+    variantList.innerHTML = "";
 
 
-    // 地区エリアを非表示
-    areaGroup.classList.add(
-        "hidden"
+    if (
+        !selectedTown ||
+        selectedTown.variantGroups.length === 0
+    ) {
+
+        variantGroup.classList.add("hidden");
+
+        return;
+
+    }
+
+
+    selectedTown.variantGroups.forEach(
+        function(variantGroupData, groupIndex) {
+
+            const fieldset =
+                document.createElement("fieldset");
+
+            fieldset.className =
+                "variant-fieldset";
+
+
+            const legend =
+                document.createElement("legend");
+
+            legend.textContent =
+                variantGroupData.group;
+
+            fieldset.appendChild(legend);
+
+
+            variantGroupData.options.forEach(
+                function(option) {
+
+                    const label =
+                        document.createElement("label");
+
+                    label.className =
+                        "variant-option";
+
+
+                    const radio =
+                        document.createElement("input");
+
+                    radio.type = "radio";
+
+                    radio.name =
+                        "variant-" + groupIndex;
+
+                    radio.value = option;
+
+                    radio.checked =
+                        selectedVariants[variantGroupData.group] === option;
+
+
+                    radio.addEventListener(
+                        "change",
+                        function() {
+
+                            selectedVariants[variantGroupData.group] =
+                                option;
+
+                            updateButton();
+
+                        }
+                    );
+
+
+                    const text =
+                        document.createElement("span");
+
+                    text.textContent =
+                        option;
+
+
+                    label.appendChild(radio);
+
+                    label.appendChild(text);
+
+                    fieldset.appendChild(label);
+
+                }
+            );
+
+
+            variantList.appendChild(fieldset);
+
+        }
     );
 
 
-    // 地区一覧を削除
-    areaList.innerHTML = "";
-
-
-    // 地区選択を初期化
-    areaSelect.innerHTML = "";
-
-
-    const defaultOption =
-        document.createElement("option");
-
-
-    defaultOption.value = "";
-
-
-    defaultOption.textContent =
-        "地区を選択してください";
-
-
-    areaSelect.appendChild(
-        defaultOption
-    );
+    variantGroup.classList.remove("hidden");
 
 }
 
@@ -509,20 +609,8 @@ function resetArea() {
 
 function updateButton() {
 
-
-    const municipalityId =
-        municipalitySelect.value;
-
-
-    const areaId =
-        areaSelect.value;
-
-
-    // ========================================
-    // 市町村が未選択
-    // ========================================
-
-    if (municipalityId === "") {
+    // 町が未選択
+    if (!selectedTown) {
 
         startButton.disabled = true;
 
@@ -531,42 +619,21 @@ function updateButton() {
     }
 
 
-    // ========================================
-    // 市町村の地区データ
-    // ========================================
+    // ステーションの曜日が未選択のグループがある
+    const allChosen =
+        selectedTown.variantGroups.every(
+            function(group) {
 
-    const municipalityAreaData =
-        areasData[municipalityId];
+                return group.options.includes(
+                    selectedVariants[group.group]
+                );
 
-
-    // ========================================
-    // 地区が存在する場合
-    // ========================================
-
-    if (
-        municipalityAreaData &&
-        municipalityAreaData.areas &&
-        municipalityAreaData.areas.length > 0
-    ) {
+            }
+        );
 
 
-        // 地区が未選択
-        if (areaId === "") {
-
-            startButton.disabled = true;
-
-            return;
-
-        }
-
-    }
-
-
-    // ========================================
-    // 選択完了
-    // ========================================
-
-    startButton.disabled = false;
+    startButton.disabled =
+        !allChosen;
 
 }
 
@@ -579,39 +646,31 @@ startButton.addEventListener(
     "click",
     function() {
 
+        /*
+         * 選択中の町に関係するグループだけ保存
+         */
 
-        const municipalityId =
-            municipalitySelect.value;
+        const variants = {};
 
+        selectedTown.variantGroups.forEach(
+            function(group) {
 
-        const areaId =
-            areaSelect.value;
+                variants[group.group] =
+                    selectedVariants[group.group];
 
-
-        // ========================================
-        // 市町村を保存
-        // ========================================
-
-        localStorage.setItem(
-            "municipality",
-            municipalityId
+            }
         );
 
 
-        // ========================================
-        // 地区を保存
-        // ========================================
-
-        localStorage.setItem(
-            "area",
-            areaId
-        );
+        GomiData.saveSelection({
+            municipalityId: municipalitySelect.value,
+            town: selectedTown.name,
+            area: selectedTown.area,
+            variants: variants
+        });
 
 
-        // ========================================
         // main.htmlへ
-        // ========================================
-
         window.location.href =
             "main.html";
 

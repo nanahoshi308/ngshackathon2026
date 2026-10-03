@@ -353,74 +353,19 @@ async function loadMunicipality() {
 
 async function loadAreaName() {
 
-    /*
-     * 地区が選択されていない場合
-     */
-
-    if (!areaId) {
-
-        areaName.textContent =
-            "";
+    const label =
+        await GomiData.getSelectionLabel();
 
 
-        calendarAreaName.textContent =
-            "（" +
-            cityName.textContent +
-            "）";
+    areaName.textContent =
+        label;
 
 
-        return;
-
-    }
-
-
-    const areasData =
-        await GomiData.loadAreasData();
-
-
-    const municipalityData =
-        areasData[
-            municipalityId
-        ];
-
-
-    if (
-        !municipalityData ||
-        !Array.isArray(
-            municipalityData.areas
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const area =
-        municipalityData.areas.find(
-            function (item) {
-
-                return item.id ===
-                    areaId;
-
-            }
-        );
-
-
-    if (area) {
-
-        areaName.textContent =
-            area.name;
-
-
-        calendarAreaName.textContent =
-            "（" +
-            cityName.textContent +
-            " " +
-            area.name +
-            "）";
-
-    }
+    calendarAreaName.textContent =
+        "（" +
+        cityName.textContent +
+        (label ? " " + label : "") +
+        "）";
 
 }
 
@@ -434,7 +379,7 @@ async function loadCalendarData() {
     calendarData =
         await GomiData.loadCalendar(
             municipalityId,
-            areaId
+            GomiData.getSelection()
         );
 
 
@@ -3548,4 +3493,8 @@ updateNotificationPopup();
  * カレンダーなどを読み込む
  */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}
