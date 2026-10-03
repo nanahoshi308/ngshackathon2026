@@ -1577,87 +1577,83 @@ function displayGarbageInformation() {
 
 
             /*
-             * HTML
+             * 収集場所
              */
 
+            let collectionPlaceHTML =
+                garbage.collectionPlace ||
+                "情報なし";
+
+
             /*
- * 収集場所
- */
+             * URLが設定されている場合
+             * リンクにする
+             */
 
-let collectionPlaceHTML =
-    garbage.collectionPlace ||
-    "情報なし";
+            if (garbage.collectionPlaceUrl) {
 
+                collectionPlaceHTML =
+                    `<a
+                        href="${garbage.collectionPlaceUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        ${garbage.collectionPlace || "詳細はこちら"}
+                    </a>`;
 
-/*
- * URLが設定されている場合
- * リンクにする
- */
-
-if (garbage.collectionPlaceUrl) {
-
-    collectionPlaceHTML =
-        `<a
-            href="${garbage.collectionPlaceUrl}"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            ${garbage.collectionPlace || "詳細はこちら"}
-        </a>`;
-
-}
+            }
 
 
-item.innerHTML = `
+            item.innerHTML = `
 
-    <div class="garbage-item-header">
+                <div class="garbage-item-header">
 
-        <img
-            src="${garbage.img}"
-            alt="${garbage.name}"
-            class="garbage-item-icon"
-        >
+                    <img
+                        src="${garbage.img}"
+                        alt="${garbage.name}"
+                        class="garbage-item-icon"
+                    >
 
-        <h3>
-            ${garbage.name}
-        </h3>
+                    <h3>
+                        ${garbage.name}
+                    </h3>
 
-    </div>
-
-
-    <p>
-
-        <strong>
-            収集曜日：
-        </strong>
-
-        ${scheduleText || "情報なし"}
-
-    </p>
+                </div>
 
 
-    <p>
+                <p>
 
-        <strong>
-            分別：
-        </strong>
+                    <strong>
+                        収集曜日：
+                    </strong>
 
-        ${garbage.separation || "情報なし"}
+                    ${scheduleText || "情報なし"}
 
-    </p>
+                </p>
 
 
-    <p>
+                <p>
 
-        <strong>
-            収集場所：
-        </strong>
+                    <strong>
+                        分別：
+                    </strong>
 
-        ${collectionPlaceHTML}
+                    ${garbage.separation || "情報なし"}
 
-    </p>
+                </p>
 
-`;
+
+                <p>
+
+                    <strong>
+                        収集場所：
+                    </strong>
+
+                    ${collectionPlaceHTML}
+
+                </p>
+
+            `;
 
 
             garbageListElement.appendChild(
@@ -1828,6 +1824,7 @@ function displayCalendarLocations() {
     );
 
 }
+
 
 /* ==================================================
    通知設定
@@ -2254,6 +2251,165 @@ async function sendPushRegistration(
 
 
 /* ========================================
+   通知用の指定場所をWorkerへ同期
+======================================== */
+
+/*
+ * Push通知の登録が成功したあとに、
+ * localStorageに保存されている
+ * 「カレンダーに追加した指定場所」を
+ * Cloudflare Workerへ送信します。
+ *
+ * これにより、
+ *
+ * 指定場所を追加
+ *      ↓
+ * あとから通知ON
+ *      ↓
+ * Push登録
+ *      ↓
+ * 指定場所もD1へ登録
+ *
+ * という流れになります。
+ */
+
+async function syncNotificationKyoten(
+    subscription
+) {
+
+    try {
+
+        /*
+         * 現在選択されている
+         * 指定場所を取得
+         */
+
+        const locations =
+            getCalendarLocations();
+
+
+        /*
+         * 指定場所の名前だけ取り出す
+         */
+
+        const places =
+            locations.map(
+                function (location) {
+
+                    return location.name;
+
+                }
+            );
+
+
+        /*
+         * 同じ名前が複数ある場合は
+         * 1つにまとめる
+         */
+
+        const uniquePlaces =
+            [...new Set(places)];
+
+
+        console.log(
+            "通知用の指定場所を同期します。",
+            uniquePlaces
+        );
+
+
+        /*
+         * Workerへ送信
+         */
+
+        const response =
+            await fetch(
+                PUSH_WORKER_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            type:
+                                "update-kyoten",
+
+                            endpoint:
+                                subscription.endpoint,
+
+                            places:
+                                uniquePlaces
+
+                        })
+
+                }
+            );
+
+
+        /*
+         * Workerの結果
+         */
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Workerからの指定場所同期結果：",
+            result
+        );
+
+
+        /*
+         * Worker側で失敗した場合
+         */
+
+        if (
+            !response.ok ||
+            !result.success
+        ) {
+
+            throw new Error(
+
+                result.message ||
+                "指定場所の同期に失敗しました。"
+
+            );
+
+        }
+
+
+        console.log(
+            "通知用の指定場所を同期しました。"
+        );
+
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "通知用の指定場所同期に失敗しました。",
+            error
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+/* ========================================
    Push通知を登録
 ======================================== */
 
@@ -2345,13 +2501,54 @@ async function registerPushNotification() {
             await getPushSubscription();
 
 
+        console.log(
+            "Push endpoint:"
+        );
+
+        console.log(
+            subscription.endpoint
+        );
+
+
         /*
-         * Cloudflare Workerへ送信
+         * Cloudflare Workerへ
+         * Push設定を送信
          */
 
         await sendPushRegistration(
             subscription
         );
+
+
+        /*
+         * ========================================
+           ここを追加
+         * ========================================
+         *
+         * Push通知の登録が成功したあと、
+         * 現在カレンダーに追加されている
+         * 指定場所をWorkerへ送信します。
+         */
+
+        const kyotenSyncSuccess =
+            await syncNotificationKyoten(
+                subscription
+            );
+
+
+        /*
+         * 指定場所の同期に失敗した場合
+         */
+
+        if (
+            !kyotenSyncSuccess
+        ) {
+
+            console.warn(
+                "Push登録は成功しましたが、指定場所の同期に失敗しました。"
+            );
+
+        }
 
 
         console.log(
@@ -2468,9 +2665,6 @@ async function updatePushRegistration() {
 /* ========================================
    Push通知の登録を解除
 ======================================== */
-/* ========================================
-   Push通知の登録を解除
-======================================== */
 
 async function unregisterPushNotification() {
 
@@ -2487,6 +2681,7 @@ async function unregisterPushNotification() {
          * navigator.serviceWorker.ready ではなく
          * getRegistration()を使用する
          */
+
         const registration =
             await navigator.serviceWorker.getRegistration();
 
@@ -2494,6 +2689,7 @@ async function unregisterPushNotification() {
         /*
          * Service Workerがない場合
          */
+
         if (!registration) {
 
             console.error(
@@ -2514,6 +2710,7 @@ async function unregisterPushNotification() {
         /*
          * 現在のPush購読を取得
          */
+
         const subscription =
             await registration.pushManager.getSubscription();
 
@@ -2521,6 +2718,7 @@ async function unregisterPushNotification() {
         /*
          * Push購読がない場合
          */
+
         if (!subscription) {
 
             console.warn(
@@ -2541,6 +2739,7 @@ async function unregisterPushNotification() {
         /*
          * endpointを取得
          */
+
         const endpoint =
             subscription.endpoint;
 
@@ -2555,6 +2754,7 @@ async function unregisterPushNotification() {
          * Cloudflare Workerへ
          * 登録解除を要求
          */
+
         const response =
             await fetch(
                 PUSH_WORKER_URL,
@@ -2588,6 +2788,7 @@ async function unregisterPushNotification() {
         /*
          * Workerの結果を取得
          */
+
         const result =
             await response.json();
 
@@ -2601,6 +2802,7 @@ async function unregisterPushNotification() {
         /*
          * Worker側で失敗した場合
          */
+
         if (
             !response.ok ||
             !result.success
@@ -2619,6 +2821,7 @@ async function unregisterPushNotification() {
         /*
          * ブラウザ側のPush購読も解除
          */
+
         const unsubscribed =
             await subscription.unsubscribe();
 
@@ -2632,6 +2835,7 @@ async function unregisterPushNotification() {
         /*
          * 完了
          */
+
         console.log(
             "Push通知の登録解除が完了しました。"
         );
@@ -2653,6 +2857,7 @@ async function unregisterPushNotification() {
     }
 
 }
+
 
 /* ========================================
    時刻一覧を作成
@@ -3352,6 +3557,7 @@ document.addEventListener(
     }
 );
 
+
 /* ========================================
    カレンダー月変更
 ======================================== */
@@ -3360,6 +3566,7 @@ document.addEventListener(
 /*
  * 前の月
  */
+
 previousMonthButton.addEventListener(
     "click",
     function () {
@@ -3377,6 +3584,7 @@ previousMonthButton.addEventListener(
 /*
  * 次の月
  */
+
 nextMonthButton.addEventListener(
     "click",
     function () {
@@ -3398,16 +3606,19 @@ nextMonthButton.addEventListener(
 /*
  * 通知時間ピッカーを作成
  */
+
 createNotificationTimePicker();
 
 
 /*
  * 通知設定を画面へ反映
  */
+
 updateNotificationPopup();
 
 
 /*
  * カレンダーなどを読み込む
  */
+
 initialize();

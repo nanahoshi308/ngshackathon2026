@@ -47,6 +47,14 @@ const calendarLocationKey =
 
 
 /* ===========================
+   Cloudflare Worker
+=========================== */
+
+const WORKER_URL =
+    "https://nagasaki-gomi-ai.nagasaki-gominavi.workers.dev";
+
+
+/* ===========================
    初期処理
 =========================== */
 
@@ -728,6 +736,10 @@ function toggleCalendarLocation(
     }
 
 
+    /*
+     * localStorageに保存
+     */
+
     localStorage.setItem(
         calendarLocationKey,
         JSON.stringify(
@@ -735,7 +747,174 @@ function toggleCalendarLocation(
         )
     );
 
+
+    /*
+     * Push通知用の拠点を更新
+     */
+
+    syncNotificationKyoten();
+
 }
 
+
+/* ===========================
+   通知用の拠点をWorkerへ同期
+=========================== */
+
+async function syncNotificationKyoten() {
+
+    try {
+
+        /*
+         * Service Workerを取得
+         */
+
+        const registration =
+            await navigator.serviceWorker.ready;
+
+
+        /*
+         * 現在のPush購読を取得
+         */
+
+        const subscription =
+            await registration.pushManager
+                .getSubscription();
+
+
+        /*
+         * Push通知を登録していない場合
+         *
+         * → D1には送らない
+         */
+
+        if (!subscription) {
+
+            console.log(
+                "Push通知が登録されていないため、拠点を同期しません。"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * 現在のカレンダー登録場所を取得
+         */
+
+        const locations =
+            getCalendarLocations();
+
+
+        /*
+         * 現在の市町村・地区だけを対象にする
+         */
+
+        const places =
+            locations
+                .filter(
+                    function(item) {
+
+                        return (
+                            item.municipalityId ===
+                                municipalityId &&
+
+                            item.areaId ===
+                                (areaId || "")
+                        );
+
+                    }
+                )
+                .map(
+                    function(item) {
+
+                        return item.name;
+
+                    }
+                );
+
+
+        /*
+         * 重複を削除
+         */
+
+        const uniquePlaces =
+            [...new Set(places)];
+
+
+        console.log(
+            "通知用の拠点を同期します：",
+            uniquePlaces
+        );
+
+
+        /*
+         * Workerへ送信
+         */
+
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            type:
+                                "update-kyoten",
+
+                            endpoint:
+                                subscription.endpoint,
+
+                            places:
+                                uniquePlaces
+
+                        })
+
+                    }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Workerへの送信に失敗しました。"
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "通知用の拠点を更新しました。",
+            result
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "通知用の拠点同期に失敗しました。",
+            error
+        );
+
+    }
+
+}
+
+
+/* ===========================
+   開始
+=========================== */
 
 initialize();
