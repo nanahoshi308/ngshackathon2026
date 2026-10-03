@@ -46,7 +46,7 @@ PDF を画像化して線を検出するのではなく、PDF に入っている
 各町の収集曜日を抽出してJSONに変換する。
 
 PDF 自体の誤記（6か所で別の町名が「稲田町」になっている）は `nagasaki_area_fixes.json` で直す。
-修正は50音順の前後関係と、一覧にない町名からの推定で、未確認（`verified: false`）。
+修正は50音順の前後関係と一覧にない町名から推定し、2026-10-03 に手動で確認済み（`verified: true`）。
 
 ```bash
 .venv/bin/python3 extract_area.py <gomi_area.pdf>

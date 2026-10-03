@@ -1914,7 +1914,7 @@
     {
         "town": "上西山町",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "月・木",
         "moeru_days": [
             "monday",
@@ -3118,7 +3118,7 @@
     {
         "town": "城山町",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "火・金",
         "moeru_days": [
             "tuesday",
@@ -3940,7 +3940,7 @@
     {
         "town": "辻町",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "火・金",
         "moeru_days": [
             "tuesday",
@@ -4854,7 +4854,7 @@
     {
         "town": "西泊町",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "火・金",
         "moeru_days": [
             "tuesday",
@@ -6458,7 +6458,7 @@
     {
         "town": "女ノ都１丁目",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "火・金",
         "moeru_days": [
             "tuesday",
@@ -7564,7 +7564,7 @@
     {
         "town": "野母町",
         "town_pdf": "稲田町",
-        "town_verified": false,
+        "town_verified": true,
         "moeru": "月・木",
         "moeru_days": [
             "monday",
