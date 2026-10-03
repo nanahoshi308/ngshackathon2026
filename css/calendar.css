@@ -664,17 +664,6 @@
 
 }
 
-/* スマホではタイトルを2行にする */
-@media (max-width: 700px) {
-
-    .calendar-title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-    }
-
-}
 
 
 /* ========================================
@@ -1231,20 +1220,33 @@
     }
 
 
+    /*
+     * 右上の通知ボタンと並ぶので、中央寄せではなく左寄せにする。
+     * 地域名は2行目に小さく出す（ヘッダーにも表示しているため）
+     */
     .calendar-title-row .calendar-title {
         display: flex;
 
         flex-direction: column;
 
-        align-items: center;
+        align-items: flex-start;
 
-        gap: 5px;
+        gap: 4px;
 
         flex: 1;
 
         font-size: 26px;
 
-        text-align: center;
+        line-height: 1.3;
+
+        text-align: left;
+    }
+
+
+    .calendar-title-row #calendar-area-name {
+        color: #4f7a6d;
+
+        font-size: 16px;
     }
 
 
