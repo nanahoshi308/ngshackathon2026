@@ -452,9 +452,8 @@
 
     line-height: 1.3;
 
-    word-break: keep-all;
-
-    overflow-wrap: anywhere;
+    /* 折り返すなら「プラスチック／ごみ」のように語の切れ目で（対応ブラウザのみ） */
+    word-break: auto-phrase;
 
 }
 
