@@ -422,17 +422,6 @@
 
 }
 
-.next-date {
-
-    color: #666666;
-
-    font-size: 14px;
-
-    font-weight: normal;
-
-}
-
-
 /* ========================================
    次のごみ内容
 ======================================== */
@@ -460,9 +449,10 @@
 
     width: 100%;
 
-    display: flex;
+    display: grid;
 
-    flex-direction: column;
+    grid-template-columns:
+        repeat(auto-fill, minmax(88px, 1fr));
 
     gap: 12px;
 
@@ -472,25 +462,57 @@
 
     display: flex;
 
+    flex-direction: column;
+
     align-items: center;
 
-    gap: 15px;
+    gap: 4px;
 
-    color: #263331;
+    padding: 10px 4px;
 
-    font-size: 19px;
+    background-color: #f6faf8;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+}
+
+.next-garbage-img {
+
+    width: 52px;
+
+    height: 52px;
+
+    margin-bottom: 4px;
+
+    border-radius: 12px;
+
+}
+
+.next-garbage-day {
+
+    color: #205b4a;
+
+    font-size: 17px;
 
     font-weight: bold;
 
 }
 
-.next-garbage-item .garbage-icon {
+.next-garbage-date {
 
-    width: 55px;
+    color: #666666;
 
-    height: 55px;
+    font-size: 12px;
 
-    font-size: 28px;
+}
+
+.next-garbage-later {
+
+    color: #31856d;
+
+    font-size: 11px;
 
 }
 
@@ -741,20 +763,28 @@
     }
 
 
-    .next-garbage-item {
+    .next-garbage-list {
 
-        font-size: 17px;
+        grid-template-columns:
+            repeat(auto-fill, minmax(76px, 1fr));
+
+        gap: 8px;
 
     }
 
 
-    .next-garbage-item .garbage-icon {
+    .next-garbage-img {
 
-        width: 50px;
+        width: 44px;
 
-        height: 50px;
+        height: 44px;
 
-        font-size: 25px;
+    }
+
+
+    .next-garbage-day {
+
+        font-size: 15px;
 
     }
 
