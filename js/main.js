@@ -23,9 +23,6 @@ const todayDate =
 const todayContent =
     document.getElementById("today-content");
 
-const nextDate =
-    document.getElementById("next-date");
-
 const nextContent =
     document.getElementById("next-content");
 
@@ -442,12 +439,15 @@ function findTodayGarbage(
 
 
 /* ========================================
-   次のごみを探す
+   ごみごとの次の収集日を探す
 ======================================== */
 
 function findNextGarbage(
     calendarData
 ) {
+
+    const result = [];
+
 
     /*
      * データがない場合
@@ -460,17 +460,25 @@ function findNextGarbage(
         )
     ) {
 
-        return null;
+        return result;
 
     }
 
 
     /*
-     * 今日
+     * 曜日の決まっているごみだけ対象
      */
 
-    const today =
-        new Date();
+    const scheduledCount =
+        calendarData.garbage.filter(
+            function(garbage) {
+
+                return Array.isArray(
+                    garbage.schedule
+                );
+
+            }
+        ).length;
 
 
     /*
@@ -478,11 +486,11 @@ function findNextGarbage(
      */
 
     const searchDate =
-        new Date(today);
+        new Date();
 
 
-    searchDate.setDate(
-        searchDate.getDate() + 1
+    searchDate.setHours(
+        0, 0, 0, 0
     );
 
 
@@ -491,59 +499,62 @@ function findNextGarbage(
      */
 
     for (
-        let i = 0;
-        i < 366;
+        let i = 1;
+        i <= 366 &&
+        result.length < scheduledCount;
         i++
     ) {
-
-        /*
-         * その日のごみを探す
-         */
-
-        const garbageList =
-            findGarbageForDate(
-                searchDate,
-                calendarData
-            );
-
-
-        /*
-         * ごみが見つかった場合
-         */
-
-        if (
-            garbageList.length > 0
-        ) {
-
-            return {
-
-                date:
-                    new Date(searchDate),
-
-                garbage:
-                    garbageList
-
-            };
-
-        }
-
-
-        /*
-         * 次の日へ
-         */
 
         searchDate.setDate(
             searchDate.getDate() + 1
         );
 
+
+        findGarbageForDate(
+            searchDate,
+            calendarData
+        ).forEach(
+            function(garbage) {
+
+                /*
+                 * 最初に見つかった日だけ使う
+                 */
+
+                const found =
+                    result.some(
+                        function(item) {
+
+                            return item.garbage ===
+                                garbage;
+
+                        }
+                    );
+
+
+                if (!found) {
+
+                    result.push({
+
+                        garbage:
+                            garbage,
+
+                        date:
+                            new Date(searchDate),
+
+                        daysLater:
+                            i
+
+                    });
+
+                }
+
+            }
+        );
+
     }
 
 
-    /*
-     * 見つからなかった場合
-     */
-
-    return null;
+    return result;
 
 }
 
@@ -796,17 +807,14 @@ function displayTodayGarbage(
 ======================================== */
 
 function displayNextGarbage(
-    nextGarbage
+    nextList
 ) {
 
     /*
      * 次のごみがない場合
      */
 
-    if (!nextGarbage) {
-
-        nextDate.textContent =
-            "";
+    if (nextList.length === 0) {
 
         nextContent.innerHTML = `
 
@@ -823,93 +831,42 @@ function displayNextGarbage(
     }
 
 
-    /*
-     * 日付を表示
-     */
-
-    const month =
-        nextGarbage.date.getMonth() + 1;
-
-
-    const date =
-        nextGarbage.date.getDate();
-
-
-    const day =
-        weekDays[
-            nextGarbage.date.getDay()
-        ];
-
-
-    nextDate.textContent =
-        month +
-        "月" +
-        date +
-        "日（" +
-        day.substring(0, 1) +
-        "）";
-
-
-    /*
-     * ごみが1種類の場合
-     */
-
-    if (
-        nextGarbage.garbage.length === 1
-    ) {
-
-        const garbage =
-            nextGarbage.garbage[0];
-
-
-        nextContent.innerHTML = `
-
-            <div class="garbage-icon">
-                ${ICONS.trash}
-            </div>
-
-            <div>
-
-                <p class="garbage-label">
-                    次回の収集
-                </p>
-
-                <h2>
-                    ${garbage.name}
-                </h2>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-     * 複数種類の場合
-     */
-
     let html = `
         <div class="next-garbage-list">
     `;
 
 
-    nextGarbage.garbage.forEach(
-        function(garbage) {
+    nextList.forEach(
+        function(next) {
 
             html += `
 
-                <div class="next-garbage-item">
+                <div
+                    class="next-garbage-item"
+                    title="${next.garbage.name}"
+                >
 
-                    <div class="garbage-icon">
-                        ${ICONS.trash}
-                    </div>
+                    <img
+                        src="${next.garbage.img}"
+                        alt=""
+                        class="next-garbage-img"
+                    >
 
-                    <span>
-                        ${garbage.name}
+                    <span class="next-garbage-name">
+                        ${next.garbage.name}
                     </span>
+
+                    <span class="next-garbage-day">
+                        ${formatNextDay(next)}
+                    </span>
+
+                    <span class="next-garbage-date">
+                        ${formatNextDate(next)}
+                    </span>
+
+                    ${next.daysLater >= 7
+                        ? `<span class="next-garbage-later">${next.daysLater}日後</span>`
+                        : ""}
 
                 </div>
 
@@ -926,6 +883,53 @@ function displayNextGarbage(
 
     nextContent.innerHTML =
         html;
+
+}
+
+
+/* ========================================
+   次の収集日の表記
+======================================== */
+
+/*
+ * 大きく出す方：明日・あさって・曜日
+ */
+
+function formatNextDay(next) {
+
+    if (next.daysLater === 1) {
+
+        return "明日";
+
+    }
+
+
+    if (next.daysLater === 2) {
+
+        return "あさって";
+
+    }
+
+
+    return weekDays[
+        next.date.getDay()
+    ];
+
+}
+
+
+/*
+ * 小さく出す方：日付
+ * 1週間以上先は曜日だけだと紛らわしいので
+ * 別の行に何日後かも出す
+ */
+
+function formatNextDate(next) {
+
+    return (next.date.getMonth() + 1) +
+        "月" +
+        next.date.getDate() +
+        "日";
 
 }
 

@@ -334,6 +334,34 @@ const GomiData = (function () {
 
 
     /* ===========================
+       読み（ひらがな）
+       { 町名・品目名: 読み }
+       漢字の町名・品目をひらがなでも検索できるようにする。
+       readings.json がない市町村は空
+    =========================== */
+
+    async function loadReadings(municipalityId) {
+
+        let rows = [];
+
+        try {
+            rows = await loadMunicipalityTable(municipalityId, "readings");
+        } catch (error) {
+            rows = [];
+        }
+
+        const readings = {};
+
+        rows.forEach(function (r) {
+            readings[r.name] = r.kana;
+        });
+
+        return readings;
+
+    }
+
+
+    /* ===========================
        kyoten.json 相当
        { kyoten: [{ jichikai, places: [{ name, date, day?, restriction? }] }] }
     =========================== */
@@ -442,7 +470,7 @@ const GomiData = (function () {
 
     /*
      * 画面に表示する地域名
-     * 例: 「皆前（A地区）」「かき道５丁目（火・金／金）」
+     * 例: 「皆前」「かき道５丁目（火・金／金）」
      * ごみステーションの曜日を選んだ場合はそれも添える
      */
 
@@ -465,10 +493,6 @@ const GomiData = (function () {
 
         const notes = [];
 
-        if (town && town.areaName) {
-            notes.push(town.areaName);
-        }
-
         if (town) {
             town.variantGroups.forEach(function (group) {
                 if (selection.variants[group.group]) {
@@ -486,7 +510,28 @@ const GomiData = (function () {
     }
 
 
+    /*
+     * 検索用に文字をそろえる
+     * 全角/半角、大文字/小文字、カタカナ/ひらがな、空白の違いを無視
+     */
+
+    function normalizeText(text) {
+
+        return String(text || "")
+            .normalize("NFKC")
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/[ァ-ヶ]/g, function (char) {
+                return String.fromCharCode(
+                    char.charCodeAt(0) - 0x60
+                );
+            });
+
+    }
+
+
     return {
+        normalizeText: normalizeText,
         loadTable: loadTable,
         loadMunicipalityTable: loadMunicipalityTable,
         loadMunicipalities: loadMunicipalities,
@@ -495,6 +540,7 @@ const GomiData = (function () {
         loadCalendar: loadCalendar,
         loadGomi: loadGomi,
         loadKyoten: loadKyoten,
+        loadReadings: loadReadings,
         getSelection: getSelection,
         saveSelection: saveSelection,
         ensureSelection: ensureSelection,

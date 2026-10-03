@@ -484,14 +484,18 @@ function displayCalendar() {
 
 
     /*
-     * 6週間分表示
-     *
-     * 7日 × 6週間 = 42マス
+     * 月末を含む週まで表示
+     * （翌月だけの週がまるごと並ばないよう、月によって4〜6週）
      */
+
+    const totalCells =
+        Math.ceil(
+            (firstWeekDay + daysInMonth) / 7
+        ) * 7;
 
     for (
         let i = 0;
-        i < 42;
+        i < totalCells;
         i++
     ) {
 
@@ -1454,7 +1458,7 @@ function displayGarbageInformation() {
 
             let collectionPlaceHTML =
                 garbage.collectionPlace ||
-                "情報なし";
+                "";
 
 
             /*
@@ -1476,6 +1480,34 @@ function displayGarbageInformation() {
             }
 
 
+            /*
+             * 情報のある項目だけ表示する
+             * （「情報なし」が並ぶとページが長くなるだけなので）
+             */
+
+            const rows = [
+                ["収集曜日", scheduleText],
+                ["分別", garbage.separation],
+                ["収集場所", collectionPlaceHTML]
+            ].filter(function (row) {
+
+                return row[1];
+
+            });
+
+
+            /*
+             * どの項目も情報がない種類はカードごと出さない
+             * （収集日がないのでカレンダーから参照されることもない）
+             */
+
+            if (rows.length === 0) {
+
+                return;
+
+            }
+
+
             item.innerHTML = `
 
                 <div class="garbage-item-header">
@@ -1492,38 +1524,18 @@ function displayGarbageInformation() {
 
                 </div>
 
+                ${rows.map(function (row) {
 
-                <p>
+                    return `
+                        <p>
+                            <strong>
+                                ${row[0]}：
+                            </strong>
+                            ${row[1]}
+                        </p>
+                    `;
 
-                    <strong>
-                        収集曜日：
-                    </strong>
-
-                    ${scheduleText || "情報なし"}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        分別：
-                    </strong>
-
-                    ${garbage.separation || "情報なし"}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        収集場所：
-                    </strong>
-
-                    ${collectionPlaceHTML}
-
-                </p>
+                }).join("")}
 
             `;
 
@@ -1565,13 +1577,8 @@ function displayCalendarLocations() {
 
             <div class="no-calendar-location">
 
-                カレンダーに追加した
-                指定場所はありません。
-
-                <br>
-
-                「指定場所」ページから
-                追加できます。
+                カレンダーに追加した指定場所はありません。<br>
+                「指定場所」ページから追加できます。
 
             </div>
 

@@ -124,21 +124,15 @@
             </h2>
 
             <p>
-                ながさきごみナビは、長崎県内のごみ出しに
-                関する情報を確認できる【非公式の】Webサービスです。
+                ながさきごみナビは、長崎県内のごみ出しに関する情報を確認できる【非公式の】Webサービスです。
             </p>
 
             <p>
-                ごみの分別方法や収集日、回収場所などの
-                情報を、地域に合わせて確認できるように
-                することを目的としています。
+                ごみの分別方法や収集日、回収場所などの情報を、地域に合わせて確認できるようにすることを目的としています。
             </p>
 
             <p>
-                長崎県へ引っ越してきた方や、普段の
-                ごみ出しについて確認したい方が、
-                必要な情報を簡単に確認できることを
-                目指しています。
+                長崎県へ引っ越してきた方や、普段のごみ出しについて確認したい方が、必要な情報を簡単に確認できることを目指しています。
             </p>
 
         </section>
@@ -157,37 +151,27 @@
             <ul class="notice-list">
 
                 <li>
-                    掲載されている情報は、変更される
-                    場合があります。
+                    掲載されている情報は、変更される場合があります。
                 </li>
 
                 <li>
-                    ごみの収集日時、分別方法、回収場所
-                    などについては、各自治体が公開して
-                    いる最新の公式情報もあわせて
-                    ご確認ください。
+                    ごみの収集日時、分別方法、回収場所などについては、各自治体が公開している最新の公式情報もあわせてご確認ください。
                 </li>
 
                 <li>
-                    地域や自治会などによって、ごみの
-                    出し方や回収場所が異なる場合があります。
+                    地域や自治会などによって、ごみの出し方や回収場所が異なる場合があります。
                 </li>
 
                 <li>
-                    祝日や年末年始などは、通常の収集日と
-                    異なる場合があります。
+                    祝日や年末年始などは、通常の収集日と異なる場合があります。
                 </li>
 
                 <li>
-                    AIによるごみの判定は、必ずしも正確とは限りません。
-                    判定結果は参考情報としてご利用ください。
-                    また、利用上限に達した場合など、AI機能が利用できなくなることがあります。
+                    AIによるごみの判定は、必ずしも正確とは限りません。判定結果は参考情報としてご利用ください。また、利用上限に達した場合など、AI機能が利用できなくなることがあります。
                 </li>
 
                 <li>
-                    本サービスに掲載された情報の利用に
-                    よって生じた損害などについて、開発者は
-                    一切責任を負いません。
+                    本サービスに掲載された情報の利用によって生じた損害などについて、開発者は一切責任を負いません。
                 </li>
 
             </ul>
@@ -206,20 +190,15 @@
             </h2>
 
             <p>
-                本サービスでは、市町村ごとにごみの
-                分別方法、収集日、回収場所などの情報を
-                管理しています。
+                本サービスでは、市町村ごとにごみの分別方法、収集日、回収場所などの情報を管理しています。
             </p>
 
             <p>
-                地域によってごみの分別方法や収集日が
-                異なるため、選択した市町村・地区に
-                応じた情報を表示しています。
+                地域によってごみの分別方法や収集日が異なるため、選択した市町村・地区に応じた情報を表示しています。
             </p>
 
             <p>
-                掲載情報については、各自治体が公開して
-                いる情報などを参考にしています。
+                掲載情報については、各自治体が公開している情報などを参考にしています。
             </p>
 
         </section>
@@ -257,8 +236,7 @@
                     </h3>
 
                     <p>
-                        各自治体が公開している情報を
-                        参考に作成しています。
+                        各自治体が公開している情報を参考に作成しています。
                     </p>
 
                 </div>
@@ -271,9 +249,7 @@
                     </h3>
 
                     <p>
-                        使用している画像・アイコンなどの
-                        素材については、それぞれの利用規約
-                        に従って使用しています。
+                        使用している画像・アイコンなどの素材については、それぞれの利用規約に従って使用しています。
                     </p>
 
                 </div>
@@ -285,8 +261,7 @@
                     </h3>
 
                     <p>
-                        中継サーバー:Cloudflare Worker
-                        使用AI:Cloudflare Workers AI
+                        中継サーバー:Cloudflare Worker<br>使用AI:Cloudflare Workers AI
                     </p>
 
                 </div>
@@ -307,14 +282,11 @@
             </h2>
 
             <p>
-                掲載されている情報に誤りがある場合や、
-                情報の更新が必要な場合は、開発者まで
-                お知らせください。
+                掲載されている情報に誤りがある場合や、情報の更新が必要な場合は、開発者までお知らせください。
             </p>
 
             <p>
-                なお、自治体が公開している情報については、
-                各自治体の公式窓口をご確認ください。
+                なお、自治体が公開している情報については、各自治体の公式窓口をご確認ください。
             </p>
 
         </section>
@@ -322,127 +294,50 @@
     </main>
 
 
+    <script src="js/data.js"></script>
+
     <script>
 
         /*
-         * 選択中の市町村・地区を表示
+         * 選択中の市町村・町名を表示（他ページと同じく GomiData を使う）
          */
-
-        const cityName =
-            document.getElementById(
-                "city-name"
-            );
-
-        const areaName =
-            document.getElementById(
-                "area-name"
-            );
-
-
-        const municipalityId =
-            localStorage.getItem(
-                "municipality"
-            );
-
-        const areaId =
-            localStorage.getItem(
-                "area"
-            );
-
 
         async function loadLocation() {
 
-            if (!municipalityId) {
+            const cityName =
+                document.getElementById("city-name");
+
+            const areaName =
+                document.getElementById("area-name");
+
+            const selection =
+                GomiData.getSelection();
+
+            if (!selection.municipalityId) {
 
                 cityName.textContent =
                     "市町村未選択";
-
-                areaName.textContent =
-                    "";
 
                 return;
 
             }
 
-
             try {
 
-                const response =
-                    await fetch(
-                        "data/municipalities.json"
-                    );
-
                 const municipalities =
-                    await response.json();
-
+                    await GomiData.loadMunicipalities();
 
                 const municipality =
-                    municipalities.find(
-                        function(item) {
-
-                            return item.id ===
-                                municipalityId;
-
-                        }
-                    );
-
+                    municipalities.find(function (item) {
+                        return item.id === selection.municipalityId;
+                    });
 
                 if (municipality) {
-
-                    cityName.textContent =
-                        municipality.name;
-
+                    cityName.textContent = municipality.name;
                 }
 
-
-                if (!areaId) {
-
-                    return;
-
-                }
-
-
-                const areaResponse =
-                    await fetch(
-                        "data/areas.json"
-                    );
-
-                const areasData =
-                    await areaResponse.json();
-
-
-                const municipalityData =
-                    areasData[
-                        municipalityId
-                    ];
-
-
-                if (
-                    municipalityData &&
-                    Array.isArray(
-                        municipalityData.areas
-                    )
-                ) {
-
-                    const area =
-                        municipalityData.areas.find(
-                            function(item) {
-
-                                return item.id ===
-                                    areaId;
-
-                            }
-                        );
-
-
-                    if (area) {
-
-                        areaName.textContent =
-                            area.name;
-
-                    }
-
-                }
+                areaName.textContent =
+                    await GomiData.getSelectionLabel();
 
             } catch (error) {
 

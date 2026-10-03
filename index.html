@@ -18,6 +18,7 @@
     <title>ながさきごみナビ</title>
     <link rel="icon" href="img/icon.ico">
 
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
 
 </head>
@@ -32,19 +33,16 @@
 
     <header class="header">
 
-        <div class="header-inner">
-
-            <h1>
+        <span class="header-logo">
             <img src="img/icon.ico" class="emoji-icon">ながさきごみナビ
-            </h1>
-
-        </div>
+        </span>
 
     </header>
 
 
     <!-- ========================================
          メイン
+         1画面に1項目ずつ表示する
     ======================================== -->
 
     <main class="select-main">
@@ -52,168 +50,211 @@
         <section class="select-box">
 
 
-            <!-- ========================================
-                 タイトル
-            ======================================== -->
+            <!-- 戻る・進み具合 -->
 
-            <h2>
-                お住まいの地域を選択
-            </h2>
+            <div class="wizard-top">
 
+                <button
+                    id="back-button"
+                    class="back-button"
+                    type="button"
+                    hidden
+                >
+                    ‹ 戻る
+                </button>
 
-            <p class="select-description">
-
-                市町村を選んでから、町名を入力して検索してください。
-
-            </p>
-
-
-            <!-- ========================================
-                 市町村
-            ======================================== -->
-
-            <div class="select-group">
-
-                <label for="municipality">
-                    市町村
-                </label>
-
-
-                <select id="municipality">
-
-                    <option value="">
-                        市町村を選択してください
-                    </option>
-
-                </select>
+                <ol
+                    id="wizard-progress"
+                    class="wizard-progress"
+                    aria-label="設定の進み具合"
+                ></ol>
 
             </div>
 
 
             <!-- ========================================
-                 町名
+                 ステップ1：町名
             ======================================== -->
 
             <div
-                id="town-group"
-                class="select-group hidden"
+                id="step-town"
+                class="wizard-step"
             >
 
-                <label for="town-search">
+                <h2 class="step-title">
+                    お住まいの町名は？
+                </h2>
+
+                <p class="step-description">
+                    長崎市・長与町の町名（長与町は自治会名）を入力してください。
+                </p>
+
+
+                <button
+                    id="gps-button"
+                    class="gps-button"
+                    type="button"
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="currentColor" fill-opacity=".18"/><circle cx="12" cy="10" r="2.5"/></svg>
+                    <span id="gps-button-text">現在地から探す</span>
+                </button>
+
+                <p
+                    id="gps-message"
+                    class="gps-message"
+                    hidden
+                ></p>
+
+
+                <!-- 現在地・前回の設定からの候補 -->
+
+                <div
+                    id="suggest-box"
+                    class="suggest-box"
+                    hidden
+                >
+
+                    <p
+                        id="suggest-label"
+                        class="suggest-label"
+                    ></p>
+
+                    <ul
+                        id="suggest-list"
+                        class="town-results"
+                    ></ul>
+
+                </div>
+
+
+                <label
+                    for="town-search"
+                    class="visually-hidden"
+                >
                     町名
                 </label>
-
 
                 <input
                     id="town-search"
                     class="town-search"
                     type="search"
-                    placeholder="町名の一部を入力（例：かき道、皆前）"
+                    placeholder="町名を入力（例：かき道、皆前）"
                     autocomplete="off"
                 >
-
 
                 <p
                     id="town-count"
                     class="town-count"
                 ></p>
 
-
                 <ul
                     id="town-results"
                     class="town-results"
                 ></ul>
 
-
-                <!-- 選択した町 -->
-
-                <div
-                    id="selected-town"
-                    class="selected-town hidden"
-                >
-
-                    <span class="selected-town-label">
-                        選択中：
-                    </span>
-
-                    <strong id="selected-town-name"></strong>
-
-                    <button
-                        id="town-clear"
-                        class="town-clear"
-                        type="button"
-                    >
-                        選び直す
-                    </button>
-
-                </div>
-
             </div>
 
 
             <!-- ========================================
-                 ごみステーションの選択
+                 ステップ2：ごみステーションの曜日
                  （ステーションによって曜日が異なる町のみ）
             ======================================== -->
 
             <div
-                id="variant-group"
-                class="variant-group hidden"
+                id="step-variant"
+                class="wizard-step"
+                hidden
             >
 
-                <h3 class="variant-title">
-                    ごみステーションの収集曜日
-                </h3>
+                <p
+                    id="variant-town"
+                    class="step-town"
+                ></p>
 
+                <h2
+                    id="variant-title"
+                    class="step-title"
+                ></h2>
 
-                <p class="variant-description">
-
-                    この町は、ごみステーションによって収集曜日が異なります。
-                    いつも利用しているごみステーションの曜日を選んでください。
-                    わからない場合は、ごみステーションの掲示や市のごみステーションマップでご確認ください。
-
+                <p class="step-description">
+                    この町は、ごみステーションによって収集曜日が異なります。いつも出しているごみステーションの曜日を選んでください。
                 </p>
 
+                <div
+                    id="variant-options"
+                    class="choice-list"
+                ></div>
 
-                <div id="variant-list"></div>
+                <p class="step-note">
+                    わからない場合は、ごみステーションの掲示や市のごみステーションマップでご確認ください。
+                </p>
 
             </div>
 
 
             <!-- ========================================
-                 ごみ情報を見る
+                 ステップ3：確認
             ======================================== -->
 
-            <button
-                id="start-button"
-                class="start-button"
-                disabled
+            <div
+                id="step-confirm"
+                class="wizard-step"
+                hidden
             >
 
-                ごみ情報を見る
+                <p
+                    id="confirm-town"
+                    class="step-town"
+                ></p>
 
-            </button>
+                <h2 class="step-title">
+                    この曜日で合っていますか？
+                </h2>
 
+                <ul
+                    id="confirm-list"
+                    class="confirm-list"
+                ></ul>
 
-            <p class="select-note">
+                <div class="confirm-actions">
 
-                ※ 選んだ地域はこの端末に保存されます。
-                あとから「変更」で選び直せます。
+                    <button
+                        id="start-button"
+                        class="start-button"
+                        type="button"
+                    >
+                        はい、これで始める
+                    </button>
 
-            </p>
+                    <button
+                        id="fix-variant-button"
+                        class="sub-button"
+                        type="button"
+                        hidden
+                    >
+                        曜日を選び直す
+                    </button>
+
+                    <button
+                        id="fix-town-button"
+                        class="sub-button"
+                        type="button"
+                    >
+                        町名を選び直す
+                    </button>
+
+                </div>
+
+                <p class="step-note">
+                    ※ 選んだ地域はこの端末に保存されます。あとから「変更」で選び直せます。
+                </p>
+
+            </div>
 
 
         </section>
 
     </main>
-
-
-    <!-- ========================================
-         フッター
-    ======================================== -->
-
-    <footer class="footer">
-    </footer>
 
 
     <script src="js/data.js"></script>

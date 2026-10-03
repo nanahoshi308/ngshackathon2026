@@ -87,6 +87,15 @@ let gomiData = null;
 
 
 /*
+ * 品目の読み { 品目名: ひらがな }
+ *
+ * 漢字の品目をひらがなで検索するために使用する
+ */
+
+let readings = {};
+
+
+/*
  * 現在選択されている画像
  */
 
@@ -257,6 +266,16 @@ async function loadGarbageData() {
         gomi.gomi;
 
 
+    /*
+     * 品目の読み（漢字の品目をひらがなで探すため）
+     */
+
+    readings =
+        await GomiData.loadReadings(
+            municipalityId
+        );
+
+
     console.log(
         "読み込んだgomi.json：",
         gomiData
@@ -329,7 +348,11 @@ function searchGarbage() {
 
     /* ===========================
        gomi.jsonから検索
+       （ひらがな/カタカナ・全角/半角の違いは無視）
     ============================ */
+
+    const normalizedKeyword =
+        GomiData.normalizeText(keyword);
 
     const results = [];
 
@@ -363,9 +386,10 @@ function searchGarbage() {
                 function (item) {
 
                     if (
-                        item
-                            .toLowerCase()
-                            .includes(keyword)
+                        GomiData.normalizeText(item)
+                            .includes(normalizedKeyword) ||
+                        GomiData.normalizeText(readings[item])
+                            .includes(normalizedKeyword)
                     ) {
 
                         matched = true;
@@ -496,12 +520,12 @@ function displaySearchResults(
             "no-result";
 
 
-        noResult.innerHTML = `
-            「${keyword}」に一致する
-            ごみが見つかりませんでした。
-            <br><br>
-            AIで判定しています...
-        `;
+        /*
+         * AIの判定中表示は下の aiResult に出すので、ここでは出さない
+         * （判定後も「判定しています」が残ってしまうため）
+         */
+        noResult.textContent =
+            "「" + keyword + "」に一致するごみが見つかりませんでした。";
 
 
         searchResult.appendChild(

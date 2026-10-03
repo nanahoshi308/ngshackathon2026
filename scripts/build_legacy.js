@@ -117,6 +117,15 @@ function validate(m, t) {
         check(k.weeks === null || validWeeks(k.weeks), label + ": weeks が不正");
     });
 
+    const itemNames = new Set(t.items.map(function (i) { return i.name; }));
+
+    unique(t.readings, function (r) { return r.name; }, "readings.name");
+
+    t.readings.forEach(function (r) {
+        check(townNames.has(r.name) || itemNames.has(r.name), "readings: 町・品目がない " + r.name);
+        check(/^[ぁ-ゖー0-9]+$/.test(r.kana), "readings: 読みはひらがな（と数字）で " + r.name + " → " + r.kana);
+    });
+
     return errors;
 
 }
@@ -158,7 +167,7 @@ async function main() {
 
     for (const m of municipalities) {
         const t = {};
-        for (const name of ["areas", "towns", "schedules", "categories", "items", "kyoten"]) {
+        for (const name of ["areas", "towns", "schedules", "categories", "items", "kyoten", "readings"]) {
             t[name] = await GomiData.loadMunicipalityTable(m.id, name);
         }
         tables[m.id] = t;
