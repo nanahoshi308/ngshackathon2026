@@ -415,23 +415,11 @@ backButton.addEventListener(
 
 
 // ========================================
-// 検索用に文字をそろえる
-// 全角/半角、カタカナ/ひらがな、空白の違いを無視
+// 検索用に文字をそろえる（data.js と共通）
 // ========================================
 
-function normalizeText(text) {
-
-    return text
-        .normalize("NFKC")
-        .toLowerCase()
-        .replace(/\s+/g, "")
-        .replace(/[ァ-ヶ]/g, function(char) {
-            return String.fromCharCode(
-                char.charCodeAt(0) - 0x60
-            );
-        });
-
-}
+const normalizeText =
+    GomiData.normalizeText;
 
 
 // ========================================

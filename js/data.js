@@ -482,7 +482,28 @@ const GomiData = (function () {
     }
 
 
+    /*
+     * 検索用に文字をそろえる
+     * 全角/半角、大文字/小文字、カタカナ/ひらがな、空白の違いを無視
+     */
+
+    function normalizeText(text) {
+
+        return String(text || "")
+            .normalize("NFKC")
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/[ァ-ヶ]/g, function (char) {
+                return String.fromCharCode(
+                    char.charCodeAt(0) - 0x60
+                );
+            });
+
+    }
+
+
     return {
+        normalizeText: normalizeText,
         loadTable: loadTable,
         loadMunicipalityTable: loadMunicipalityTable,
         loadMunicipalities: loadMunicipalities,

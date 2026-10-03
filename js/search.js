@@ -329,7 +329,11 @@ function searchGarbage() {
 
     /* ===========================
        gomi.jsonから検索
+       （ひらがな/カタカナ・全角/半角の違いは無視）
     ============================ */
+
+    const normalizedKeyword =
+        GomiData.normalizeText(keyword);
 
     const results = [];
 
@@ -363,9 +367,8 @@ function searchGarbage() {
                 function (item) {
 
                     if (
-                        item
-                            .toLowerCase()
-                            .includes(keyword)
+                        GomiData.normalizeText(item)
+                            .includes(normalizedKeyword)
                     ) {
 
                         matched = true;
