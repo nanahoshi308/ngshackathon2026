@@ -6,227 +6,171 @@
 
 使い方:
   .venv/bin/python3 extract_separation.py <PDFパス>
+
+表は罫線（ベクター）で行・列を決め、1文字ずつセルに振り分けて組み立てる（pdf_table.py）。
+袋の色のアイコンは画像なので、色からごみの種類を判定する。
+備考の中のアイコン（例: 「金属製は [青い袋]」）も「燃やせないごみ」に置き換える。
 """
 
+import re
 import sys
 import json
-import re
-import pdfplumber
 from pathlib import Path
 
+import pymupdf
 
-KNOWN_CATEGORIES = [
-    "燃やせるごみ",
-    "燃やせないごみ",
-    "プラスチックごみ",
-    "資源ごみ",
-    "資源物等拠点回収",
-    "粗大ごみ",
-    "蛍光管",
-    "乾電池",
-    "ボタン電池",
-]
+from pdf_table import (
+    horizontal_lines, vertical_lines, page_chars, page_images,
+    image_color, build_cells, line_text, join_lines, clean,
+)
 
-KOSHIBETSU_CATEGORIES = {
-    "古紙（雑がみ）": "古紙",
-    "古紙(雑がみ)": "古紙",
-    "古紙（新聞）": "古紙",
-    "古紙(新聞)": "古紙",
-    "古紙（段ボール）": "古紙",
-    "古紙(段ボール)": "古紙",
+
+# 列（左から）
+COL_INDEX, COL_NAME, COL_BAG, COL_KIND, COL_NOTE = range(5)
+HEADER = ["50音", "品名", "袋の色", "種類", "備考"]
+
+# 袋のアイコンの色
+# 色が表す種類の名前は版によって変わる（例: 黄色は「プラスチック製容器包装」→「プラスチックごみ」）ので、
+# ページ下部の凡例から読み取る（bag_legend）
+BAG_COLORS = {
+    "red": (237, 35, 41),
+    "blue": (7, 116, 190),
+    "yellow": (253, 185, 24),
+    "green": (7, 167, 85),
 }
 
-NOT_COLLECTED = "市では収集しません"
+
+def classify_color(rgb):
+    """いちばん近い袋の色。どれにも近くなければ None"""
+    best, best_distance = None, None
+    for name, ref in BAG_COLORS.items():
+        distance = sum((a - b) ** 2 for a, b in zip(rgb, ref))
+        if best_distance is None or distance < best_distance:
+            best, best_distance = name, distance
+    return best if best_distance < 60 ** 2 else None
 
 
-def normalize(text):
-    if text is None:
-        return ""
-    text = text.strip()
-    text = re.sub(r"\s+", " ", text)
-    return text
-
-
-def detect_category(bag_color, kind):
-    """袋の色セルと種類セルからカテゴリを判定"""
-    bag = normalize(bag_color)
-    kind_text = normalize(kind)
-
-    if "市では収集しません" in bag:
-        return NOT_COLLECTED
-    if "資源物等拠点回収" in bag and (not kind_text or "資源物等拠点回収" in kind_text):
-        return "資源物等拠点回収"
-
-    target = kind_text if kind_text else bag
-
-    for cat in KNOWN_CATEGORIES:
-        if cat in target:
-            return cat
-
-    for pattern, cat in KOSHIBETSU_CATEGORIES.items():
-        if pattern in target:
-            return cat
-
-    if "古紙" in target:
-        return "古紙"
-
-    return None
-
-
-def find_columns(header_row):
-    """ヘッダー行からカラムインデックスを特定"""
-    name_idx = None
-    bag_idx = None
-    kind_idx = None
-    note_idx = None
-
-    for i, cell in enumerate(header_row):
-        c = normalize(cell)
-        if "品" in c and "名" in c:
-            name_idx = i
-        elif "袋の色" in c or "袋" in c:
-            bag_idx = i
-        elif "種" in c and "類" in c:
-            kind_idx = i
-        elif "備" in c and "考" in c:
-            note_idx = i
-
-    return name_idx, bag_idx, kind_idx, note_idx
-
-
-def extract_separation(pdf_path):
-    items = []
-
-    with pdfplumber.open(pdf_path) as pdf:
-        for page_num in range(1, len(pdf.pages)):
-            page = pdf.pages[page_num]
-            tables = page.extract_tables()
-
-            if not tables:
-                continue
-
-            for table in tables:
-                if not table:
-                    continue
-
-                header = table[0]
-                header_text = " ".join(normalize(c) for c in header)
-                if "品" not in header_text and "名" not in header_text:
-                    continue
-
-                name_idx, bag_idx, kind_idx, note_idx = find_columns(header)
-                if name_idx is None:
-                    continue
-
-                for row_num, row in enumerate(table[1:], 1):
-                    if len(row) <= name_idx:
-                        continue
-
-                    parsed = _parse_row(row, name_idx, bag_idx, kind_idx, note_idx)
-                    if parsed:
-                        items.extend(parsed)
-
-    return items
-
-
-def _parse_row(row, name_idx, bag_idx, kind_idx, note_idx):
-    """1行から品目リストを抽出（複数行対応）"""
-    raw_name = normalize(row[name_idx]) if name_idx is not None and name_idx < len(row) else ""
-    raw_bag = normalize(row[bag_idx]) if bag_idx is not None and bag_idx < len(row) else ""
-    raw_kind = normalize(row[kind_idx]) if kind_idx is not None and kind_idx < len(row) else ""
-    raw_note = normalize(row[note_idx]) if note_idx is not None and note_idx < len(row) else ""
-
-    if not raw_name:
+def find_table(page):
+    """見出し行（品名・袋の色…）がある表なら (列の x 座標, 縦線の y 範囲) を返す"""
+    text = page.get_text()
+    if "袋の色" not in text or "備" not in text:
         return None
-
-    if "品名" in raw_name or "品 名" in raw_name:
-        return None
-
-    name_lines = [n.strip() for n in raw_name.replace("\n", " ").split(" ") if n.strip()]
-    name_lines = _resplit_names(raw_name)
-
-    kind_lines = [k.strip() for k in raw_kind.replace("\n", " ").split(" ") if k.strip()] if raw_kind else []
-
-    if len(name_lines) > 1 and len(kind_lines) == len(name_lines):
-        results = []
-        for i, name in enumerate(name_lines):
-            cat = detect_category(raw_bag if i == 0 else "", kind_lines[i])
-            if cat and _is_valid_name(name):
-                results.append({
-                    "name": name,
-                    "category": cat,
-                    "note": raw_note if i == 0 else "",
-                })
-        return results if results else None
-
-    category = detect_category(raw_bag, raw_kind)
-    if not category:
-        return None
-
-    if len(name_lines) > 1:
-        results = []
-        for i, name in enumerate(name_lines):
-            if _is_valid_name(name):
-                results.append({
-                    "name": name,
-                    "category": category,
-                    "note": raw_note if i == 0 else "",
-                })
-        return results if results else None
-
-    name = raw_name.replace("\n", "")
-    if not _is_valid_name(name):
-        return None
-
-    return [{
-        "name": name,
-        "category": category,
-        "note": raw_note,
-    }]
+    columns, y_range = vertical_lines(page, 0, page.rect.height)
+    return (columns, y_range) if len(columns) == len(HEADER) + 1 else None
 
 
-def _resplit_names(text):
-    """品名セルの複数アイテムを分割"""
-    text = text.strip()
-    parts = re.split(r"\n", text)
-    parts = [p.strip() for p in parts if p.strip()]
-    if len(parts) > 1:
-        return parts
-    return [text]
+def extract_page(doc, page, page_number, bag_by_xref):
+    table = find_table(page)
+    if table is None:
+        return []
 
+    columns, y_range = table
+    rows = horizontal_lines(page, columns[0], columns[-1], y_range=y_range)
+    cells = build_cells(
+        page_chars(page),
+        page_images(page),
+        rows,
+        columns,
+        image_text=lambda xref: bag_by_xref.get(xref),
+    )
 
-def _is_valid_name(name):
-    """品名として有効か判定"""
-    name = name.strip()
-    if not name:
-        return False
-    if len(name) <= 1 and re.match(r"^[あ-ん]$", name):
-        return False
-    if "品名" in name or "品 名" in name:
-        return False
-    return True
-
-
-def build_output(items):
-    """正規化形式: 1行1レコードのフラットなリスト"""
-    seen = set()
     records = []
-    for item in items:
-        key = (item["name"], item["category"])
-        if key in seen:
+    index_kana = ""
+    for row_number, row in enumerate(cells):
+        texts = ["".join(clean(line_text(line)) for line in cell) for cell in row]
+        name = texts[COL_NAME]
+
+        if row_number == 0 or not name or name.replace(" ", "") == "品名":
             continue
-        seen.add(key)
 
-        record = {
-            "item": item["name"],
-            "category": item["category"],
-        }
-        if item.get("note"):
-            record["note"] = item["note"]
-        records.append(record)
+        if texts[COL_INDEX]:
+            index_kana = texts[COL_INDEX]
 
-    records.sort(key=lambda x: (x["category"], x["item"]))
+        # 袋の色の列: アイコン（燃やせる…）、「−」、「×」のどれか
+        bag = texts[COL_BAG]
+        kind = texts[COL_KIND]
+
+        records.append({
+            "item": name,
+            "index": index_kana,
+            "bag": bag,
+            "kind": kind,
+            "category": normalize_kind(kind),
+            "note": tidy_note(join_lines(row[COL_NOTE], columns[COL_NOTE + 1])),
+            "page": page_number,
+        })
     return records
+
+
+def tidy_note(note):
+    """アイコンを置き換えた「…」の前後に残った空白（アイコンの置き場所）を詰める"""
+    note = re.sub(r"\s+(「[^」]*」)", r"\1", note)
+    # 「…」のあとに文が続く場合（「燃やせないごみ」 でも可）の空白も詰める
+    return re.sub(r"」\s+(?=でも|、|。|に|は|を|へ)", "」", note)
+
+
+# 種類の欄が「−」の品目（たたみ、パソコンなど）は備考に出し方が書いてある
+OTHER_CATEGORY = "その他（備考を参照）"
+
+
+def normalize_kind(kind):
+    """「×市では収集しません」「古紙（新聞）」「−」などをカテゴリ名にそろえる"""
+    kind = kind.lstrip("×✕ ").strip()
+    if kind.startswith("古紙"):
+        return "古紙"
+    if kind in ("−", "ー", "-", "―", "－", ""):
+        return OTHER_CATEGORY
+    return kind
+
+
+def bag_legend(doc, color_by_xref):
+    """
+    表の下の凡例（[赤]燃やせるごみ [青]燃やせないごみ …）から 色 → 種類名 を読み取る
+    アイコンの右から、次のアイコンまでの文字を名前とする
+    """
+    legend = {}
+    for page in doc:
+        table = find_table(page)
+        if table is None:
+            continue
+        _, (_, bottom) = table
+        icons = sorted((
+            (rect, color_by_xref[xref])
+            for rect, xref in page_images(page)
+            if xref in color_by_xref and rect.y0 > bottom
+        ), key=lambda icon: icon[0].x0)
+        words = page.get_text("words")
+        for i, (rect, color) in enumerate(icons):
+            right = icons[i + 1][0].x0 if i + 1 < len(icons) else rect.x1 + 150
+            label = "".join(
+                w[4] for w in sorted(words, key=lambda w: w[0])
+                if rect.x1 - 1 <= w[0] < right and abs((w[1] + w[3]) / 2 - (rect.y0 + rect.y1) / 2) < rect.height
+            )
+            label = label.split("※")[0].strip()
+            if label:
+                legend.setdefault(color, label)
+        if len(legend) == len(BAG_COLORS):
+            break
+    missing = set(BAG_COLORS) - set(legend)
+    if missing:
+        raise SystemExit(f"凡例から袋の色の名前を読み取れませんでした: {sorted(missing)}")
+    return legend
+
+
+def bag_icons(doc):
+    """
+    全ページの画像を色で分類し、袋のアイコンだけ xref → 「種類名」 にする
+    戻り値: (xref → 「種類名」, 色 → 種類名)
+    """
+    color_by_xref = {}
+    for page in doc:
+        for _, xref in page_images(page):
+            if xref not in color_by_xref:
+                color = classify_color(image_color(doc, xref))
+                if color:
+                    color_by_xref[xref] = color
+    legend = bag_legend(doc, color_by_xref)
+    return {xref: "「" + legend[color] + "」" for xref, color in color_by_xref.items()}, legend
 
 
 def main():
@@ -234,35 +178,49 @@ def main():
         print(f"使い方: .venv/bin/python3 {sys.argv[0]} <gomi_sep.pdf>")
         sys.exit(1)
 
-    pdf_path = sys.argv[1]
-    if not Path(pdf_path).exists():
+    pdf_path = Path(sys.argv[1])
+    if not pdf_path.exists():
         print(f"エラー: {pdf_path} が見つかりません")
         sys.exit(1)
 
-    print(f"PDFを読み込み中: {pdf_path}")
-    items = extract_separation(pdf_path)
-    print(f"抽出した品目数: {len(items)}")
+    doc = pymupdf.open(pdf_path)
+    bag_by_xref, legend = bag_icons(doc)
+    print("袋の色の凡例:", legend)
 
-    cats = set(item["category"] for item in items)
-    print(f"カテゴリ: {', '.join(sorted(cats))}")
+    records = []
+    for page_number, page in enumerate(doc, 1):
+        records.extend(extract_page(doc, page, page_number, bag_by_xref))
 
-    records = build_output(items)
+    # 袋の色の列は種類の列と同じ意味なので、食い違いがあれば知らせる
+    for r in records:
+        bag = r["bag"].strip("「」")
+        if bag in legend.values() and bag != r["category"]:
+            print(f"警告: 袋の色と種類が違います p{r['page']} {r['item']}: {bag} / {r['kind']}")
 
     out_dir = Path(__file__).parent.parent / "data" / "nagasaki"
     out_dir.mkdir(parents=True, exist_ok=True)
-
     out_path = out_dir / "gomi.json"
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(records, f, ensure_ascii=False, indent=4)
 
-    print(f"\n出力完了: {out_path}")
-    print(f"レコード数: {len(records)}件")
+    output = [
+        {k: v for k, v in {
+            "item": r["item"],
+            "category": r["category"],
+            "kind": r["kind"] if r["kind"] != r["category"] else None,
+            "note": r["note"] or None,
+            "index": r["index"],
+            "page": r["page"],
+        }.items() if v is not None}
+        for r in records
+    ]
+    with open(out_path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(output, f, ensure_ascii=False, indent=4)
+        f.write("\n")
 
     from collections import Counter
-    cat_counts = Counter(r["category"] for r in records)
-    print("\n--- カテゴリ別品目数 ---")
-    for cat, count in sorted(cat_counts.items()):
-        print(f"  {cat}: {count}件")
+    print(f"出力完了: {out_path}")
+    print(f"レコード数: {len(output)}件")
+    for category, count in sorted(Counter(r["category"] for r in output).items()):
+        print(f"  {category}: {count}件")
 
 
 if __name__ == "__main__":

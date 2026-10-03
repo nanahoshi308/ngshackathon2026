@@ -34,7 +34,7 @@ OTHER_CATEGORIES = ["moenai", "shigen", "pura"]
 
 # 抽出結果のカテゴリ名 → categories.json の id
 CATEGORY_ALIASES = {
-    "プラスチックごみ": "pura",
+    "プラスチック製容器包装": "pura",  # 令和8年4月版より前の呼び方
     "市では収集しません": "atumenai",
 }
 
@@ -89,6 +89,12 @@ def row(town, category_id, weekday, variant_group, variant):
             "variant_group": variant_group, "variant": variant}
 
 
+def item_note(record):
+    """備考。種類が細かく分かれている場合（古紙（新聞）など）は先頭に付ける"""
+    parts = [p for p in (record.get("kind"), record.get("note")) if p]
+    return "。".join(parts) if parts else None
+
+
 def build_items(records, categories):
     name_to_id = {c["name"]: c["id"] for c in categories}
     name_to_id.update(CATEGORY_ALIASES)
@@ -98,7 +104,7 @@ def build_items(records, categories):
         if category_id is None:
             unknown.add(r["category"])
             continue
-        rows.append({"name": r["item"], "category_id": category_id, "note": r.get("note") or None})
+        rows.append({"name": r["item"], "category_id": category_id, "note": item_note(r)})
     if unknown:
         raise SystemExit(f"categories.json にないカテゴリ: {sorted(unknown)}")
     return rows
