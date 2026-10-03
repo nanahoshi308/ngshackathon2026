@@ -83,13 +83,8 @@ async function initialize() {
          * 市町村データを読み込む
          */
 
-        const municipalityResponse =
-            await fetch(
-                "data/municipalities.json"
-            );
-
         const municipalities =
-            await municipalityResponse.json();
+            await GomiData.loadMunicipalities();
 
 
         /*
@@ -185,68 +180,10 @@ async function loadAreaName(
     areaId
 ) {
 
-    /*
-     * 地区がない場合
-     */
-
-    if (!areaId) {
-
-        areaName.textContent = "";
-
-        return;
-
-    }
-
-
     try {
 
-        const response =
-            await fetch(
-                "data/areas.json"
-            );
-
-        const areasData =
-            await response.json();
-
-
-        const municipalityData =
-            areasData[municipalityId];
-
-
-        if (
-            !municipalityData ||
-            !municipalityData.areas
-        ) {
-
-            return;
-
-        }
-
-
-        /*
-         * 選択された地区を探す
-         */
-
-        const area =
-            municipalityData.areas.find(
-                function(item) {
-
-                    return item.id === areaId;
-
-                }
-            );
-
-
-        /*
-         * 地区名を表示
-         */
-
-        if (area) {
-
-            areaName.textContent =
-                area.name;
-
-        }
+        areaName.textContent =
+            await GomiData.getSelectionLabel();
 
     } catch (error) {
 
@@ -293,56 +230,13 @@ async function loadGarbageData(
     areaId
 ) {
 
-    let calendarPath;
-
-
-    /*
-     * 地区がある場合
-     */
-
-    if (areaId) {
-
-        calendarPath =
-            "data/" +
-            municipalityId +
-            "/" +
-            areaId +
-            "/calendar.json";
-
-    }
-
-
-    /*
-     * 地区がない場合
-     */
-
-    else {
-
-        calendarPath =
-            "data/" +
-            municipalityId +
-            "/calendar.json";
-
-    }
-
-
     try {
 
-        const response =
-            await fetch(calendarPath);
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "calendar.jsonが見つかりません"
-            );
-
-        }
-
-
         const calendarData =
-            await response.json();
+            await GomiData.loadCalendar(
+                municipalityId,
+                GomiData.getSelection()
+            );
 
 
         /*
@@ -1040,4 +934,8 @@ function displayNextGarbage(
    実行
 ======================================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

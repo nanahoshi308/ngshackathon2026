@@ -57,7 +57,7 @@
 
             <p class="select-description">
 
-                まず、市町村を選択してください。
+                市町村を選んでから、町名を入力して検索してください。
 
             </p>
 
@@ -85,60 +85,91 @@
 
 
             <!-- ========================================
-                 地区
+                 町名
             ======================================== -->
 
             <div
-                id="area-group"
-                class="area-group hidden"
+                id="town-group"
+                class="select-group hidden"
             >
 
+                <label for="town-search">
+                    町名
+                </label>
 
-                <h3 class="area-title">
-                    地区
+
+                <input
+                    id="town-search"
+                    class="town-search"
+                    type="search"
+                    placeholder="町名の一部を入力（例：かき道、皆前）"
+                    autocomplete="off"
+                >
+
+
+                <p
+                    id="town-count"
+                    class="town-count"
+                ></p>
+
+
+                <ul
+                    id="town-results"
+                    class="town-results"
+                ></ul>
+
+
+                <!-- 選択した町 -->
+
+                <div
+                    id="selected-town"
+                    class="selected-town hidden"
+                >
+
+                    <span class="selected-town-label">
+                        選択中：
+                    </span>
+
+                    <strong id="selected-town-name"></strong>
+
+                    <button
+                        id="town-clear"
+                        class="town-clear"
+                        type="button"
+                    >
+                        選び直す
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 ごみステーションの選択
+                 （ステーションによって曜日が異なる町のみ）
+            ======================================== -->
+
+            <div
+                id="variant-group"
+                class="variant-group hidden"
+            >
+
+                <h3 class="variant-title">
+                    ごみステーションの収集曜日
                 </h3>
 
 
-                <p class="area-description">
+                <p class="variant-description">
 
-                    以下の一覧から、お住まいの地域が
-                    含まれている地区を確認してください。
+                    この町は、ごみステーションによって収集曜日が異なります。
+                    いつも利用しているごみステーションの曜日を選んでください。
+                    わからない場合は、ごみステーションの掲示や市のごみステーションマップでご確認ください。
 
                 </p>
 
 
-                <!-- ========================================
-                     地区一覧
-                ======================================== -->
-
-                <div
-                    id="area-list"
-                    class="area-list"
-                >
-                </div>
-
-
-                <!-- ========================================
-                     地区選択
-                ======================================== -->
-
-                <div class="select-group area-select-group">
-
-                    <label for="area">
-                        地区を選択
-                    </label>
-
-
-                    <select id="area">
-
-                        <option value="">
-                            地区を選択してください
-                        </option>
-
-                    </select>
-
-                </div>
-
+                <div id="variant-list"></div>
 
             </div>
 
@@ -160,8 +191,8 @@
 
             <p class="select-note">
 
-                ※ 市町村によっては地区の選択が
-                必要な場合があります。
+                ※ 選んだ地域はこの端末に保存されます。
+                あとから「変更」で選び直せます。
 
             </p>
 
@@ -179,6 +210,7 @@
     </footer>
 
 
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
 
 </body>

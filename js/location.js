@@ -102,23 +102,8 @@ async function initialize() {
 
 async function loadMunicipality() {
 
-    const response =
-        await fetch(
-            "data/municipalities.json"
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "municipalities.jsonが見つかりません"
-        );
-
-    }
-
-
     const municipalities =
-        await response.json();
+        await GomiData.loadMunicipalities();
 
 
     const municipality =
@@ -156,73 +141,20 @@ async function loadMunicipality() {
 
 async function loadAreaName() {
 
-    if (!areaId) {
-
-        areaName.textContent =
-            "";
-
-        return;
-
-    }
+    const label =
+        await GomiData.getSelectionLabel();
 
 
-    const response =
-        await fetch(
-            "data/areas.json"
-        );
+    areaName.textContent =
+        label;
 
 
-    if (!response.ok) {
-
-        throw new Error(
-            "areas.jsonが見つかりません"
-        );
-
-    }
-
-
-    const areasData =
-        await response.json();
-
-
-    const municipalityData =
-        areasData[
-            municipalityId
-        ];
-
-
-    if (
-        !municipalityData ||
-        !Array.isArray(
-            municipalityData.areas
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const area =
-        municipalityData.areas.find(
-            function(item) {
-
-                return item.id ===
-                    areaId;
-
-            }
-        );
-
-
-    if (area) {
-
-        areaName.textContent =
-            area.name;
+    if (label) {
 
         municipalityName.textContent =
             cityName.textContent +
             " " +
-            area.name;
+            label;
 
     }
 
@@ -235,49 +167,14 @@ async function loadAreaName() {
 
 async function loadKyoten() {
 
-    let path;
-
-
-    if (areaId) {
-
-        path =
-            "data/" +
-            municipalityId +
-            "/" +
-            areaId +
-            "/kyoten.json";
-
-    } else {
-
-        path =
-            "data/" +
-            municipalityId +
-            "/kyoten.json";
-
-    }
-
-
-    console.log(
-        "読み込む指定場所：",
-        path
-    );
-
-
-    const response =
-        await fetch(path);
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "kyoten.jsonが見つかりません"
-        );
-
-    }
-
+    /*
+     * 指定場所は市町村単位
+     */
 
     const data =
-        await response.json();
+        await GomiData.loadKyoten(
+            municipalityId
+        );
 
 
     displayKyoten(data);
@@ -917,4 +814,8 @@ async function syncNotificationKyoten() {
    開始
 =========================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

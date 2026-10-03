@@ -899,3 +899,334 @@
     }
 
 }
+
+/* ========================================
+   町名の検索
+======================================== */
+
+.town-search {
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border:
+        2px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    background-color: #ffffff;
+
+    color: #263331;
+
+    font-size: 16px;
+
+    transition: 0.2s;
+
+}
+
+
+.town-search:focus {
+
+    outline: none;
+
+    border-color: #31856d;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(49, 133, 109, 0.12);
+
+}
+
+
+/* ========================================
+   検索結果の件数
+======================================== */
+
+.town-count {
+
+    margin: 8px 0;
+
+    color: #888888;
+
+    font-size: 13px;
+
+}
+
+
+/* ========================================
+   検索結果
+======================================== */
+
+.town-results {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    max-height: 320px;
+
+    overflow-y: auto;
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+
+}
+
+
+.town-result {
+
+    padding: 8px 14px;
+
+    border:
+        2px solid #d8e5e1;
+
+    border-radius: 999px;
+
+    background-color: #ffffff;
+
+    color: #263331;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.town-result:hover,
+.town-result:focus {
+
+    outline: none;
+
+    border-color: #31856d;
+
+    background-color: #f1f8f5;
+
+}
+
+
+/* 地区名 */
+
+.town-result-area {
+
+    margin-left: 6px;
+
+    color: #31856d;
+
+    font-size: 12px;
+
+}
+
+
+/* ========================================
+   選択した町
+======================================== */
+
+.selected-town {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 14px 16px;
+
+    background-color: #f1f8f5;
+
+    border-left:
+        5px solid #31856d;
+
+    border-radius: 10px;
+
+}
+
+
+.selected-town.hidden {
+
+    display: none;
+
+}
+
+
+.selected-town-label {
+
+    color: #666666;
+
+    font-size: 14px;
+
+}
+
+
+.selected-town strong {
+
+    color: #205b4a;
+
+    font-size: 18px;
+
+}
+
+
+.town-clear {
+
+    margin-left: auto;
+
+    padding: 6px 12px;
+
+    border:
+        1px solid #31856d;
+
+    border-radius: 8px;
+
+    background-color: #ffffff;
+
+    color: #31856d;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+/* ========================================
+   ごみステーションの曜日
+======================================== */
+
+.variant-group {
+
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+    border:
+        2px solid #f0c36d;
+
+    border-radius: 12px;
+
+    background-color: #fffaf0;
+
+}
+
+
+.variant-group.hidden {
+
+    display: none;
+
+}
+
+
+.variant-title {
+
+    margin-bottom: 8px;
+
+    color: #205b4a;
+
+    font-size: 18px;
+
+}
+
+
+.variant-description {
+
+    margin-bottom: 15px;
+
+    color: #666666;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+
+}
+
+
+.variant-fieldset {
+
+    margin: 0 0 12px 0;
+
+    padding: 12px 15px;
+
+    border:
+        1px solid #d8e5e1;
+
+    border-radius: 10px;
+
+    background-color: #ffffff;
+
+}
+
+
+.variant-fieldset legend {
+
+    padding: 0 6px;
+
+    color: #205b4a;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+}
+
+
+.variant-option {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin: 4px 18px 4px 0;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+.variant-option input {
+
+    width: 18px;
+
+    height: 18px;
+
+    accent-color: #31856d;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .town-result {
+
+        font-size: 14px;
+
+    }
+
+
+    .variant-group {
+
+        padding: 15px;
+
+    }
+
+
+    .variant-description {
+
+        font-size: 13px;
+
+    }
+
+}

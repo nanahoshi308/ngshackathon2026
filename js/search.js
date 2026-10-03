@@ -159,23 +159,8 @@ async function initialize() {
 
 async function loadMunicipality() {
 
-    const response =
-        await fetch(
-            "data/municipalities.json"
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "municipalities.jsonが見つかりません"
-        );
-
-    }
-
-
     const municipalities =
-        await response.json();
+        await GomiData.loadMunicipalities();
 
 
     const municipality =
@@ -205,74 +190,8 @@ async function loadMunicipality() {
 
 async function loadAreaName() {
 
-    /*
-     * 地区がない場合
-     */
-
-    if (!areaId) {
-
-        areaName.textContent =
-            "";
-
-        return;
-
-    }
-
-
-    const response =
-        await fetch(
-            "data/areas.json"
-        );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "areas.jsonが見つかりません"
-        );
-
-    }
-
-
-    const areasData =
-        await response.json();
-
-
-    const municipalityData =
-        areasData[
-        municipalityId
-        ];
-
-
-    if (
-        !municipalityData ||
-        !Array.isArray(
-            municipalityData.areas
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const area =
-        municipalityData.areas.find(
-            function (item) {
-
-                return item.id ===
-                    areaId;
-
-            }
-        );
-
-
-    if (area) {
-
-        areaName.textContent =
-            area.name;
-
-    }
+    areaName.textContent =
+        await GomiData.getSelectionLabel();
 
 }
 
@@ -283,87 +202,15 @@ async function loadAreaName() {
 
 async function loadGarbageData() {
 
-    let calendarPath;
-    let gomiPath;
-
-
-    /*
-     * 地区がある場合
-     */
-
-    if (areaId) {
-
-        calendarPath =
-            "data/" +
-            municipalityId +
-            "/" +
-            areaId +
-            "/calendar.json";
-
-
-        gomiPath =
-            "data/" +
-            municipalityId +
-            "/" +
-            areaId +
-            "/gomi.json";
-
-    }
-
-
-    /*
-     * 地区がない場合
-     */
-
-    else {
-
-        calendarPath =
-            "data/" +
-            municipalityId +
-            "/calendar.json";
-
-
-        gomiPath =
-            "data/" +
-            municipalityId +
-            "/gomi.json";
-
-    }
-
-
-    console.log(
-        "読み込むcalendar.json：",
-        calendarPath
-    );
-
-
-    console.log(
-        "読み込むgomi.json：",
-        gomiPath
-    );
-
-
     /* ===========================
-       calendar.json
+       calendar.json 相当
     ============================ */
 
-    const calendarResponse =
-        await fetch(
-            calendarPath
-        );
-
-
-    if (!calendarResponse.ok) {
-
-        throw new Error(
-            "calendar.jsonが見つかりません"
-        );
-
-    }
-
-
     const calendar =
-        await calendarResponse.json();
+        await GomiData.loadCalendar(
+            municipalityId,
+            GomiData.getSelection()
+        );
 
 
     if (
@@ -384,26 +231,13 @@ async function loadGarbageData() {
 
 
     /* ===========================
-       gomi.json
+       gomi.json 相当
     ============================ */
 
-    const gomiResponse =
-        await fetch(
-            gomiPath
-        );
-
-
-    if (!gomiResponse.ok) {
-
-        throw new Error(
-            "gomi.jsonが見つかりません"
-        );
-
-    }
-
-
     const gomi =
-        await gomiResponse.json();
+        await GomiData.loadGomi(
+            municipalityId
+        );
 
 
     if (
@@ -795,14 +629,14 @@ function createSearchItem(
                 <span class="search-label">
                     分別：
                 </span>
-                ${garbage.separation}
+                ${garbage.separation || "情報なし"}
             </p>
 
             <p>
                 <span class="search-label">
                     収集場所：
                 </span>
-                ${garbage.collectionPlace}
+                ${garbage.collectionPlace || "情報なし"}
             </p>
 
         `;
@@ -1607,14 +1441,14 @@ function showAIResult(
                                 <span class="ai-label">
                                     分別：
                                 </span>
-                                ${garbage.separation}
+                                ${garbage.separation || "情報なし"}
                             </p>
 
                             <p>
                                 <span class="ai-label">
                                     収集場所：
                                 </span>
-                                ${garbage.collectionPlace}
+                                ${garbage.collectionPlace || "情報なし"}
                             </p>
                         `
             : ""
@@ -1669,4 +1503,8 @@ searchInput.addEventListener(
    開始
 =========================== */
 
-initialize();
+if (GomiData.ensureSelection()) {
+
+    initialize();
+
+}

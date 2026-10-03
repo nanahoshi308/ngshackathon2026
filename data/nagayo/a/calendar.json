@@ -3,173 +3,162 @@
         {
             "name": "燃やせるごみ",
             "img": "img/moeru.webp",
-
             "schedule": [
                 {
                     "day": "月曜日",
-                    "restriction": [1, 1, 1, 1, 1]
+                    "restriction": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
                 },
                 {
                     "day": "木曜日",
-                    "restriction": [1, 1, 1, 1, 1]
-                },
-                {
-                    "day": "日曜日",
-                    "restriction": [1, 1, 1, 1, 1]
+                    "restriction": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
                 }
             ],
-
             "separation": "指定袋に入れてください。",
-
             "collectionPlace": "ごみステーション"
         },
-
         {
             "name": "容器包装プラスチック",
             "img": "img/pura.webp",
-
-
             "schedule": [
                 {
                     "day": "火曜日",
-                    "restriction": [1, 1, 1, 1, 1]
+                    "restriction": [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ]
                 }
             ],
-
             "separation": "種類ごとに分けてください。",
-
             "collectionPlace": "ごみステーション"
         },
-
         {
             "name": "ペットボトル",
             "img": "img/pet.webp",
-
-
             "schedule": [
                 {
                     "day": "金曜日",
-                    "restriction": [1, 0, 1, 0, 0]
+                    "restriction": [
+                        1,
+                        0,
+                        1,
+                        0,
+                        0
+                    ]
                 }
             ],
-
             "separation": "種類ごとに分けてください。",
-
             "collectionPlace": "ごみステーション"
         },
-
-         {
+        {
             "name": "燃やせないごみ",
             "img": "img/moenai.webp",
-
             "schedule": [
                 {
                     "day": "金曜日",
-                    "restriction": [0, 1, 0, 1, 0]
+                    "restriction": [
+                        0,
+                        1,
+                        0,
+                        1,
+                        0
+                    ]
                 }
             ],
-
             "separation": "指定袋に入れてください。",
-
             "collectionPlace": "ごみステーション"
         },
-        
         {
             "name": "紙類",
             "img": "img/kami.webp",
-
             "schedule": [
                 {
                     "day": "水曜日",
-                    "restriction": [0, 1, 0, 1, 0]
+                    "restriction": [
+                        0,
+                        1,
+                        0,
+                        1,
+                        0
+                    ]
                 }
             ],
-
             "separation": "指定袋に入れてください。",
-
             "collectionPlace": "ごみステーション"
         },
         {
             "name": "金属類",
             "img": "img/kinzoku.webp",
-
             "separation": "中身を空にし、きれいにすすいで乾かしてください。",
-
             "collectionPlace": "自治会の拠点回収、常設の資源倉庫"
         },
         {
             "name": "蛍光管・電球",
             "img": "img/keikou.webp",
-
             "separation": "破損を防ぐため、購入時の箱などに入れていください。  グロー球やLED電球は「燃やせないごみ」へ",
-
             "collectionPlace": "自治会の拠点回収、常設の資源倉庫"
         },
         {
             "name": "ビン類",
             "img": "img/bin.webp",
-
             "separation": "飲料用、飲食物用、飲み薬用、化粧品用のみ対象。 中身を空にし、きれいにすすいで乾かしてください。（フタははずすこと） 哺乳瓶などの耐熱ガラスは「燃やせないごみ」へ",
-                          
-
             "collectionPlace": "自治会の拠点回収、常設の資源倉庫"
         },
         {
             "name": "紙パック",
             "img": "img/kamipack.webp",
-
             "separation": "きれいにすすいで、切り開いて乾かしてください。  内側にアルミ缶が貼られているものは「燃やせるごみ」へ",
-
             "collectionPlace": "自治会の拠点回収、常設の資源倉庫"
         },
         {
             "name": "布類",
             "img": "img/nuno.webp",
-
             "separation": "重ねてから、ひもで縛ってください。  雨の日は濡れないようにレジ袋などに入れいてください。 /n 化学繊維の衣類、わた、毛糸を使用した製品は「燃やせるごみ」へ",
-
             "collectionPlace": "自治会の拠点回収、常設の資源倉庫"
         },
         {
             "name": "充電式電池",
             "img": "img/denti.webp",
-
             "separation": "マークがついている電池・バッテリーは必ず回収窓口へ出してください。　出すときは、端子部分を絶縁テープなどで被覆してください。　充電式電池やバッテリーが取り外せない場合は、本体ごと「小型家電の回収ボックス（役場一階に設置）」に入れてください。",
-
             "collectionPlace": "長与町役場　長与南交流センター　上長与地区公民館　長与町ふれあいセンター　高田地区公民館　長与町働く婦人の家　長与北部地区多目的研修集会施設"
         },
         {
             "name": "使用済み乾電池・ボタン電池",
             "img": "img/kandenti.webp",
-
             "collectionPlace": "詳細はこちら",
             "collectionPlaceUrl": "https://webtown.nagayo.jp/kiji0032963/3_2963_22741_up_qurk4mxz.pdf"
         },
         {
             "name": "水銀を含む体温計・血圧計",
             "img": "img/taion.webp",
-
             "separation": "割れている場合は、レジ袋などに入れてください。",
-
             "collectionPlace": "長与町役場住民環境課の窓口"
         },
         {
             "name": "粗大ごみ",
             "img": "img/sodai.webp",
-
             "date": "収集日の朝8時",
-
             "separation": "収集希望の一週間前までの平日に電話で申し込みをし、販売窓口にて処理券を購入してください。",
-
             "collectionPlace": "長与町役場　長与南交流センター　上長与地区公民館　長与町ふれあいセンター　高田地区公民館　長与町働く婦人の家　長与北部地区多目的研修集会施設　長与町公民館"
         },
         {
             "name": "町では収集しないもの",
             "img": "img/atumenai.webp",
-
             "separation": "販売店、メーカー、専門の処理業者などにお尋ねください"
-
         }
-
     ]
 }
