@@ -241,6 +241,10 @@ a {
 }
 
 .nav-item {
+    /* 表示中の項目数によらず幅いっぱいに均等割り */
+    flex: 1 1 0;
+    min-width: 0;
+
     display: flex;
 
     align-items: center;
@@ -1049,17 +1053,21 @@ a {
     }
 
     .navigation {
-        overflow-x: auto;
+        gap: 2px;
 
-        justify-content: flex-start;
-
-        white-space: nowrap;
+        padding: 6px;
     }
 
     .nav-item {
-        padding: 9px 12px;
+        flex-direction: column;
 
-        font-size: 12px;
+        gap: 2px;
+
+        padding: 8px 2px;
+
+        font-size: 11px;
+
+        white-space: nowrap;
     }
 
     .main-container,

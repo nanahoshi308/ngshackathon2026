@@ -632,7 +632,6 @@ const GomiData = (function () {
                 .forEach(function (link) {
                     link.style.display = "none";
                 });
-
         })
         .catch(function () {
             // 読み込めないときはリンクを残しておく
