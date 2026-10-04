@@ -109,7 +109,7 @@ async function initialize() {
                 municipality.name;
 
             welcomeCity.textContent =
-                municipality.name;
+                await GomiData.getSelectionLabel();
 
         }
 
