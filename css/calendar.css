@@ -347,6 +347,45 @@
 
 
 /* ========================================
+   ごみが多い日（名前を省略して2列）
+======================================== */
+
+.calendar-events.compact {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 3px;
+
+    justify-items: center;
+}
+
+
+.calendar-events.compact .garbage-image {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+
+    aspect-ratio: 1 / 1;
+
+    margin: 0;
+}
+
+
+.calendar-events.compact .calendar-garbage-name {
+    display: none;
+}
+
+
+.calendar-events.compact .calendar-location-event {
+    margin: 0;
+
+    padding: 0;
+}
+
+
+/* ========================================
    ごみ情報
 ======================================== */
 
@@ -634,6 +673,19 @@
 
     .calendar-location-event {
         font-size: 8px;
+    }
+
+
+    .calendar-events.compact {
+        gap: 2px;
+
+        /* セルの左右 padding 5px を少し食って、アイコンを大きくする */
+        margin: 0 -3px;
+    }
+
+
+    .calendar-events.compact .garbage-image {
+        border-radius: 4px;
     }
 
 

@@ -132,6 +132,14 @@ const weekDays = [
 
 
 /* ========================================
+   この個数以上のごみがある日は
+   名前を省略して2列で表示
+======================================== */
+
+const COMPACT_EVENT_COUNT = 2;
+
+
+/* ========================================
    現在表示している月
 ======================================== */
 
@@ -705,6 +713,20 @@ function displayCalendar() {
 
 
             /*
+             * ごみ・指定場所の入れ物
+             */
+
+            const eventsElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            eventsElement.className =
+                "calendar-events";
+
+
+            /*
              * ごみを表示
              */
 
@@ -712,7 +734,7 @@ function displayCalendar() {
                 function (garbage) {
 
                     createGarbageEvent(
-                        dayElement,
+                        eventsElement,
                         garbage
                     );
 
@@ -725,8 +747,36 @@ function displayCalendar() {
              */
 
             createLocationEvents(
-                dayElement,
+                eventsElement,
                 date
+            );
+
+
+            /*
+             * 2個以上ある日は
+             * 名前を省略して2列で表示
+             */
+
+            const eventCount =
+                eventsElement.querySelectorAll(
+                    ".garbage-image"
+                ).length;
+
+
+            if (
+                eventCount >=
+                COMPACT_EVENT_COUNT
+            ) {
+
+                eventsElement.classList.add(
+                    "compact"
+                );
+
+            }
+
+
+            dayElement.appendChild(
+                eventsElement
             );
 
         }
@@ -923,6 +973,15 @@ function createGarbageEvent(
 
 
     image.alt =
+        garbage.name;
+
+
+    /*
+     * 名前を省略したときも
+     * マウスを乗せると分かるように
+     */
+
+    image.title =
         garbage.name;
 
 
@@ -1187,6 +1246,10 @@ function createLocationEvents(
 
 
             image.alt =
+                location.name;
+
+
+            image.title =
                 location.name;
 
 
