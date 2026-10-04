@@ -599,3 +599,43 @@ const GomiData = (function () {
     };
 
 })();
+
+
+/* ===========================
+   指定場所（拠点回収）のデータがない市町村
+   （長崎市など）では指定場所へのリンクを隠す
+=========================== */
+
+(function () {
+
+    // scripts/build_legacy.js（Node）から読み込まれたときは何もしない
+    if (typeof document === "undefined") {
+        return;
+    }
+
+    const municipalityId =
+        localStorage.getItem("municipality");
+
+    if (!municipalityId) {
+        return;
+    }
+
+    GomiData.loadMunicipalityTable(municipalityId, "kyoten")
+        .then(function (rows) {
+
+            if (rows.length > 0) {
+                return;
+            }
+
+            document
+                .querySelectorAll('a[href="location.html"]')
+                .forEach(function (link) {
+                    link.style.display = "none";
+                });
+
+        })
+        .catch(function () {
+            // 読み込めないときはリンクを残しておく
+        });
+
+})();
