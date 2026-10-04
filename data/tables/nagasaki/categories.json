@@ -2,7 +2,7 @@
   {"id": "moeru", "name": "燃やせるごみ", "img": "img/moeru.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
   {"id": "koshi", "name": "古紙", "img": "img/kami.webp", "separation": "種類ごとに分けてひもでしばってください。雑がみは紙袋や透明のビニール袋でも出せます。ビニール、雑誌付録のDVDや化粧品サンプルなどは取りはずしてください。", "collection_place": "ごみステーション", "collection_place_url": null, "date_note": "燃やせるごみ週2回のうち、初めの曜日（週1回）"},
   {"id": "moenai", "name": "燃やせないごみ", "img": "img/moenai.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
-  {"id": "shigen", "name": "資源ごみ", "img": "img/bin.webp", "separation": null, "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
+  {"id": "shigen", "name": "資源ごみ", "img": "img/bin.webp", "separation": "空き缶・空き瓶・ペットボトル・金属製の鍋・釜・やかん・フライパン", "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
   {"id": "pura", "name": "プラスチックごみ", "img": "img/pura.webp", "separation": "プラスチック製容器包装に加えて、プラスチックでできた製品（歯ブラシ、バケツ、ハンガーなど）もまとめて出せます。長さ50㎝以上のもの（ビニールひもやビデオテープなど）、厚さが5㎜以上のもの（まな板など）は燃やせるごみへ。「プラスチック製容器包装」のごみ袋も引き続き使えます。", "collection_place": "ごみステーション", "collection_place_url": null, "date_note": null},
   {"id": "kyoten", "name": "資源物等拠点回収", "img": "img/denti.webp", "separation": "小型家電（回収ボックスの入口25㎝×10㎝に入るもの）、充電式電池（モバイルバッテリーなど）、古布（古着）、水銀体温計・水銀温度計・水銀血圧計、中身が残っているスプレー缶・カセットボンベ・ライターを無料で回収しています。個人情報は事前に消去してください。投入したものは返却できません。", "collection_place": "長崎市役所及び一部の地域センター（品目により回収場所が異なります）", "collection_place_url": null, "date_note": null},
   {"id": "keikou", "name": "蛍光管", "img": "img/keikou.webp", "separation": null, "collection_place": null, "collection_place_url": null, "date_note": null},
